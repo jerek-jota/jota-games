@@ -14,7 +14,7 @@ A collection of word games that installs on a phone's home screen and works offl
 - `src/app.src.html`: the app's screens, styles and game logic.
 - `src/gen.js`: the Letter Web puzzle generator.
 - `src/words.txt`: puzzle answers. About 5,700 everyday words, 4–8 letters, no plurals, with -ing/-ed forms. Shared by all games.
-- `src/bonus.txt`: about 15,000 more common words (plurals, less frequent words). Tracing one of these counts as a blue bonus word.
+- `src/bonus.txt`: about 11,000 more common words (less frequent ones, still no plurals). Tracing one of these counts as a blue bonus word.
 
 Both lists come from word-frequency rankings (movie/TV subtitles and Google's 20k most common words), checked against an English dictionary and filtered for offensive words.
 - `src/sw.template.js`: offline caching.

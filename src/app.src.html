@@ -201,7 +201,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 <script>
 /* ===== Shared word lists (built in, works offline) =====
    list:  everyday words used as puzzle answers (4–8 letters, no plurals, with -ing/-ed forms)
-   bonus: other common words (plurals, less frequent words) accepted as bonus finds */
+   bonus: other common words (less frequent, still no plurals) accepted as bonus finds */
 window.JotaWords = (function () {
   const list = "__WORDS__".split(" ");
   const set = new Set(list);
@@ -459,7 +459,9 @@ __GEN__
       return;
     }
     path = []; render();
-    setTrace("Not in this puzzle", "bad");
+    const sing = /ies$/.test(word) ? word.slice(0, -3) + "y" : /(s|x|z|ch|sh)es$/.test(word) ? word.slice(0, -2) : word.slice(0, -1);
+    if (/[^su]s$/.test(word) && window.JotaWords.isWord(sing)) setTrace("No plurals", "bad");
+    else setTrace("Not in this puzzle", "bad");
   }
 
   // ---------- screens ----------

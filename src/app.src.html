@@ -13,6 +13,8 @@
   --accent: #E9B949;
   --accent-ink: #1B1710;
   --good: #5AAE75;
+  --bonus: #4C8DF5;
+  --bonus-ink: #0B1630;
   --bad: #E26B5E;
   --badge: #4C6EF5;
   --font: "Baloo 2", ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
@@ -21,13 +23,13 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     --bg: #F1EFEA; --surface: #FFFFFF; --tile: #DBD6CB; --ink: #25221D; --muted: #6F695E;
-    --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bad: #C44B3E; --badge: #3B5BDB;
+    --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bonus: #2F6BD6; --bonus-ink: #FFFFFF; --bad: #C44B3E; --badge: #3B5BDB;
     color-scheme: light;
   }
 }
 :root[data-theme="light"] {
   --bg: #F1EFEA; --surface: #FFFFFF; --tile: #DBD6CB; --ink: #25221D; --muted: #6F695E;
-  --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bad: #C44B3E; --badge: #3B5BDB;
+  --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bonus: #2F6BD6; --bonus-ink: #FFFFFF; --bad: #C44B3E; --badge: #3B5BDB;
   color-scheme: light;
 }
 html, body { height: 100%; }
@@ -90,6 +92,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 }
 .trace.msg { font-size: 1.05rem; letter-spacing: 0.01em; font-weight: 600; }
 .trace.good { color: var(--good); }
+.trace.bonus { color: var(--bonus); }
 .trace.bad { color: var(--bad); animation: shake 0.35s; }
 .trace.hint { color: var(--ink); }
 @keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
@@ -108,12 +111,16 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .node.hinted circle { stroke: var(--accent); stroke-width: 5; stroke-dasharray: 9 7; }
 #selpath { fill: none; stroke: var(--accent); stroke-width: 20; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 #selpath.ok { stroke: var(--good); }
+#selpath.bonus { stroke: var(--bonus); }
+.node.bonus circle { fill: var(--bonus); }
+.node.bonus text { fill: var(--bonus-ink); }
 .found {
   flex: none; max-height: 96px; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
   padding-top: 10px; min-height: 40px;
 }
 .chip { background: var(--surface); border-radius: 999px; padding: 3px 12px; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
 .chip.new { background: var(--good); color: var(--accent-ink); }
+.chip.bonus { background: var(--bonus); color: var(--bonus-ink); }
 .found .empty { color: var(--muted); font-size: 0.92rem; margin: 0; text-align: center; max-width: 34ch; }
 
 /* Win sheet */
@@ -192,11 +199,28 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 </div>
 
 <script>
-/* ===== Shared word list (built in, works offline). Common English words, 4–8 letters, no plurals. ===== */
+/* ===== Shared word lists (built in, works offline) =====
+   list:  everyday words used as puzzle answers (4–8 letters, no plurals, with -ing/-ed forms)
+   bonus: other common words (plurals, less frequent words) accepted as bonus finds */
 window.JotaWords = (function () {
   const list = "__WORDS__".split(" ");
   const set = new Set(list);
-  return { list, has: (w) => set.has(w.toLowerCase()) };
+  // Bonus list, front-coded: each digit = letters shared with the previous word.
+  let dict = null;
+  function dictionary() {
+    if (dict) return dict;
+    dict = new Set(list);
+    const packed = "__DICT__";
+    let prev = "";
+    for (const m of packed.matchAll(/(\d)([a-z]*)/g)) { prev = prev.slice(0, +m[1]) + m[2]; dict.add(prev); }
+    return dict;
+  }
+  return {
+    list,                                            // common words: puzzle answers
+    has: (w) => set.has(w.toLowerCase()),
+    isWord: (w) => dictionary().has(w.toLowerCase()), // puzzle words + bonus words
+    warm: () => dictionary(),
+  };
 })();
 </script>
 <script>
@@ -225,11 +249,14 @@ __GEN__
   function newGame(N) {
     let p = null, seed;
     while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, trie); }
-    return { puzzle: p, found: [], hintsLeft: HINTS, hinted: null };
+    return { puzzle: p, found: [], bonus: [], order: [], hintsLeft: HINTS, hinted: null };
   }
   function ensureGame(N) {
     const g = store["g" + N];
-    if (g && g.puzzle && g.found.length < g.puzzle.words.length) return g;
+    if (g && g.puzzle && g.found.length < g.puzzle.words.length) {
+      g.bonus = g.bonus || []; g.order = g.order || g.found.slice();
+      return g;
+    }
     const fresh = newGame(N);
     store["g" + N] = fresh; save();
     return fresh;
@@ -294,7 +321,8 @@ __GEN__
     els.sel.setAttribute("points", path.map((i) => els.xy(i).join(",")).join(" "));
     const total = game.puzzle.words.length, f = game.found.length, left = total - f;
     $("count").textContent = left === 1 ? "1 word left" : `${left} words left`;
-    $("subcount").textContent = `${f} of ${total} found`;
+    const nb = game.bonus.length;
+    $("subcount").textContent = `${f} of ${total} found` + (nb ? ` · ${nb} bonus` : "");
     $("hintCount").textContent = game.hintsLeft;
     $("hintBtn").disabled = game.hintsLeft <= 0 || left === 0;
     $("sizeTag").textContent = `${game.puzzle.size} × ${game.puzzle.size}`;
@@ -306,16 +334,16 @@ __GEN__
   function renderFound() {
     const box = $("found");
     box.innerHTML = "";
-    if (!game.found.length) {
+    if (!game.order.length) {
       const p = document.createElement("p");
       p.className = "empty";
       p.textContent = "Found words show up here.";
       box.appendChild(p);
       return;
     }
-    [...game.found].reverse().forEach((w) => {
+    [...game.order].reverse().forEach((w) => {
       const s = document.createElement("span");
-      s.className = "chip" + (w === lastFound ? " new" : "");
+      s.className = "chip" + (game.bonus.includes(w) ? " bonus" : w === lastFound ? " new" : "");
       s.textContent = w;
       box.appendChild(s);
     });
@@ -409,16 +437,29 @@ __GEN__
       setTimeout(() => {
         els.sel.classList.remove("ok");
         used.forEach((i) => els.nodeEls[i].classList.remove("ok"));
-        game.found.push(word); lastFound = word;
+        game.found.push(word); game.order.push(word); lastFound = word;
         if (game.hinted === word) game.hinted = null;
         path = []; busy = false; save(); render();
         if (game.found.length === game.puzzle.words.length) setTimeout(showWin, 550);
       }, 380);
       return;
     }
+    if (game.found.includes(word) || game.bonus.includes(word)) { path = []; render(); setTrace("Already found", "bad"); return; }
+    if (window.JotaWords.isWord(word)) {
+      busy = true;
+      els.sel.classList.add("bonus");
+      used.forEach((i) => els.nodeEls[i].classList.add("bonus"));
+      setTrace(word.toUpperCase() + " · bonus", "bonus");
+      setTimeout(() => {
+        els.sel.classList.remove("bonus");
+        used.forEach((i) => els.nodeEls[i].classList.remove("bonus"));
+        game.bonus.push(word); game.order.push(word);
+        path = []; busy = false; save(); render();
+      }, 520);
+      return;
+    }
     path = []; render();
-    if (game.found.includes(word)) setTrace("Already found", "bad");
-    else setTrace("Not in this puzzle", "bad");
+    setTrace("Not in this puzzle", "bad");
   }
 
   // ---------- screens ----------
@@ -426,7 +467,8 @@ __GEN__
     store["solved" + size] = (store["solved" + size] || 0) + 1; save();
     const used = HINTS - game.hintsLeft;
     $("winText").textContent = `You found all ${game.puzzle.words.length} words` +
-      (used ? ` using ${used} hint${used > 1 ? "s" : ""}.` : " with no hints.");
+      (used ? ` using ${used} hint${used > 1 ? "s" : ""}` : " with no hints") +
+      (game.bonus.length ? `, plus ${game.bonus.length} bonus word${game.bonus.length > 1 ? "s" : ""}.` : ".");
     $("winSheet").hidden = false;
   }
   function openGame(N) {
@@ -455,7 +497,7 @@ __GEN__
       return;
     }
     clearTimeout(restartArmed); restartArmed = null; btn.classList.remove("armed");
-    game.found = []; game.hinted = null; game.hintsLeft = HINTS; path = []; lastFound = null; save();
+    game.found = []; game.bonus = []; game.order = []; game.hinted = null; game.hintsLeft = HINTS; path = []; lastFound = null; save();
     setTrace("Puzzle restarted", "hint"); render();
   }
 
@@ -477,6 +519,7 @@ __GEN__
 
   function start(data) {
     if (data && data.screen === "game") openGame(data.size); else openHome();
+    setTimeout(() => window.JotaWords.warm(), 300);
   }
   if (window.claude && window.claude.hot) {
     window.claude.hot.snapshot && window.claude.hot.snapshot(() => ({ screen: $("game").hidden ? "home" : "game", size }));

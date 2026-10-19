@@ -11,8 +11,19 @@ const read = (f) => fs.readFileSync(path.join(SRC, f), "utf8");
 
 const words = read("words.txt").split(/\s+/).filter(Boolean);
 const gen = read("gen.js");
+// Front-code the bonus word list (common words that are not puzzle answers).
+const common = new Set(words);
+let prev = "", packed = "";
+for (const w of read("bonus.txt").split(/\s+/).filter(Boolean)) {
+  if (common.has(w)) continue;
+  let k = 0;
+  while (k < 9 && k < prev.length && prev[k] === w[k]) k++;
+  packed += k + w.slice(k);
+  prev = w;
+}
 const app = read("app.src.html")
   .replace('"__WORDS__"', () => JSON.stringify(words.join(" ")))
+  .replace('"__DICT__"', () => JSON.stringify(packed))
   .replace("__GEN__", () => gen);
 
 // Syntax-check every inline script.

@@ -1,8 +1,8 @@
-# Jota Word Games
+# Jota Games
 
 A collection of word games that installs on a phone's home screen and works offline.
 
-**Play:** https://jerek-jota.github.io/jota-word-games/
+**Play:** https://jerek-jota.github.io/jota-games/
 
 ## Games
 

@@ -4635,6 +4635,7 @@ barring
 barrio
 barrister
 barroom
+barrow
 barter
 bartered
 barterer
@@ -4903,6 +4904,7 @@ bechancing
 becharm
 becharmed
 becharming
+beck
 becket
 beckon
 beckoned
@@ -6771,6 +6773,7 @@ brackishness
 bract
 bracteate
 bracteole
+brad
 bradawl
 bradycardia
 bradytelic
@@ -6982,6 +6985,7 @@ bregma
 bregmata
 brei
 brent
+brethren
 breve
 brevet
 brevetted
@@ -7038,6 +7042,7 @@ brier
 brierroot
 brierwood
 briery
+brig
 brigand
 brigandage
 brigandine
@@ -7329,6 +7334,7 @@ buddhi
 budding
 buddle
 buddleia
+budge
 budged
 budgerigar
 budgetary
@@ -7429,6 +7435,7 @@ bullish
 bullishly
 bullishness
 bullnose
+bullock
 bullpen
 bullring
 bullseye
@@ -7573,6 +7580,7 @@ burnsides
 burp
 burped
 burping
+burr
 burred
 burrier
 burriest
@@ -8235,6 +8243,7 @@ canopying
 canorous
 canso
 canst
+cant
 cantabile
 cantaloupe
 cantankerous
@@ -8539,6 +8548,7 @@ carmagnole
 carmaker
 carman
 carminative
+carmine
 carnal
 carnality
 carnallite
@@ -9218,6 +9228,7 @@ cetology
 chabazite
 chacma
 chaconne
+chad
 chadar
 chador
 chaeta
@@ -11085,6 +11096,7 @@ collider
 colliding
 collie
 collied
+collier
 colliery
 colligate
 colligated
@@ -11324,6 +11336,7 @@ commode
 commodify
 commodious
 commodiously
+commodore
 commonable
 commonage
 commonality
@@ -11587,6 +11600,7 @@ concocting
 concoction
 concomitance
 concomitant
+concord
 concordance
 concordanced
 concordant
@@ -13759,6 +13773,7 @@ cyclopentane
 cyclopes
 cycloplegia
 cyclopropane
+cyclops
 cyclorama
 cycloses
 cyclosis
@@ -13905,6 +13920,7 @@ dairywomen
 dais
 dalasi
 dalasis
+dale
 dalesman
 dalesmen
 daleth
@@ -14069,6 +14085,7 @@ dauntless
 dauntlessly
 dauphin
 dauphine
+davenport
 davit
 dawdle
 dawdled
@@ -14632,6 +14649,7 @@ delitescent
 deliverable
 deliverance
 deliverer
+dell
 delocalize
 delphinium
 deltaic
@@ -15707,6 +15725,7 @@ dirge
 dirgeful
 dirham
 dirigible
+dirk
 dirndl
 dirtball
 dirtied
@@ -16346,6 +16365,7 @@ domineering
 doming
 dominical
 dominie
+dominion
 dominium
 dona
 donated
@@ -16670,6 +16690,7 @@ dramaturgy
 dramshop
 drape
 draped
+draper
 drapery
 drastically
 drat
@@ -17174,6 +17195,7 @@ earmarked
 earmarking
 earmuff
 earner
+earnest
 earnestly
 earnestness
 earphone
@@ -17888,6 +17910,7 @@ emerita
 emeritus
 emersed
 emersion
+emery
 emesis
 emetic
 emetine
@@ -20613,6 +20636,7 @@ feyly
 feyness
 fezzes
 fiacre
+fiat
 fibbed
 fibber
 fibbing
@@ -20689,6 +20713,7 @@ fiefdom
 fielded
 fielder
 fieldfare
+fielding
 fieldpiece
 fieldsman
 fieldsmen
@@ -22771,6 +22796,7 @@ galimatias
 galingale
 galiot
 galipot
+gall
 gallantly
 gallantry
 gallbladder
@@ -23482,6 +23508,7 @@ gilded
 gilder
 gilding
 gilgai
+gill
 gilled
 gillie
 gillion
@@ -25095,6 +25122,7 @@ halala
 halation
 halberd
 halcyon
+hale
 haled
 haleness
 haler
@@ -25164,6 +25192,7 @@ hamartia
 hamate
 hamburg
 hame
+hamlet
 hammed
 hammerer
 hammerhead
@@ -25677,6 +25706,7 @@ hectograph
 hectographed
 hectoliter
 hectometer
+hector
 hectored
 hectoring
 hectoringly
@@ -25994,6 +26024,7 @@ herp
 herpetic
 herpetologic
 herpetology
+herring
 herringbone
 hertz
 hesitance
@@ -26188,6 +26219,7 @@ hilly
 hilt
 hilum
 himation
+hind
 hindbrain
 hinder
 hindered
@@ -27011,6 +27043,7 @@ hybris
 hydantoin
 hydatid
 hydnocarpate
+hydra
 hydracid
 hydrangea
 hydrant
@@ -28597,6 +28630,7 @@ inquired
 inquirer
 inquiring
 inquiringly
+inquisition
 inquisitive
 inquisitor
 inrush
@@ -29399,6 +29433,7 @@ isthmus
 istle
 itacolumite
 ital
+italic
 italicize
 italicizing
 itchier
@@ -29545,6 +29580,7 @@ jarred
 jarring
 jarringly
 jarvey
+jasper
 jato
 jaundice
 jaundiced
@@ -30010,6 +30046,7 @@ kail
 kailyard
 kain
 kainite
+kaiser
 kaiserdom
 kaiserism
 kaisership
@@ -30125,6 +30162,7 @@ kelpie
 kelson
 kelt
 kelter
+kelvin
 kenaf
 kendo
 kenned
@@ -30701,6 +30739,7 @@ ladybug
 ladyfinger
 ladylike
 ladylove
+ladyship
 laetrile
 lagan
 lagena
@@ -31460,6 +31499,7 @@ levogyrate
 levorotation
 levorotatory
 levulose
+levy
 levying
 lewd
 lewder
@@ -31659,6 +31699,7 @@ limbering
 limberness
 limbic
 limbless
+limbo
 limbus
 limeade
 limed
@@ -33084,6 +33125,7 @@ mantic
 mantilla
 mantis
 mantissa
+mantle
 mantled
 mantling
 mantra
@@ -33223,6 +33265,7 @@ marquess
 marqueterie
 marquetery
 marquetry
+marquis
 marquisate
 marquise
 marquisette
@@ -33455,6 +33498,7 @@ maxilla
 maxillae
 maxillary
 maxilliped
+maxim
 maxima
 maximal
 maximally
@@ -33539,6 +33583,7 @@ meatmen
 meatpacking
 meatus
 meaty
+mecca
 mech
 mechanically
 mechanician
@@ -33601,6 +33646,7 @@ medulla
 medullar
 medullary
 medullated
+medusa
 medusae
 meed
 meek
@@ -33885,6 +33931,7 @@ merriness
 merrymaker
 merrymaking
 merrythought
+mesa
 mesalliance
 mesarch
 mescal
@@ -34216,6 +34263,7 @@ midfield
 midfielder
 midge
 midgut
+midi
 midinette
 midiron
 midis
@@ -35250,6 +35298,7 @@ moonstruck
 moonwalk
 moonwort
 moony
+moor
 moorage
 moored
 moorfowl
@@ -35336,6 +35385,8 @@ morphologist
 morphology
 morphosis
 morris
+morrow
+morse
 morsel
 mort
 mortally
@@ -35760,6 +35811,7 @@ muscovado
 muscularity
 muscularly
 musculature
+muse
 mused
 museology
 muser
@@ -36313,6 +36365,7 @@ nematic
 nematode
 nemertean
 nemeses
+nemesis
 neoclassic
 neoclassical
 neocolonial
@@ -36498,6 +36551,7 @@ newswomen
 newsworthy
 newsy
 newt
+newton
 nextdoor
 nexus
 ngultrum
@@ -39169,11 +39223,13 @@ paddler
 paddock
 paddocked
 paddocking
+paddy
 pademelon
 padlock
 padlocked
 padlocking
 padnag
+padre
 padrone
 paduasoy
 paean
@@ -39951,6 +40007,7 @@ patronizing
 patronymic
 patroon
 patroonship
+patsy
 patted
 patten
 patter
@@ -43795,6 +43852,7 @@ psittacine
 psittacosis
 psoas
 psoriasis
+psyche
 psychedelia
 psychedelic
 psychical
@@ -43850,6 +43908,7 @@ publishable
 puca
 puccoon
 puce
+puck
 pucka
 pucker
 puckered
@@ -44828,6 +44887,7 @@ rancidness
 rancor
 rancorous
 rancorously
+rand
 randan
 randier
 randiest
@@ -47297,6 +47357,7 @@ ruttish
 rutty
 sabadilla
 sabayon
+sabbath
 sabin
 sable
 sabot
@@ -48374,6 +48435,7 @@ scrog
 scroll
 scrolled
 scrolling
+scrooge
 scroop
 scrota
 scrotal
@@ -48533,6 +48595,7 @@ sealer
 sealing
 sealskin
 seam
+seaman
 seamanlike
 seamanship
 seamark
@@ -50125,6 +50188,7 @@ sitcom
 sited
 siting
 sitology
+sitter
 situ
 situating
 situational
@@ -52560,6 +52624,7 @@ stegodon
 stegosaur
 stegosauri
 stegosaurus
+stein
 steinbok
 stela
 stele
@@ -53796,6 +53861,7 @@ sullenest
 sullenly
 sullenness
 sullied
+sully
 sullying
 sulphonamide
 sulphonate
@@ -55469,12 +55535,12 @@ ternate
 ternion
 terpene
 terpineol
+terra
 terraced
 terracing
 terracotta
 terraform
 terraformed
-terrain
 terrane
 terrapin
 terraqueous
@@ -55623,6 +55689,7 @@ thanksgiving
 thar
 thatch
 thatched
+thatcher
 thatching
 thaumatology
 thaumatrope
@@ -57055,8 +57122,10 @@ trestle
 trestlework
 tret
 trews
+trey
 triable
 triacid
+triad
 triadelphous
 triadic
 triage
@@ -57397,6 +57466,7 @@ trowel
 troweled
 troweling
 trowing
+troy
 truancy
 truant
 truanted
@@ -57683,6 +57753,7 @@ twaddle
 twaddled
 twaddler
 twaddling
+twain
 twang
 twanged
 twangier
@@ -60060,6 +60131,7 @@ waddle
 waddled
 waddler
 waddling
+wade
 wader
 wadge
 wadi
@@ -60215,6 +60287,7 @@ wardmote
 wardress
 wardroom
 wardship
+ware
 warehoused
 warehouseman
 warehouser
@@ -60769,6 +60842,7 @@ whisperer
 whispery
 whist
 whistler
+whit
 whitebait
 whitebeam
 whiteboard
@@ -60923,6 +60997,7 @@ wildcatted
 wildcatter
 wildcatting
 wildebeest
+wilder
 wildfire
 wildflower
 wildfowl

@@ -60,6 +60,9 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .game-card .how { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; max-width: 60ch; }
 .mini { width: 56px; height: 56px; flex: none; }
 .sizes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: var(--bg); border-radius: 14px; padding: 4px; }
+.level-btn { border-radius: 10px; padding: 8px 0; font-size: 1rem; font-weight: 700; color: var(--muted); }
+.level-btn[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
 .size-btn {
   background: var(--tile); border-radius: 16px; padding: 12px 14px; text-align: left;
   display: flex; flex-direction: column; gap: 0;
@@ -175,6 +178,11 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       </svg>
       <h2>Letter Web</h2>
     </header>
+    <div class="levels" role="group" aria-label="Difficulty">
+      <button class="level-btn" type="button" data-level="easy">Easy</button>
+      <button class="level-btn" type="button" data-level="medium">Medium</button>
+      <button class="level-btn" type="button" data-level="hard">Hard</button>
+    </div>
     <div class="sizes">
       <button class="size-btn" id="pick4" type="button"><b>4 × 4</b><small id="prog4">New puzzle</small></button>
       <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5">New puzzle</small></button>
@@ -255,7 +263,6 @@ __GEN__
   const STORE_KEY = "jota.letterweb.v1";
   const HINTS = 3;
   const words = window.JotaWords.list;
-  const trie = buildTrie(words);
   const $ = (id) => document.getElementById(id);
   const SVGNS = "http://www.w3.org/2000/svg";
 
@@ -265,23 +272,31 @@ __GEN__
 
   let game = null;   // {puzzle, found:[], hintsLeft, hinted}
   let size = 4;
+  const LEVEL_NAMES = { easy: "Easy", medium: "Medium", hard: "Hard" };
+  // Saved games, wins and best times are kept per size and level, e.g. "g4easy", "best5hard".
+  for (const N of [4, 5]) for (const k of ["g", "solved", "best"]) {
+    if (store[k + N] !== undefined && store[k + N + "medium"] === undefined) store[k + N + "medium"] = store[k + N];
+    delete store[k + N];
+  }
+  let level = LEVEL_NAMES[store.level] ? store.level : "medium";
+  const key = (k, N = size, lv = level) => k + N + lv;
   let path = [];
   let els = null;    // svg element refs
   let busy = false;
 
   function newGame(N) {
     let p = null, seed;
-    while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, trie); }
+    while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, level); }
     return { puzzle: p, found: [], bonus: [], order: [], hintsLeft: HINTS, hinted: null, elapsed: 0 };
   }
   function ensureGame(N) {
-    const g = store["g" + N];
+    const g = store[key("g", N)];
     if (g && g.puzzle && g.found.length < g.puzzle.words.length) {
       g.bonus = g.bonus || []; g.order = g.order || g.found.slice(); g.elapsed = g.elapsed || 0;
       return g;
     }
     const fresh = newGame(N);
-    store["g" + N] = fresh; save();
+    store[key("g", N)] = fresh; save();
     return fresh;
   }
 
@@ -348,7 +363,7 @@ __GEN__
     $("subcount").textContent = `${f} of ${total} found` + (nb ? ` · ${nb} bonus` : "");
     $("hintCount").textContent = game.hintsLeft;
     $("hintBtn").disabled = game.hintsLeft <= 0 || left === 0;
-    $("sizeTag").textContent = `${game.puzzle.size} × ${game.puzzle.size}`;
+    $("sizeTag").textContent = `${game.puzzle.size}×${game.puzzle.size} ${LEVEL_NAMES[level]}`;
     if (path.length) setTrace(path.map((i) => game.puzzle.letters[i]).join("").toUpperCase());
     renderFound();
   }
@@ -528,10 +543,10 @@ __GEN__
   // ---------- screens ----------
   function showWin() {
     stopTimer();
-    store["solved" + size] = (store["solved" + size] || 0) + 1;
-    const t = game.elapsed, prev = store["best" + size];
+    store[key("solved")] = (store[key("solved")] || 0) + 1;
+    const t = game.elapsed, prev = store[key("best")];
     const record = !prev || t < prev;
-    if (record) store["best" + size] = t;
+    if (record) store[key("best")] = t;
     save();
     $("winTime").textContent = fmt(t);
     const bestEl = $("winBest");
@@ -552,12 +567,13 @@ __GEN__
   function openHome() {
     stopTimer();
     $("game").hidden = true; $("winSheet").hidden = true; $("home").hidden = false;
+    document.querySelectorAll(".level-btn").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.level === level)));
     for (const N of [4, 5]) {
-      const g = store["g" + N], solved = store["solved" + N] || 0;
+      const g = store[key("g", N)], solved = store[key("solved", N)] || 0;
       let text = "New puzzle";
       if (g && g.found.length && g.found.length < g.puzzle.words.length) text = `Continue · ${g.found.length}/${g.puzzle.words.length}`;
       if (solved) text += ` · ${solved} solved`;
-      if (store["best" + N]) text += ` · Best ${fmt(store["best" + N])}`;
+      if (store[key("best", N)]) text += ` · Best ${fmt(store[key("best", N)])}`;
       $("prog" + N).textContent = text;
     }
   }
@@ -577,6 +593,9 @@ __GEN__
     setTrace("Puzzle restarted", "hint"); render(); startTimer();
   }
 
+  document.querySelectorAll(".level-btn").forEach((b) => b.addEventListener("click", () => {
+    level = b.dataset.level; store.level = level; save(); openHome();
+  }));
   $("pick4").addEventListener("click", () => openGame(4));
   $("pick5").addEventListener("click", () => openGame(5));
   $("menuBtn").addEventListener("click", openHome);
@@ -584,7 +603,7 @@ __GEN__
   $("hintBtn").addEventListener("click", useHint);
   $("winHome").addEventListener("click", openHome);
   $("winNext").addEventListener("click", () => {
-    store["g" + size] = newGame(size); save(); openGame(size);
+    store[key("g")] = newGame(size); save(); openGame(size);
   });
   const svg = $("board");
   svg.addEventListener("pointerdown", onDown);
@@ -594,11 +613,12 @@ __GEN__
   document.addEventListener("contextmenu", (e) => e.preventDefault());
 
   function start(data) {
+    if (data && data.level && LEVEL_NAMES[data.level]) level = data.level;
     if (data && data.screen === "game") openGame(data.size); else openHome();
     setTimeout(() => window.JotaWords.warm(), 300);
   }
   if (window.claude && window.claude.hot) {
-    window.claude.hot.snapshot && window.claude.hot.snapshot(() => ({ screen: $("game").hidden ? "home" : "game", size }));
+    window.claude.hot.snapshot && window.claude.hot.snapshot(() => ({ screen: $("game").hidden ? "home" : "game", size, level }));
   }
   window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
 })();

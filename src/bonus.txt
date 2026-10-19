@@ -95,6 +95,7 @@ aboral
 aborning
 aborted
 aborting
+abortion
 abortive
 aboulia
 abound
@@ -145,6 +146,8 @@ absurdly
 abulia
 abulic
 abundant
+abuse
+abused
 abuser
 abusing
 abusive
@@ -332,6 +335,8 @@ addend
 addenda
 addendum
 adder
+addict
+addicted
 additive
 additory
 addle
@@ -476,6 +481,7 @@ afeard
 afebrile
 affable
 affably
+affair
 affaire
 afferent
 affiance
@@ -1633,6 +1639,7 @@ assai
 assail
 assailed
 assailer
+assault
 assay
 assayed
 assayer
@@ -4093,6 +4100,7 @@ bullbat
 bulldog
 bulldoze
 bulled
+bullet
 bulleted
 bullfrog
 bullhead
@@ -5472,6 +5480,7 @@ choicer
 choicest
 choirboy
 choker
+choking
 cholent
 choler
 cholera
@@ -7620,6 +7629,7 @@ dazzling
 dded
 dding
 deaconry
+dead
 deadbeat
 deadbolt
 deaden
@@ -7631,6 +7641,7 @@ deadfall
 deadhead
 deadlier
 deadlock
+deadly
 deadness
 deadpan
 deadwood
@@ -7648,6 +7659,7 @@ dearer
 dearness
 dearth
 deary
+death
 deathbed
 deathday
 deathful
@@ -8177,6 +8189,7 @@ didst
 didymium
 didymous
 dieback
+died
 dieldrin
 diereses
 dieresis
@@ -8452,6 +8465,7 @@ divinity
 divinize
 divisive
 divisor
+divorce
 divorcee
 divot
 divulge
@@ -8946,7 +8960,9 @@ drumfire
 drumfish
 drumhead
 drumlin
+drunk
 drunkard
+drunken
 drunker
 drunkest
 drupe
@@ -9036,6 +9052,7 @@ dulosis
 dulse
 duly
 duma
+dumb
 dumbbell
 dumber
 dumbest
@@ -9152,6 +9169,7 @@ dyeline
 dyer
 dyestuff
 dyewood
+dying
 dynamism
 dynamist
 dynamo
@@ -10367,6 +10385,7 @@ expiring
 expiry
 explant
 explicit
+explode
 exploder
 explored
 explorer
@@ -10618,6 +10637,7 @@ fasciate
 fascicle
 fascine
 fascism
+fascist
 fash
 fastback
 fastball
@@ -10656,6 +10676,7 @@ fattest
 fattier
 fattiest
 fattish
+fatty
 fatuity
 fatuous
 fatwa
@@ -13226,6 +13247,7 @@ greige
 greisen
 gremial
 gremlin
+grenade
 grep
 grepped
 grepping
@@ -13489,6 +13511,7 @@ gumtree
 gumwood
 gunboat
 gunfight
+gunfire
 gunflint
 gunge
 gungy
@@ -13509,6 +13532,7 @@ gunplay
 gunpoint
 gunsel
 gunship
+gunshot
 gunsmith
 gunstock
 gunter
@@ -13770,6 +13794,7 @@ handymen
 hangar
 hangbird
 hangdog
+hanged
 hanger
 hangman
 hangmen
@@ -13886,10 +13911,12 @@ hatchery
 hatchet
 hatching
 hatchway
+hate
 hateful
 hater
 hath
 hatpin
+hatred
 hatstand
 hatted
 hatter
@@ -14595,6 +14622,7 @@ hosp
 hospice
 hospodar
 hosta
+hostage
 hostel
 hosteled
 hosteler
@@ -14902,6 +14930,7 @@ ideology
 idiocy
 idiolect
 idiom
+idiot
 idiotic
 idiotism
 idled
@@ -16161,6 +16190,7 @@ kidder
 kiddie
 kiddish
 kiddo
+kidnap
 kidskin
 kief
 kielbasa
@@ -16168,7 +16198,9 @@ kielbasi
 kier
 kill
 killdeer
+killed
 killick
+killing
 killjoy
 kiln
 kilned
@@ -17491,6 +17523,7 @@ lorry
 lory
 losable
 losel
+loser
 lossless
 lota
 loti
@@ -17532,6 +17565,7 @@ lovelier
 lovelily
 lovelock
 lovelorn
+lover
 loverly
 lovesick
 lovesome
@@ -18149,6 +18183,7 @@ masonic
 masonry
 masque
 masquer
+massacre
 massaged
 massed
 masseter
@@ -18841,6 +18876,7 @@ misruled
 missal
 missend
 misshape
+missile
 missive
 misspeak
 misspell
@@ -22250,6 +22286,7 @@ pisser
 pissoir
 piste
 pistil
+pistol
 pistole
 piston
 pita
@@ -22573,6 +22610,8 @@ poise
 poised
 poisha
 poising
+poison
+poisoned
 poisoner
 poked
 pokeweed
@@ -23753,6 +23792,7 @@ raciest
 racily
 raciness
 racism
+racist
 racked
 racketed
 rackety
@@ -26573,6 +26613,8 @@ shoo
 shooed
 shooing
 shool
+shooter
+shooting
 shootout
 shophar
 shoplift
@@ -27078,6 +27120,7 @@ slaty
 slaved
 slaver
 slavered
+slavery
 slavey
 slaving
 slavish
@@ -28638,6 +28681,7 @@ strait
 straiten
 straitly
 strake
+strangle
 strapped
 strapper
 strata
@@ -28764,6 +28808,7 @@ stuntmen
 stupa
 stupe
 stupefy
+stupid
 stupider
 stupidly
 stupor
@@ -29919,6 +29964,7 @@ terret
 terrier
 terrify
 terrine
+terror
 terry
 terse
 tersely
@@ -30588,6 +30634,8 @@ tortious
 tortoise
 tortoni
 tortuous
+torture
+tortured
 torturer
 torus
 tosh
@@ -30655,6 +30703,7 @@ towpath
 towrope
 toxemia
 toxemic
+toxic
 toxicant
 toxicity
 toxin
@@ -31079,6 +31128,7 @@ tumefy
 tumid
 tumidity
 tumidly
+tumor
 tumorous
 tumpline
 tumular
@@ -31304,6 +31354,7 @@ ugliest
 uglified
 uglify
 ugliness
+ugly
 uhlan
 ukase
 ukulele
@@ -32126,6 +32177,7 @@ vicinage
 vicinal
 vicing
 vicinity
+victim
 victor
 victoria
 victual
@@ -32187,6 +32239,8 @@ viol
 viola
 violable
 violator
+violence
+violent
 violet
 violist
 violone

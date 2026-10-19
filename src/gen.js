@@ -20,13 +20,32 @@ function buildTrie(words) {
   return root;
 }
 
-const GEN_CONFIG = {
-  4: { maxLen: 7, min: 9, max: 15 },
-  5: { maxLen: 8, min: 15, max: 24 },
+// `words` is ordered easiest to hardest, so a word's position is its difficulty (0 = easiest, 1 = hardest).
+//   pool:   which words the board is built from
+//   cap:    the hardest word that still counts as a puzzle word (harder ones traced are bonus words)
+//   min/max: how many puzzle words a board may have
+const LEVELS = {
+  easy:   { pool: [0, 0.40],    cap: 0.45, 4: { maxLen: 6, min: 7,  max: 12 }, 5: { maxLen: 7, min: 12, max: 18 } },
+  medium: { pool: [0.10, 0.80], cap: 0.85, 4: { maxLen: 7, min: 9,  max: 15 }, 5: { maxLen: 8, min: 15, max: 24 } },
+  hard:   { pool: [0.50, 1],    cap: 1,    4: { minLen: 6, maxLen: 8, min: 11, max: 18 }, 5: { minLen: 6, maxLen: 8, min: 18, max: 30 } },
 };
 
-function generatePuzzle(N, seed, words, trie) {
-  const cfg = GEN_CONFIG[N];
+// Keep -ing/-ed words from taking over a board.
+const FORM_LIMIT = { 4: 2, 5: 3 };   // most -ing/-ed words the board may be built from
+const FORM_SHARE = 0.25;             // most of a board's puzzle words that may end in -ing/-ed
+const isForm = (w) => /(ing|ed)$/.test(w);
+
+const trieCache = new Map();
+function levelTrie(words, level) {
+  const key = level + ":" + words.length;
+  if (!trieCache.has(key)) trieCache.set(key, buildTrie(words.slice(0, Math.ceil(words.length * LEVELS[level].cap))));
+  return trieCache.get(key);
+}
+
+function generatePuzzle(N, seed, words, level) {
+  level = LEVELS[level] ? level : "medium";
+  const L = LEVELS[level], cfg = L[N];
+  const trie = levelTrie(words, level);
   const rand = makeRng(seed);
   const C = N * N;
   const adj = [];
@@ -40,11 +59,14 @@ function generatePuzzle(N, seed, words, trie) {
     adj.push(list);
   }
   const ek = (a, b) => (a < b ? a + "-" + b : b + "-" + a);
-  const pool = words.filter((w) => w.length <= cfg.maxLen);
-  // Favor -ing/-ed words: tracing them also reveals their root word.
-  const forms = pool.filter((w) => /(ing|ed)$/.test(w));
+  const pool = words
+    .slice(Math.floor(words.length * L.pool[0]), Math.ceil(words.length * L.pool[1]))
+    .filter((w) => w.length >= (cfg.minLen || 4) && w.length <= cfg.maxLen);
+  // Some -ing/-ed words are welcome (tracing one also reveals its root), up to FORM_LIMIT.
+  const forms = pool.filter(isForm), plain = pool.filter((w) => !isForm(w));
+  let formsPlaced = 0;
   const pick = () => {
-    const src = rand() < 0.3 ? forms : pool;
+    const src = formsPlaced < FORM_LIMIT[N] && rand() < 0.2 ? forms : plain;
     return src[Math.floor(rand() * src.length)];
   };
 
@@ -114,10 +136,12 @@ function generatePuzzle(N, seed, words, trie) {
     for (let k = 1; k < b.path.length; k++) edges.add(ek(b.path[k - 1], b.path[k]));
     placed.push({ word: b.word, path: b.path });
     usedWords.add(b.word);
+    if (isForm(b.word)) formsPlaced++;
   }
 
-  for (let attempt = 0; attempt < 40; attempt++) {
+  for (let attempt = 0; attempt < 60; attempt++) {
     const letters = Array(C).fill(null), edges = new Set(), placed = [], usedWords = new Set();
+    formsPlaced = 0;
     let steps = 0;
     while (letters.includes(null) && steps++ < 60) {
       const b = tryPlace(letters, placed, usedWords, "fill");
@@ -133,9 +157,10 @@ function generatePuzzle(N, seed, words, trie) {
       targets = enumerate(letters, edges, placed);
     }
     if (targets.length < cfg.min || targets.length > cfg.max) continue;
-    return { size: N, seed, letters, words: targets };
+    if (targets.filter((t) => isForm(t.word)).length > Math.max(2, Math.floor(targets.length * FORM_SHARE))) continue;
+    return { size: N, seed, level, letters, words: targets };
   }
   return null;
 }
 
-if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie, makeRng };
+if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie, makeRng, LEVELS };

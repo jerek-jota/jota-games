@@ -48,7 +48,7 @@ def pct(values):
 
 f = pct([math.log(base_rank(w) + 50) for w in words])
 s = pct([spelling(w) for w in words])
-l = [(len(w) - 4) / 4 for w in words]
+l = [min(len(w) - 4, 8) / 8 for w in words]
 score = [0.55 * a + 0.30 * b + 0.15 * c for a, b, c in zip(f, s, l)]
 ordered = [w for _, w in sorted(zip(score, words))]
 open(path, "w").write("\n".join(ordered) + "\n")

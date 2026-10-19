@@ -25,9 +25,9 @@ function buildTrie(words) {
 //   cap:    the hardest word that still counts as a puzzle word (harder ones traced are bonus words)
 //   min/max: how many puzzle words a board may have
 const LEVELS = {
-  easy:   { pool: [0, 0.40],    cap: 0.45, 4: { maxLen: 6, min: 7,  max: 12 }, 5: { maxLen: 7, min: 12, max: 18 } },
-  medium: { pool: [0.10, 0.80], cap: 0.85, 4: { maxLen: 7, min: 9,  max: 15 }, 5: { maxLen: 8, min: 15, max: 24 } },
-  hard:   { pool: [0.50, 1],    cap: 1,    4: { minLen: 6, maxLen: 8, min: 11, max: 18 }, 5: { minLen: 6, maxLen: 8, min: 18, max: 30 } },
+  easy:   { pool: [0, 0.40],    cap: 0.45, 4: { maxLen: 7,  min: 7,  max: 12 }, 5: { maxLen: 8,  min: 12, max: 18 } },
+  medium: { pool: [0.10, 0.80], cap: 0.85, 4: { maxLen: 9,  min: 9,  max: 15 }, 5: { maxLen: 10, min: 15, max: 24 } },
+  hard:   { pool: [0.50, 1],    cap: 1,    4: { minLen: 6, maxLen: 10, min: 11, max: 18 }, 5: { minLen: 6, maxLen: 12, min: 18, max: 30 } },
 };
 
 // Keep -ing/-ed words from taking over a board.

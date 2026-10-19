@@ -132,14 +132,19 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 #selpath.bonus { stroke: var(--bonus); }
 .node.bonus circle { fill: var(--bonus); }
 .node.bonus text { fill: var(--bonus-ink); }
-.found {
-  flex: none; max-height: 96px; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
-  padding-top: 10px; min-height: 40px;
-}
-.chip { background: var(--surface); border-radius: 999px; padding: 3px 12px; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
-.chip.new { background: var(--good); color: var(--accent-ink); }
+.found { flex: none; display: flex; flex-direction: column; gap: 8px; padding-top: 10px; }
+.found-row { display: grid; grid-template-columns: 58px minmax(0, 1fr); align-items: center; gap: 10px; }
+.found-label { display: flex; flex-direction: column; line-height: 1.1; }
+.found-label b { font-size: 1.05rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.found-label span { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.words .found-label b { color: var(--good); }
+.bonus-row .found-label b { color: var(--bonus); }
+.chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; min-height: 30px; align-items: center; }
+.chips::-webkit-scrollbar { display: none; }
+.chip { flex: none; }
+.chip { background: var(--good); color: var(--accent-ink); border-radius: 999px; padding: 3px 12px; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
 .chip.bonus { background: var(--bonus); color: var(--bonus-ink); }
-.found .empty { color: var(--muted); font-size: 0.92rem; margin: 0; text-align: center; max-width: 34ch; }
+.chips .empty { color: var(--muted); font-size: 0.9rem; margin: 0; white-space: nowrap; }
 
 /* Win sheet */
 .sheet-back { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 70%, transparent); display: grid; place-items: end center; z-index: 20; }
@@ -187,7 +192,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5">New puzzle</small></button>
     </div>
   </article>
-  <p class="version">Version Oct 19, 8:35 AM</p>
+  <p class="version">Version Oct 19, 8:46 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -502,19 +507,30 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   function renderFound() {
     const box = $("found");
     box.innerHTML = "";
-    if (!game.order.length) {
-      const p = document.createElement("p");
-      p.className = "empty";
-      p.textContent = "Found words show up here.";
-      box.appendChild(p);
-      return;
-    }
-    [...game.order].reverse().forEach((w) => {
-      const s = document.createElement("span");
-      s.className = "chip" + (game.bonus.includes(w) ? " bonus" : w === lastFound ? " new" : "");
-      s.textContent = w;
-      box.appendChild(s);
-    });
+    const row = (cls, count, label, list, chipClass, emptyText) => {
+      const r = document.createElement("div");
+      r.className = "found-row " + cls;
+      const l = document.createElement("div");
+      l.className = "found-label";
+      const b = document.createElement("b"); b.textContent = count;
+      const t = document.createElement("span"); t.textContent = label;
+      l.append(b, t);
+      const chips = document.createElement("div");
+      chips.className = "chips";
+      if (!list.length) {
+        const e = document.createElement("p"); e.className = "empty"; e.textContent = emptyText; chips.appendChild(e);
+      }
+      [...list].reverse().forEach((w) => {
+        const c = document.createElement("span");
+        c.className = "chip" + chipClass;
+        c.textContent = w;
+        chips.appendChild(c);
+      });
+      r.append(l, chips);
+      box.appendChild(r);
+    };
+    row("words", `${game.found.length}/${game.puzzle.words.length}`, "Words", game.found, "", "None yet");
+    row("bonus-row", `${game.bonus.length}`, "Bonus", game.bonus, " bonus", "Other real words turn blue");
   }
 
   let traceTimer = null;

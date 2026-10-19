@@ -1,6 +1,6 @@
 // Offline support: the app shell is cached on install, and every later visit
 // is served from the cache first while a fresh copy downloads in the background.
-const CACHE = "jota-a94349b6d2";
+const CACHE = "jota-ae834b033b";
 const CORE = [
   "./",
   "index.html",

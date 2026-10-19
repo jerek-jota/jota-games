@@ -80,7 +80,10 @@ if ("serviceWorker" in navigator && (location.protocol === "https:" || location.
 `;
 fs.writeFileSync(path.join(ROOT, "index.html"), index);
 
-const version = crypto.createHash("sha1").update(index).digest("hex").slice(0, 10);
+// Version covers everything the app caches, so changing an icon also ships an update.
+const hash = crypto.createHash("sha1").update(index);
+for (const f of ["manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png"]) hash.update(fs.readFileSync(path.join(ROOT, f)));
+const version = hash.digest("hex").slice(0, 10);
 const sw = read("sw.template.js").replace("__VERSION__", version);
 fs.writeFileSync(path.join(ROOT, "sw.js"), sw);
 

@@ -100,6 +100,9 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
   background: var(--badge); color: #fff; font-size: 0.78rem; font-weight: 700; line-height: 21px; text-align: center;
   font-variant-numeric: tabular-nums;
 }
+.timer { font-size: 1.15rem; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 4.2ch; text-align: center; }
+.timer.paused { color: var(--muted); }
+.toolbar .size-tag { min-width: 3.4rem; }
 .size-tag { font-size: 1rem; color: var(--muted); font-weight: 600; padding-left: 4px; }
 .status { text-align: center; flex: none; display: flex; flex-direction: column; gap: 0; padding-top: 4px; }
 .count { font-size: 1.75rem; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
@@ -154,6 +157,10 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
   display: flex; flex-direction: column; gap: 14px; text-align: center; animation: rise 0.35s ease-out;
 }
 .sheet h3 { margin: 0; font-size: 2rem; font-weight: 800; line-height: 1.1; }
+.win-time { display: flex; flex-direction: column; gap: 2px; }
+.win-time b { font-size: 2.6rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; color: var(--accent); }
+.win-time span { color: var(--muted); font-size: 1rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.win-time span.record { color: var(--good); }
 .sheet p { margin: 0; color: var(--muted); font-size: 1.05rem; }
 .sheet .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .btn { border-radius: 16px; padding: 14px; font-size: 1.1rem; font-weight: 700; background: var(--tile); }
@@ -192,7 +199,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5">New puzzle</small></button>
     </div>
   </article>
-  <p class="version">Version Oct 19, 10:57 AM</p>
+  <p class="version">Version Oct 19, 12:20 PM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -201,6 +208,8 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <svg viewBox="0 0 32 32"><path d="M6 9h20M6 16h20M6 23h20"/></svg>
     </button>
     <span class="size-tag" id="sizeTag">4 × 4</span>
+    <span class="spacer"></span>
+    <span class="timer" id="timer" aria-label="Time">0:00</span>
     <span class="spacer"></span>
     <button class="icon-btn" id="restartBtn" type="button" aria-label="Restart puzzle">
       <svg viewBox="0 0 32 32"><path d="M25 16a9 9 0 1 1-3-6.7"/><path d="M23 4v6h-6"/></svg>
@@ -222,6 +231,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 <div class="sheet-back" id="winSheet" hidden>
   <div class="sheet" role="dialog" aria-labelledby="winTitle">
     <h3 id="winTitle">Web cleared!</h3>
+    <div class="win-time"><b id="winTime">2:41</b><span id="winBest">Best 2:05</span></div>
     <p id="winText">You found all 13 words.</p>
     <div class="row">
       <button class="btn" id="winHome" type="button">All games</button>
@@ -422,12 +432,12 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   function newGame(N) {
     let p = null, seed;
     while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, trie); }
-    return { puzzle: p, found: [], bonus: [], order: [], hintsLeft: HINTS, hinted: null };
+    return { puzzle: p, found: [], bonus: [], order: [], hintsLeft: HINTS, hinted: null, elapsed: 0 };
   }
   function ensureGame(N) {
     const g = store["g" + N];
     if (g && g.puzzle && g.found.length < g.puzzle.words.length) {
-      g.bonus = g.bonus || []; g.order = g.order || g.found.slice();
+      g.bonus = g.bonus || []; g.order = g.order || g.found.slice(); g.elapsed = g.elapsed || 0;
       return g;
     }
     const fresh = newGame(N);
@@ -648,9 +658,45 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     else setTrace("Not in this puzzle", "bad");
   }
 
+  // ---------- timer ----------
+  // Runs only while a puzzle is on screen and the app is in the foreground.
+  let tStart = null, tTick = null, tSave = 0;
+  const fmt = (ms) => {
+    const t = Math.floor(ms / 1000), h = Math.floor(t / 3600), m = Math.floor(t / 60) % 60, sec = String(t % 60).padStart(2, "0");
+    return h ? `${h}:${String(m).padStart(2, "0")}:${sec}` : `${m}:${sec}`;
+  };
+  const elapsedNow = () => (game ? game.elapsed + (tStart !== null ? performance.now() - tStart : 0) : 0);
+  function showTime() { $("timer").textContent = fmt(elapsedNow()); $("timer").classList.toggle("paused", tStart === null); }
+  function startTimer() {
+    if (!game || tStart !== null || $("game").hidden || document.hidden) return;
+    if (game.found.length >= game.puzzle.words.length) return;
+    tStart = performance.now();
+    tTick = setInterval(() => {
+      showTime();
+      if (performance.now() - tSave > 5000) { tSave = performance.now(); game.elapsed = elapsedNow(); tStart = performance.now(); save(); }
+    }, 250);
+    showTime();
+  }
+  function stopTimer() {
+    if (tStart === null) return;
+    game.elapsed = elapsedNow(); tStart = null;
+    clearInterval(tTick); tTick = null; save(); showTime();
+  }
+  document.addEventListener("visibilitychange", () => (document.hidden ? stopTimer() : startTimer()));
+  addEventListener("pagehide", stopTimer);
+
   // ---------- screens ----------
   function showWin() {
-    store["solved" + size] = (store["solved" + size] || 0) + 1; save();
+    stopTimer();
+    store["solved" + size] = (store["solved" + size] || 0) + 1;
+    const t = game.elapsed, prev = store["best" + size];
+    const record = !prev || t < prev;
+    if (record) store["best" + size] = t;
+    save();
+    $("winTime").textContent = fmt(t);
+    const bestEl = $("winBest");
+    bestEl.textContent = record ? (prev ? `New best! Old best ${fmt(prev)}` : "First solve, new best!") : `Best ${fmt(prev)}`;
+    bestEl.classList.toggle("record", record);
     const used = HINTS - game.hintsLeft;
     $("winText").textContent = `You found all ${game.puzzle.words.length} words` +
       (used ? ` using ${used} hint${used > 1 ? "s" : ""}` : " with no hints") +
@@ -661,14 +707,17 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     size = N; game = ensureGame(N); path = []; lastFound = null;
     $("home").hidden = true; $("game").hidden = false; $("winSheet").hidden = true;
     buildBoard(); setTrace(""); render();
+    showTime(); startTimer();
   }
   function openHome() {
+    stopTimer();
     $("game").hidden = true; $("winSheet").hidden = true; $("home").hidden = false;
     for (const N of [4, 5]) {
       const g = store["g" + N], solved = store["solved" + N] || 0;
       let text = "New puzzle";
       if (g && g.found.length && g.found.length < g.puzzle.words.length) text = `Continue · ${g.found.length}/${g.puzzle.words.length}`;
       if (solved) text += ` · ${solved} solved`;
+      if (store["best" + N]) text += ` · Best ${fmt(store["best" + N])}`;
       $("prog" + N).textContent = text;
     }
   }
@@ -683,8 +732,9 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
       return;
     }
     clearTimeout(restartArmed); restartArmed = null; btn.classList.remove("armed");
-    game.found = []; game.bonus = []; game.order = []; game.hinted = null; game.hintsLeft = HINTS; path = []; lastFound = null; save();
-    setTrace("Puzzle restarted", "hint"); render();
+    stopTimer();
+    game.found = []; game.bonus = []; game.order = []; game.hinted = null; game.hintsLeft = HINTS; game.elapsed = 0; path = []; lastFound = null; save();
+    setTrace("Puzzle restarted", "hint"); render(); startTimer();
   }
 
   $("pick4").addEventListener("click", () => openGame(4));

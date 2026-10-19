@@ -1,0 +1,487 @@
+<title>Jota Word Games</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: one-screen app — toolbar, counter, square letter web filling the middle, found words at the bottom. */
+:root {
+  --bg: #131313;
+  --surface: #1E1D1B;
+  --tile: #2E2C29;
+  --ink: #ECE6D8;
+  --muted: #8E887C;
+  --accent: #E9B949;
+  --accent-ink: #1B1710;
+  --good: #5AAE75;
+  --bad: #E26B5E;
+  --badge: #4C6EF5;
+  --font: "Baloo 2", ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F1EFEA; --surface: #FFFFFF; --tile: #DBD6CB; --ink: #25221D; --muted: #6F695E;
+    --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bad: #C44B3E; --badge: #3B5BDB;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #F1EFEA; --surface: #FFFFFF; --tile: #DBD6CB; --ink: #25221D; --muted: #6F695E;
+  --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bad: #C44B3E; --badge: #3B5BDB;
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font);
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+  overflow: hidden;
+}
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
+.screen {
+  height: 100%; box-sizing: border-box; display: flex; flex-direction: column;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px 16px; max-width: 560px; margin: 0 auto;
+}
+
+/* Home */
+.home { gap: 28px; padding-top: 40px; overflow-y: auto; }
+.brand { display: flex; flex-direction: column; gap: 2px; }
+.brand h1 { margin: 0; font-size: 2.6rem; line-height: 1; font-weight: 800; letter-spacing: -0.01em; }
+.brand h1 span { color: var(--accent); }
+.brand p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.game-card { background: var(--surface); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.game-card header { display: flex; align-items: center; gap: 14px; }
+.game-card h2 { margin: 0; font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+.game-card .how { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; max-width: 60ch; }
+.mini { width: 56px; height: 56px; flex: none; }
+.sizes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.size-btn {
+  background: var(--tile); border-radius: 16px; padding: 12px 14px; text-align: left;
+  display: flex; flex-direction: column; gap: 0;
+}
+.size-btn b { font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
+.size-btn small { color: var(--muted); font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+.size-btn:active { transform: scale(0.97); }
+.soon { color: var(--muted); font-size: 0.95rem; text-align: center; margin: 0; }
+
+/* Game */
+.toolbar { display: flex; align-items: center; gap: 6px; height: 52px; flex: none; }
+.toolbar .spacer { flex: 1; }
+.icon-btn { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; position: relative; color: var(--ink); }
+.icon-btn svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.icon-btn:active { background: var(--surface); }
+.icon-btn[disabled] { opacity: 0.35; cursor: default; }
+.icon-btn.armed { color: var(--accent); }
+.badge {
+  position: absolute; top: 4px; right: 2px; min-width: 20px; height: 20px; border-radius: 10px;
+  background: var(--badge); color: #fff; font-size: 0.78rem; font-weight: 700; line-height: 21px; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.size-tag { font-size: 1rem; color: var(--muted); font-weight: 600; padding-left: 4px; }
+.status { text-align: center; flex: none; display: flex; flex-direction: column; gap: 0; padding-top: 4px; }
+.count { font-size: 1.75rem; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.subcount { font-size: 0.95rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.trace {
+  height: 44px; flex: none; display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 1.6rem; font-weight: 800; letter-spacing: 0.12em; color: var(--accent);
+}
+.trace.msg { font-size: 1.05rem; letter-spacing: 0.01em; font-weight: 600; }
+.trace.good { color: var(--good); }
+.trace.bad { color: var(--bad); animation: shake 0.35s; }
+.trace.hint { color: var(--ink); }
+@keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+.board-wrap { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+#board { width: 100%; height: 100%; max-height: 100%; touch-action: none; display: block; }
+.edge { stroke: var(--tile); stroke-width: 20; stroke-linecap: round; transition: opacity 0.45s, stroke 0.2s; }
+.node circle { fill: var(--tile); transition: fill 0.15s; }
+.node text { fill: var(--ink); font-family: var(--font); font-weight: 700; font-size: 40px; text-anchor: middle; dominant-baseline: central; pointer-events: none; transition: fill 0.15s; }
+.node { transition: opacity 0.45s, transform 0.45s; transform-box: fill-box; transform-origin: center; }
+.gone { opacity: 0; pointer-events: none; }
+.node.gone { transform: scale(0.4); }
+.node.sel circle { fill: var(--accent); }
+.node.sel text { fill: var(--accent-ink); }
+.node.ok circle { fill: var(--good); }
+.node.ok text { fill: var(--accent-ink); }
+.node.hinted circle { stroke: var(--accent); stroke-width: 5; stroke-dasharray: 9 7; }
+#selpath { fill: none; stroke: var(--accent); stroke-width: 20; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+#selpath.ok { stroke: var(--good); }
+.found {
+  flex: none; max-height: 96px; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  padding-top: 10px; min-height: 40px;
+}
+.chip { background: var(--surface); border-radius: 999px; padding: 3px 12px; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.chip.new { background: var(--good); color: var(--accent-ink); }
+.found .empty { color: var(--muted); font-size: 0.92rem; margin: 0; text-align: center; max-width: 34ch; }
+
+/* Win sheet */
+.sheet-back { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 70%, transparent); display: grid; place-items: end center; z-index: 20; }
+.sheet {
+  background: var(--surface); border-radius: 26px 26px 0 0; width: 100%; max-width: 560px; box-sizing: border-box;
+  padding: 24px max(20px, env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-direction: column; gap: 14px; text-align: center; animation: rise 0.35s ease-out;
+}
+.sheet h3 { margin: 0; font-size: 2rem; font-weight: 800; line-height: 1.1; }
+.sheet p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.sheet .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn { border-radius: 16px; padding: 14px; font-size: 1.1rem; font-weight: 700; background: var(--tile); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+@keyframes rise { from { transform: translateY(40px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+</style>
+
+<section class="screen home" id="home">
+  <div class="brand">
+    <h1>Jota<span>.</span></h1>
+    <p>Word games</p>
+  </div>
+  <article class="game-card">
+    <header>
+      <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
+        <g stroke="var(--accent)" stroke-width="8" stroke-linecap="round">
+          <line x1="22" y1="22" x2="78" y2="22"/><line x1="78" y1="22" x2="22" y2="78"/><line x1="22" y1="78" x2="78" y2="78"/>
+        </g>
+        <g fill="var(--tile)"><circle cx="22" cy="22" r="17"/><circle cx="78" cy="22" r="17"/><circle cx="22" cy="78" r="17"/><circle cx="78" cy="78" r="17"/></g>
+        <g fill="var(--ink)" font-family="var(--font)" font-weight="700" font-size="20" text-anchor="middle" dominant-baseline="central">
+          <text x="22" y="23">W</text><text x="78" y="23">E</text><text x="22" y="79">B</text><text x="78" y="79">S</text>
+        </g>
+      </svg>
+      <h2>Letter Web</h2>
+    </header>
+    <div class="sizes">
+      <button class="size-btn" id="pick4" type="button"><b>4 × 4</b><small id="prog4">New puzzle</small></button>
+      <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5">New puzzle</small></button>
+    </div>
+  </article>
+</section>
+
+<section class="screen" id="game" hidden>
+  <div class="toolbar">
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Back to games">
+      <svg viewBox="0 0 32 32"><path d="M6 9h20M6 16h20M6 23h20"/></svg>
+    </button>
+    <span class="size-tag" id="sizeTag">4 × 4</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="restartBtn" type="button" aria-label="Restart puzzle">
+      <svg viewBox="0 0 32 32"><path d="M25 16a9 9 0 1 1-3-6.7"/><path d="M23 4v6h-6"/></svg>
+    </button>
+    <button class="icon-btn" id="hintBtn" type="button" aria-label="Use a hint">
+      <svg viewBox="0 0 32 32"><path d="M12 22c0-3-4-5-4-10a8 8 0 0 1 16 0c0 5-4 7-4 10z"/><path d="M12.5 26h7M14 29.5h4"/></svg>
+      <span class="badge" id="hintCount">3</span>
+    </button>
+  </div>
+  <div class="status">
+    <div class="count" id="count">13 words left</div>
+    <div class="subcount" id="subcount">0 of 13 found</div>
+  </div>
+  <div class="trace" id="trace" aria-live="polite"></div>
+  <div class="board-wrap"><svg id="board" role="application" aria-label="Letter web"></svg></div>
+  <div class="found" id="found"></div>
+</section>
+
+<div class="sheet-back" id="winSheet" hidden>
+  <div class="sheet" role="dialog" aria-labelledby="winTitle">
+    <h3 id="winTitle">Web cleared!</h3>
+    <p id="winText">You found all 13 words.</p>
+    <div class="row">
+      <button class="btn" id="winHome" type="button">All games</button>
+      <button class="btn primary" id="winNext" type="button">New puzzle</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== Shared word list (built in, works offline). Common English words, 4–8 letters, no plurals. ===== */
+window.JotaWords = (function () {
+  const list = "__WORDS__".split(" ");
+  const set = new Set(list);
+  return { list, has: (w) => set.has(w.toLowerCase()) };
+})();
+</script>
+<script>
+/* ===== Letter Web generator ===== */
+__GEN__
+</script>
+<script>
+(function () {
+  const STORE_KEY = "jota.letterweb.v1";
+  const HINTS = 3;
+  const words = window.JotaWords.list;
+  const trie = buildTrie(words);
+  const $ = (id) => document.getElementById(id);
+  const SVGNS = "http://www.w3.org/2000/svg";
+
+  function load() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } }
+  let store = load();
+  function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
+
+  let game = null;   // {puzzle, found:[], hintsLeft, hinted}
+  let size = 4;
+  let path = [];
+  let els = null;    // svg element refs
+  let busy = false;
+
+  function newGame(N) {
+    let p = null, seed;
+    while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, trie); }
+    return { puzzle: p, found: [], hintsLeft: HINTS, hinted: null };
+  }
+  function ensureGame(N) {
+    const g = store["g" + N];
+    if (g && g.puzzle && g.found.length < g.puzzle.words.length) return g;
+    const fresh = newGame(N);
+    store["g" + N] = fresh; save();
+    return fresh;
+  }
+
+  // ---------- derived state ----------
+  const ek = (a, b) => (a < b ? a + "-" + b : b + "-" + a);
+  function remaining() { return game.puzzle.words.filter((w) => !game.found.includes(w.word)); }
+  function visible() {
+    const nodes = new Set(), edges = new Set();
+    for (const w of remaining()) {
+      w.path.forEach((i, k) => { nodes.add(i); if (k) edges.add(ek(w.path[k - 1], i)); });
+    }
+    return { nodes, edges };
+  }
+  let vis = { nodes: new Set(), edges: new Set() };
+
+  // ---------- rendering ----------
+  function buildBoard() {
+    const N = game.puzzle.size, svg = $("board");
+    svg.innerHTML = "";
+    svg.setAttribute("viewBox", `0 0 ${N * 100} ${N * 100}`);
+    const xy = (i) => [(i % N) * 100 + 50, Math.floor(i / N) * 100 + 50];
+    const edgeG = document.createElementNS(SVGNS, "g");
+    const allEdges = new Set();
+    game.puzzle.words.forEach((w) => w.path.forEach((i, k) => { if (k) allEdges.add(ek(w.path[k - 1], i)); }));
+    const edgeEls = {};
+    for (const e of allEdges) {
+      const [a, b] = e.split("-").map(Number), [x1, y1] = xy(a), [x2, y2] = xy(b);
+      const l = document.createElementNS(SVGNS, "line");
+      l.setAttribute("class", "edge");
+      l.setAttribute("x1", x1); l.setAttribute("y1", y1); l.setAttribute("x2", x2); l.setAttribute("y2", y2);
+      edgeG.appendChild(l); edgeEls[e] = l;
+    }
+    const sel = document.createElementNS(SVGNS, "polyline");
+    sel.id = "selpath";
+    const nodeG = document.createElementNS(SVGNS, "g");
+    const nodeEls = [];
+    game.puzzle.letters.forEach((ch, i) => {
+      const [x, y] = xy(i);
+      const g = document.createElementNS(SVGNS, "g");
+      g.setAttribute("class", "node");
+      const c = document.createElementNS(SVGNS, "circle");
+      c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 39);
+      const t = document.createElementNS(SVGNS, "text");
+      t.setAttribute("x", x); t.setAttribute("y", y + 2); t.textContent = ch.toUpperCase();
+      g.append(c, t); nodeG.appendChild(g); nodeEls.push(g);
+    });
+    svg.append(edgeG, sel, nodeG);
+    els = { svg, edgeEls, nodeEls, sel, xy };
+  }
+
+  function render() {
+    vis = visible();
+    for (const e in els.edgeEls) els.edgeEls[e].classList.toggle("gone", !vis.edges.has(e));
+    const hintedPath = hintedWord() ? hintedWord().path.slice(0, 2) : [];
+    els.nodeEls.forEach((g, i) => {
+      g.classList.toggle("gone", !vis.nodes.has(i));
+      g.classList.toggle("sel", path.includes(i));
+      g.classList.toggle("hinted", hintedPath.includes(i) && !path.includes(i));
+    });
+    els.sel.setAttribute("points", path.map((i) => els.xy(i).join(",")).join(" "));
+    const total = game.puzzle.words.length, f = game.found.length, left = total - f;
+    $("count").textContent = left === 1 ? "1 word left" : `${left} words left`;
+    $("subcount").textContent = `${f} of ${total} found`;
+    $("hintCount").textContent = game.hintsLeft;
+    $("hintBtn").disabled = game.hintsLeft <= 0 || left === 0;
+    $("sizeTag").textContent = `${game.puzzle.size} × ${game.puzzle.size}`;
+    if (path.length) setTrace(path.map((i) => game.puzzle.letters[i]).join("").toUpperCase());
+    renderFound();
+  }
+
+  let lastFound = null;
+  function renderFound() {
+    const box = $("found");
+    box.innerHTML = "";
+    if (!game.found.length) {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "Found words show up here.";
+      box.appendChild(p);
+      return;
+    }
+    [...game.found].reverse().forEach((w) => {
+      const s = document.createElement("span");
+      s.className = "chip" + (w === lastFound ? " new" : "");
+      s.textContent = w;
+      box.appendChild(s);
+    });
+  }
+
+  let traceTimer = null;
+  function setTrace(text, kind) {
+    const t = $("trace");
+    clearTimeout(traceTimer);
+    t.className = "trace" + (kind ? " msg " + kind : "");
+    t.textContent = text;
+    if (kind) { void t.offsetWidth; traceTimer = setTimeout(() => { if (!path.length) { t.textContent = ""; t.className = "trace"; } }, kind === "hint" ? 4000 : 1400); }
+  }
+
+  // ---------- hints ----------
+  function hintedWord() {
+    if (!game.hinted) return null;
+    return remaining().find((w) => w.word === game.hinted) || null;
+  }
+  function useHint() {
+    if (game.hintsLeft <= 0) return;
+    let w = hintedWord();
+    if (!w) {
+      const rem = remaining().sort((a, b) => a.word.length - b.word.length);
+      w = rem[Math.floor(Math.random() * Math.min(rem.length, 4))];
+      if (!w) return;
+      game.hinted = w.word; game.hintsLeft--; save();
+    }
+    path = []; render();
+    setTrace(`${w.word.length}-letter word starting ${w.word.slice(0, 2).toUpperCase()}…`, "hint");
+  }
+
+  // ---------- input ----------
+  const linked = (a, b) => vis.edges.has(ek(a, b));
+  function nodeAt(ev, radius) {
+    const pt = els.svg.createSVGPoint();
+    pt.x = ev.clientX; pt.y = ev.clientY;
+    const m = els.svg.getScreenCTM(); if (!m) return null;
+    const p = pt.matrixTransform(m.inverse());
+    const N = game.puzzle.size;
+    const c = Math.floor(p.x / 100), r = Math.floor(p.y / 100);
+    if (c < 0 || r < 0 || c >= N || r >= N) return null;
+    const i = r * N + c, [x, y] = els.xy(i);
+    if (Math.hypot(p.x - x, p.y - y) > radius) return null;
+    return vis.nodes.has(i) ? i : null;
+  }
+
+  let drag = null; // {moved, submitOnUp}
+  function onDown(ev) {
+    if (busy || !game) return;
+    const n = nodeAt(ev, 48);
+    if (n === null) { if (path.length) { path = []; setTrace(""); render(); } return; }
+    ev.preventDefault();
+    try { els.svg.setPointerCapture(ev.pointerId); } catch (e) {}
+    const last = path[path.length - 1];
+    drag = { moved: false, submitOnUp: false };
+    if (path.length && n === last) drag.submitOnUp = true;
+    else if (path.length >= 2 && n === path[path.length - 2]) path.pop();
+    else if (path.length && linked(last, n) && !path.includes(n)) path.push(n);
+    else path = [n];
+    render();
+  }
+  function onMove(ev) {
+    if (!drag) return;
+    const n = nodeAt(ev, 36);
+    const last = path[path.length - 1];
+    if (n === null || n === last) return;
+    if (path.length >= 2 && n === path[path.length - 2]) { path.pop(); drag.moved = true; }
+    else if (linked(last, n) && !path.includes(n)) { path.push(n); drag.moved = true; }
+    else return;
+    drag.submitOnUp = false;
+    render();
+  }
+  function onUp() {
+    if (!drag) return;
+    const d = drag; drag = null;
+    if (d.moved || d.submitOnUp) submit(d.moved);
+  }
+
+  function submit() {
+    const word = path.map((i) => game.puzzle.letters[i]).join("");
+    const used = path.slice();
+    if (word.length < 4) { path = []; render(); setTrace("Words need 4+ letters", "bad"); return; }
+    const target = remaining().find((w) => w.word === word);
+    if (target) {
+      busy = true;
+      els.sel.classList.add("ok");
+      used.forEach((i) => els.nodeEls[i].classList.add("ok"));
+      setTrace(word.toUpperCase(), "good");
+      try { navigator.vibrate && navigator.vibrate(18); } catch (e) {}
+      setTimeout(() => {
+        els.sel.classList.remove("ok");
+        used.forEach((i) => els.nodeEls[i].classList.remove("ok"));
+        game.found.push(word); lastFound = word;
+        if (game.hinted === word) game.hinted = null;
+        path = []; busy = false; save(); render();
+        if (game.found.length === game.puzzle.words.length) setTimeout(showWin, 550);
+      }, 380);
+      return;
+    }
+    path = []; render();
+    if (game.found.includes(word)) setTrace("Already found", "bad");
+    else setTrace("Not in this puzzle", "bad");
+  }
+
+  // ---------- screens ----------
+  function showWin() {
+    store["solved" + size] = (store["solved" + size] || 0) + 1; save();
+    const used = HINTS - game.hintsLeft;
+    $("winText").textContent = `You found all ${game.puzzle.words.length} words` +
+      (used ? ` using ${used} hint${used > 1 ? "s" : ""}.` : " with no hints.");
+    $("winSheet").hidden = false;
+  }
+  function openGame(N) {
+    size = N; game = ensureGame(N); path = []; lastFound = null;
+    $("home").hidden = true; $("game").hidden = false; $("winSheet").hidden = true;
+    buildBoard(); setTrace(""); render();
+  }
+  function openHome() {
+    $("game").hidden = true; $("winSheet").hidden = true; $("home").hidden = false;
+    for (const N of [4, 5]) {
+      const g = store["g" + N], solved = store["solved" + N] || 0;
+      let text = "New puzzle";
+      if (g && g.found.length && g.found.length < g.puzzle.words.length) text = `Continue · ${g.found.length}/${g.puzzle.words.length}`;
+      if (solved) text += ` · ${solved} solved`;
+      $("prog" + N).textContent = text;
+    }
+  }
+
+  let restartArmed = null;
+  function restart() {
+    const btn = $("restartBtn");
+    if (!restartArmed) {
+      btn.classList.add("armed");
+      setTrace("Tap restart again to clear your progress", "hint");
+      restartArmed = setTimeout(() => { btn.classList.remove("armed"); restartArmed = null; }, 3000);
+      return;
+    }
+    clearTimeout(restartArmed); restartArmed = null; btn.classList.remove("armed");
+    game.found = []; game.hinted = null; game.hintsLeft = HINTS; path = []; lastFound = null; save();
+    setTrace("Puzzle restarted", "hint"); render();
+  }
+
+  $("pick4").addEventListener("click", () => openGame(4));
+  $("pick5").addEventListener("click", () => openGame(5));
+  $("menuBtn").addEventListener("click", openHome);
+  $("restartBtn").addEventListener("click", restart);
+  $("hintBtn").addEventListener("click", useHint);
+  $("winHome").addEventListener("click", openHome);
+  $("winNext").addEventListener("click", () => {
+    store["g" + size] = newGame(size); save(); openGame(size);
+  });
+  const svg = $("board");
+  svg.addEventListener("pointerdown", onDown);
+  svg.addEventListener("pointermove", onMove);
+  svg.addEventListener("pointerup", onUp);
+  svg.addEventListener("pointercancel", () => { drag = null; });
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+  function start(data) {
+    if (data && data.screen === "game") openGame(data.size); else openHome();
+  }
+  if (window.claude && window.claude.hot) {
+    window.claude.hot.snapshot && window.claude.hot.snapshot(() => ({ screen: $("game").hidden ? "home" : "game", size }));
+  }
+  window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+})();
+</script>

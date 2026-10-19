@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Jota">
+<meta name="theme-color" content="#131313">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<style>
+html { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+[hidden] { display: none !important; }
+</style>
+<title>Jota Word Games</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: one-screen app — toolbar, counter, square letter web filling the middle, found words at the bottom. */
+:root {
+  --bg: #131313;
+  --surface: #1E1D1B;
+  --tile: #2E2C29;
+  --ink: #ECE6D8;
+  --muted: #8E887C;
+  --accent: #E9B949;
+  --accent-ink: #1B1710;
+  --good: #5AAE75;
+  --bad: #E26B5E;
+  --badge: #4C6EF5;
+  --font: "Baloo 2", ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #F1EFEA; --surface: #FFFFFF; --tile: #DBD6CB; --ink: #25221D; --muted: #6F695E;
+    --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bad: #C44B3E; --badge: #3B5BDB;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #F1EFEA; --surface: #FFFFFF; --tile: #DBD6CB; --ink: #25221D; --muted: #6F695E;
+  --accent: #DDA22C; --accent-ink: #1B1710; --good: #267A4B; --bad: #C44B3E; --badge: #3B5BDB;
+  color-scheme: light;
+}
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font);
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+  overflow: hidden;
+}
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; padding: 0; }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 12px; }
+.screen {
+  height: 100%; box-sizing: border-box; display: flex; flex-direction: column;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px 16px; max-width: 560px; margin: 0 auto;
+}
+
+/* Home */
+.home { gap: 28px; padding-top: 40px; overflow-y: auto; }
+.brand { display: flex; flex-direction: column; gap: 2px; }
+.brand h1 { margin: 0; font-size: 2.6rem; line-height: 1; font-weight: 800; letter-spacing: -0.01em; }
+.brand h1 span { color: var(--accent); }
+.brand p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.game-card { background: var(--surface); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.game-card header { display: flex; align-items: center; gap: 14px; }
+.game-card h2 { margin: 0; font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
+.game-card .how { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; max-width: 60ch; }
+.mini { width: 56px; height: 56px; flex: none; }
+.sizes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.size-btn {
+  background: var(--tile); border-radius: 16px; padding: 12px 14px; text-align: left;
+  display: flex; flex-direction: column; gap: 0;
+}
+.size-btn b { font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
+.size-btn small { color: var(--muted); font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+.size-btn:active { transform: scale(0.97); }
+.soon { color: var(--muted); font-size: 0.95rem; text-align: center; margin: 0; }
+
+/* Game */
+.toolbar { display: flex; align-items: center; gap: 6px; height: 52px; flex: none; }
+.toolbar .spacer { flex: 1; }
+.icon-btn { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; position: relative; color: var(--ink); }
+.icon-btn svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.icon-btn:active { background: var(--surface); }
+.icon-btn[disabled] { opacity: 0.35; cursor: default; }
+.icon-btn.armed { color: var(--accent); }
+.badge {
+  position: absolute; top: 4px; right: 2px; min-width: 20px; height: 20px; border-radius: 10px;
+  background: var(--badge); color: #fff; font-size: 0.78rem; font-weight: 700; line-height: 21px; text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.size-tag { font-size: 1rem; color: var(--muted); font-weight: 600; padding-left: 4px; }
+.status { text-align: center; flex: none; display: flex; flex-direction: column; gap: 0; padding-top: 4px; }
+.count { font-size: 1.75rem; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.subcount { font-size: 0.95rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.trace {
+  height: 44px; flex: none; display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 1.6rem; font-weight: 800; letter-spacing: 0.12em; color: var(--accent);
+}
+.trace.msg { font-size: 1.05rem; letter-spacing: 0.01em; font-weight: 600; }
+.trace.good { color: var(--good); }
+.trace.bad { color: var(--bad); animation: shake 0.35s; }
+.trace.hint { color: var(--ink); }
+@keyframes shake { 20%,60% { transform: translateX(-6px); } 40%,80% { transform: translateX(6px); } }
+.board-wrap { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+#board { width: 100%; height: 100%; max-height: 100%; touch-action: none; display: block; }
+.edge { stroke: var(--tile); stroke-width: 20; stroke-linecap: round; transition: opacity 0.45s, stroke 0.2s; }
+.node circle { fill: var(--tile); transition: fill 0.15s; }
+.node text { fill: var(--ink); font-family: var(--font); font-weight: 700; font-size: 40px; text-anchor: middle; dominant-baseline: central; pointer-events: none; transition: fill 0.15s; }
+.node { transition: opacity 0.45s, transform 0.45s; transform-box: fill-box; transform-origin: center; }
+.gone { opacity: 0; pointer-events: none; }
+.node.gone { transform: scale(0.4); }
+.node.sel circle { fill: var(--accent); }
+.node.sel text { fill: var(--accent-ink); }
+.node.ok circle { fill: var(--good); }
+.node.ok text { fill: var(--accent-ink); }
+.node.hinted circle { stroke: var(--accent); stroke-width: 5; stroke-dasharray: 9 7; }
+#selpath { fill: none; stroke: var(--accent); stroke-width: 20; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+#selpath.ok { stroke: var(--good); }
+.found {
+  flex: none; max-height: 96px; overflow-y: auto; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  padding-top: 10px; min-height: 40px;
+}
+.chip { background: var(--surface); border-radius: 999px; padding: 3px 12px; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+.chip.new { background: var(--good); color: var(--accent-ink); }
+.found .empty { color: var(--muted); font-size: 0.92rem; margin: 0; text-align: center; max-width: 34ch; }
+
+/* Win sheet */
+.sheet-back { position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 70%, transparent); display: grid; place-items: end center; z-index: 20; }
+.sheet {
+  background: var(--surface); border-radius: 26px 26px 0 0; width: 100%; max-width: 560px; box-sizing: border-box;
+  padding: 24px max(20px, env(safe-area-inset-left, 0px)) calc(24px + env(safe-area-inset-bottom, 0px));
+  display: flex; flex-direction: column; gap: 14px; text-align: center; animation: rise 0.35s ease-out;
+}
+.sheet h3 { margin: 0; font-size: 2rem; font-weight: 800; line-height: 1.1; }
+.sheet p { margin: 0; color: var(--muted); font-size: 1.05rem; }
+.sheet .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn { border-radius: 16px; padding: 14px; font-size: 1.1rem; font-weight: 700; background: var(--tile); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+@keyframes rise { from { transform: translateY(40px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<section class="screen home" id="home">
+  <div class="brand">
+    <h1>Jota<span>.</span></h1>
+    <p>Word games</p>
+  </div>
+  <article class="game-card">
+    <header>
+      <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
+        <g stroke="var(--accent)" stroke-width="8" stroke-linecap="round">
+          <line x1="22" y1="22" x2="78" y2="22"/><line x1="78" y1="22" x2="22" y2="78"/><line x1="22" y1="78" x2="78" y2="78"/>
+        </g>
+        <g fill="var(--tile)"><circle cx="22" cy="22" r="17"/><circle cx="78" cy="22" r="17"/><circle cx="22" cy="78" r="17"/><circle cx="78" cy="78" r="17"/></g>
+        <g fill="var(--ink)" font-family="var(--font)" font-weight="700" font-size="20" text-anchor="middle" dominant-baseline="central">
+          <text x="22" y="23">W</text><text x="78" y="23">E</text><text x="22" y="79">B</text><text x="78" y="79">S</text>
+        </g>
+      </svg>
+      <h2>Letter Web</h2>
+    </header>
+    <div class="sizes">
+      <button class="size-btn" id="pick4" type="button"><b>4 × 4</b><small id="prog4">New puzzle</small></button>
+      <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5">New puzzle</small></button>
+    </div>
+  </article>
+</section>
+
+<section class="screen" id="game" hidden>
+  <div class="toolbar">
+    <button class="icon-btn" id="menuBtn" type="button" aria-label="Back to games">
+      <svg viewBox="0 0 32 32"><path d="M6 9h20M6 16h20M6 23h20"/></svg>
+    </button>
+    <span class="size-tag" id="sizeTag">4 × 4</span>
+    <span class="spacer"></span>
+    <button class="icon-btn" id="restartBtn" type="button" aria-label="Restart puzzle">
+      <svg viewBox="0 0 32 32"><path d="M25 16a9 9 0 1 1-3-6.7"/><path d="M23 4v6h-6"/></svg>
+    </button>
+    <button class="icon-btn" id="hintBtn" type="button" aria-label="Use a hint">
+      <svg viewBox="0 0 32 32"><path d="M12 22c0-3-4-5-4-10a8 8 0 0 1 16 0c0 5-4 7-4 10z"/><path d="M12.5 26h7M14 29.5h4"/></svg>
+      <span class="badge" id="hintCount">3</span>
+    </button>
+  </div>
+  <div class="status">
+    <div class="count" id="count">13 words left</div>
+    <div class="subcount" id="subcount">0 of 13 found</div>
+  </div>
+  <div class="trace" id="trace" aria-live="polite"></div>
+  <div class="board-wrap"><svg id="board" role="application" aria-label="Letter web"></svg></div>
+  <div class="found" id="found"></div>
+</section>
+
+<div class="sheet-back" id="winSheet" hidden>
+  <div class="sheet" role="dialog" aria-labelledby="winTitle">
+    <h3 id="winTitle">Web cleared!</h3>
+    <p id="winText">You found all 13 words.</p>
+    <div class="row">
+      <button class="btn" id="winHome" type="button">All games</button>
+      <button class="btn primary" id="winNext" type="button">New puzzle</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== Shared word list (built in, works offline). Common English words, 4–8 letters, no plurals. ===== */
+window.JotaWords = (function () {
+  const list = "able about above accept accepted acid acorn across acted acting action actor added adding adult advice afraid after again agent agree agreed agreeing ahead aimed aiming alarm alarmed alarming album alert alerted alerting alien alike alive alley allow allowed allowing alone along aloud also alter altered altering always amount angel anger angle angry animal ankle answer answered apart apple applied apply applying area arena argue argued arguing arise armed armor army around arrive arrived arriving arrow artist aside asked asking asleep attic aunt auto autumn avoid avoided avoiding awake award awarded awarding aware away awful baby back bacon badge badger badly bake baked baker bakery baking ball band bang banged banging bank bare barely bark barked barking barn base basic basin basket bath bathe bathed bathing beach bead beam beamed beaming bean bear beard beast beat beauty beaver became become bedroom beef been beer beetle before began begin behind being bell belly belong belonged below belt bench bend bending bent berry beside best better beyond bike bill bird birth bison bite bitter black blade blame blank blast blaze blend bless blessed blessing blew blind blink blinked blinking block blocked blocking blond blood bloom bloomed blooming blouse blow blowing blue blush blushed blushing board boast boasted boasting boat body boil boiled boiling bold bolt bolted bolting bond bone bonus book booked booking boom boost boot booth border bore bored boring born boss both bother bottle bottom bought bounce bounced bouncing bound bowed bowing bowl bowling boxer brain brake braked braking branch brand brass brave bread break breaking breath breathed breed breeze brick bride bridge brief bright bring bringing broad broke broken brook broom broth brother brought brown brush brushed brushing bubble bubbled bubbling bucket buddy budget build building built bulb bull bump bumped bumping bunch bundle bunny burger buried burn burned burning burst bury burying bush busy butler butter button buyer buzzed buzzing cabbage cabin cable cactus cafe cage cake called calling calm calmed calming came camel camera camp camped camping campus canal candle candy cannon canoe canvas canyon cape card care cared career careful cargo caring carol carpet carried carrot carry carrying cart carton cartoon case cash castle cattle caught cause caused causing cave cedar ceiling cell cellar cent center cereal chain chair chalk champ chance change chant chanted chanting chapel charge charged charging charm chart chase chased chasing chatted chatting cheap cheat cheated cheating check checked checking cheek cheer cheered cheering cheese cheetah chef cherry chess chest chew chewed chewing chick chicken chief child chill chilled chilling chin chip chipped chipping choice choir choose choosing chop chopped chopping chord chore chose chosen church cinema circle circled circling city civil claim claimed claiming clam clap clapped clapping class claw clay clean cleaned cleaning clear cleared clearing clerk clever click clicked clicking client cliff climb climbed climbing cling clinging clip clipped clipping cloak clock close closed closet closing cloth cloud clover clown club clue clung coach coached coaching coal coast coat cobra cocoa code coffee coin cold collar colony color colored coloring comb combed combing come comedy comet comfort comic coming common cook cooked cookie cooking cool cooled cooling copied copper copy copying coral cord core corn corner cost costume cottage cotton couch cough coughed coughing could count counted counting county couple courage course court cousin cover covered covering cowboy coyote crab crack cracked cracking cradle craft crane crash crashed crashing crate crawl crawled crawling crayon crazy cream create created creating credit creek crew crib cricket crime crisp crop cross crossed crossing crowd crowded crowding crown cruel crumb crush crushed crushing crust cube cucumber cupboard cupcake curb cure cured curing curl curled curling curtain curve cushion custom cute cycle cycled cycling daily dairy daisy damage damaged damaging damp dance danced dancer dancing danger dare dared daring dark darling dash dashed dashing data date daughter dawn dead deaf deal dealer dealing dealt dear death debt decade decide decided deciding deck deep deer defend degree delay delayed delaying deliver demand demanded denied denim dense dentist deny denying depart depend depended depth desert design designed desk detail device dialed dialing diamond diary dice diet differ digging digit dime dined diner dining dinner dinosaur dipped dipping dirt dirty dish dive diver divide divided dividing diving doctor dodge dodged dodging does dollar dolphin dome donkey donut door dose double doubt doubted doubting dough down dozen draft drag dragged dragging dragon drain drained draining drama drank draw drawer drawing drawn dread dream dreaming dress dressed dressing drew dried drift drifted drifting drill drilled drilling drink drinking drip dripped dripping drive driven driver driving drop dropped dropping drove drown drowned drowning drum drummed drumming duck dull dust dusted dusting dusty duty dwarf each eager eagle early earn earned earning earth ease easel east easy eaten echo eclipse edge edit edited editing eight either elbow elder elect eleven else empty ended ending enemy energy enjoy enjoyed enjoying enough enter entered entering entry equal error escape escaped escaping even event ever every exact exam except excite excited exciting excuse excused excusing exist existed existing exit expect expected expert extra fabric face fact factory fade faded fading fail failed failing faint fainted fainting fair fairy faith fake falcon fall falling false fame family famous fancy farm farmer fast fasten fastened father fault favor fear feared fearing feast feather feed feeding feel feeling fell fellow felt female fence fern ferry fetched fetching fever field fierce fifth fifty fight fighting figure file fill filled filling film filmed filming final find finding fine finger finish finished fire firm first fish fished fishing fist five fixed fixing flag flake flame flannel flap flapped flapping flash flashed flashing flat flavor flea fled flesh flew flip flipped flipping float floated floating flock flood flooded flooding floor flour flow flowed flower flowing fluid flute foam focus foggy fold folded folding folk follow followed fond food fool foot force forced forcing forest forget forgot fork form formed forming fort forty forward fossil fought found four fourth frame free freeze freezing fresh fridge friend fright frog front frost frown frowned frowning froze frozen fruit fuel full fully fund funny furry future gain gained gaining galaxy game garage garden garlic gate gather gathered gave gazed gazing gear gecko general gentle ghost giant gift ginger girl give given giving glad glance glanced glancing glass glide glided gliding glitter globe gloom glory glove glow glowed glowing glue goal goat goblin gold golden golf gone good goose gopher gown grab grabbed grabbing grace grade grain grand grant grape graph grass grave gravel gravy gray great greed green greet greeted greeting grew grill grilled grilling grin grind grinding grinned grinning grip gripped gripping groan groaned groaning groom ground group grove grow growing growl growled growling grown guard guarded guarding guess guessed guessing guest guide guided guiding guilt guitar gulf gull guppy gust habit hair half hall halt hammer hammered hamster hand handed handing handle handled handling hang hanging happen happened happy harbor hard harm harmed harming harp harvest hate hated hating haul hauled hauling have hawk hazard hazel head headed heading heal healed healing health heap hear heard hearing heart heat heated heating heaven heavy hedge heel height held hello helmet help helped helping hero heron hidden hide hiding high hike hiked hiking hill hint hinted hinting hippo hire hired hiring hobby hold holding hole holiday hollow holy home honest honey hood hook hooked hooking hope hoped hoping horn hornet horse hose host hotel hound hour house hover hovered hovering however huge hugged hugging human humble hummed humming humor hundred hung hunger hungry hunt hunted hunter hunting hurried hurry hurrying hurt hurting husband hush hushed hushing iced idea idle igloo ignored ignoring iguana inch inched inching income indeed inner insect inside invite invited inviting iron ironed ironing island itched itching item jacket jaguar jail jelly jewel jigsaw jogged jogging join joined joining joke joked joking jolly journey judge judged judging juice jump jumped jumping jungle junior just kayak keen keep keeping kept kettle kick kicked kicking kind king kiss kissed kissing kitchen kite kitten knee kneel kneeling knelt knew knife knit knitted knitting knock knocked knocking knot know knowing known koala label labor lace ladder ladle lady lake lamb lamp land landed landing lane lantern large last lasted lasting late later laugh laughed laughing launch launched lawn layer lazy lead leader leading leaf lean leaning leap leaping leapt learn learning least leather leave leaving left legal lemon lemur lend lending length lent lesson letter level liar licked licking life lift lifted lifting light like liked liking limb lime limit limited limiting line linen link linked linking lion list listed listen listened listing little live lived lively liver living lizard llama load loaded loading loaf loan lobster local lock locked locket locking lodge loft lollipop lone lonely long look looked looking loop looped looping loose lord lose losing loss lost loud love loved lovely loving lower loyal luck lucky lunch lung machine made magic magnet maid mail mailed mailing main major make maker making male mall mammal mango manner many maple marble march marched marching mark marked market marking married marry marrying marsh mask mass master match matched matching mate mattered meadow meal mean meant meat medal media melon melt melted melting member memory mend mended mending menu mercy merry mess metal middle might mild mile milk mill mind mine mint minute mirror miss missed missing mist mitten mixed mixing model modern moist mole moment money monkey month mood moon moose more morning most moth mother motor mount mouse mouth move moved movie moving much muddy muffin mule music must mute muttered myth nail nailed nailing name named naming napkin narrow nasty native nature near nearby nearly neat neck nectar need needed needing needle nerve nest never news next nice night nine noble nodded nodding noise none noodle noon north nose note noted notice noticed noticing noting novel number nurse nylon oasis oath obeyed obeying ocean odor offer offered offering office often oily okay olive once onion only open opened opening opera orange orbit orchid order ordered ordering ostrich other otter ounce outer oval oven over owner oyster pace pack package packed packing paddle paddled paddling page paid pail pain paint painted painting pair palace pale palm panda panel panic pantry paper parade parent park parked parking parrot part party pass passed passing past pasta paste pasted pasting patch path pause paused pausing peace peach peak peanut pear pearl pebble pedal peeked peeking peel peeled peeling pelican pencil penguin people pepper perch period person pest petal phone phoned phoning photo piano pick picked picking pickle picnic picture piece pier pigeon piglet pile pill pillow pilot pinched pinching pine pinecone pink pint pipe pirate pitch pizza place placed placing plain plan plane planet planned planning plant planted planting plate play played player playing plaza plead pleaded pleading please pleased pleasing plenty plot plug plugged plugging plum plus pocket poem poet point pointed pointing poison polar pole police polish polished polite pollen pond pony poodle pool poor popcorn porch pork port pose post poster potato potion pound pour poured pouring powder power praise praised praising pray prayed prayer praying press pressed pressing pretty pretzel price pride priest prince print printed printing prison prize problem prompt proof proud prove proved proving pudding puddle pull pulled pulling pulse pump pumped pumping pumpkin punch punched punching pupil puppet puppy pure purple purse push pushed pushing puzzle puzzled puzzling python quack quacked quacking quarter quartz queen query quest quick quiet quilt quite quiz quote rabbit raccoon race raced racing racket radar radio radish raft rage rail rain rainbow rained raining raise raised raisin raising rake raked raking ramp ranch rang range rapid rare rate rather raven ravine razor reach reached reaching read reading ready real really reason recipe record reef reindeer relax relaxed relaxing relay remain remained remind reminded remote rent rented renting repair repaired repeat repeated replied reply replying report reported rescue rescued rescuing rest rested resting result return returned reward rhyme rhymed rhyming ribbon rice rich ridden ride rider ridge riding right ring ringing ripe rise risen rising risk risked risking river road roar roared roaring roast roasted roasting robe robin robot rock rocked rocket rocking rode role roll rolled rolling roof room rooster root rope rose rotten rough round route royal rubbed rubber rubbing rude rule ruled ruler ruling rumor rush rushed rushing rust sack saddle sadly safe safety said sail sailed sailing sailor salad sale salmon salt same sand sandal sang sank sauce save saved saving scale scare scared scarf scaring scene scent school scooter score scored scoring scout scrap scraped scraping scream screamed screen screened script seal searched seashell season seat seated seating second secret seed seek seeking seem seemed seeming seen select self sell selling send sending sense sent serve served serving settle settled settling seven shade shadow shake shaken shaking shall shallow shame shape shaped shaping share shared sharing shark sharp shave shaved shaving shed sheep sheet shelf shell shield shift shifted shifting shine shining shiny ship shirt shivered shock shocked shocking shoe shone shook shoot shooting shop shopped shopping shore short shot should shout shouted shouting shoved shovel shoving show shower showing shown shrank shrimp shrink shrugged shut shutting sick side sigh sighed sighing sight sign signed signing silent silk silly silver simple since sing singer singing single sink sinking sipped sipping sister site sitting size skate skated skating sketch sketched skied skiing skill skin skip skipped skipping skirt skull skunk slam slammed slamming sleep sleeping sleeve slept slice sliced slicing slid slide sliding slim slip slipped slipping slope sloth slow small smart smashed smashing smell smelling smile smiled smiling smoke smoked smoking smooth snack snail snake snapped snapping sneeze sneezed sneezing sniffed sniffing snored snoring snow snowed snowing snowman soaked soaking soap soccer social sock soda sofa soft soil sold soldier solid solve solved solving some song soon sore sorry sort sorted sorting sought soul sound sounded sounding soup sour south space spare spark sparked sparking sparrow spat speak speaking spear speed spell spelling spend spending spent spice spicy spider spill spilling spin spine spinning spirit spit spitting splash splashed spoil spoiling spoke spoken spoon sport spot spotted spotting spray sprayed spraying spread spring sprout spun square squash squashed squeezed squid squirrel stable stack stacked stacking staff stage stain stair stake stale stamp stamped stamping stand standing star stare stared staring start started starting state statue stay stayed staying steady steak steal stealing steam steamed steaming steel steep stem step stepped stepping stew stick sticking sticky stiff still sting stinging stir stirred stirring stock stole stolen stomach stone stood stool stop stopped stopping store stored storing stork storm story stove strap straw stream street stress strict strike striking string strip stripe strolled strong struck stuck studied study studying stuff stuffed stuffing stump stung style sugar suit summer sunny sunset super supper supply sure surf sushi swam swamp swan swayed swaying swear sweat sweep sweeping sweet swell swelling swept swift swim swimming swing swinging switch switched sword swung table tablet tackled tackling tadpole tail taken tale talent talk talked talking tall tame tamed taming tank tape tapped tapping target task taste tasted tasting tasty taught taxi teach teacher teaching team teapot tear teased teasing tell telling temple tend tended tender tending tennis tent term test tested testing text than thank thanked thanking that their them theme then there these thick thief thimble thin thing think thinking third thirst thirty those though thought thread three threw throat throne throw throwing thrown thumb thunder ticket tickle tickled tickling tide tidy tied tiger tight tile timber time timid tiny tipped tipping tired title toast toasted toasting today toddler together toilet told tomato tone tongue tonight tool tooth topic torch tore torn tossed tossing total toucan touch touched touching tough tour toured touring towel tower town toxic trace traced tracing track tracked tracking tractor trade traded trading trail trailed trailing train trained training trap trapped trapping trash travel traveled tray treat treated treating tree trend trial tribe trick tricked tricking tried trim trimmed trimming trip tripped tripping troop trophy truck true truly trumpet trunk trust trusted trusting truth trying tuba tube tucked tucking tugged tugging tulip tumble tumbled tumbling tuna tundra tune tunnel turkey turn turned turning turnip turtle twelve twenty twice twin twist twisted twisting tying type typed typing ugly umbrella uncle under undo unicorn unit unite united uniting until upon upper upset urban urge urged urging used using usual vacant valley value vanish vanished vase vast velvet verb verse very vest video view village violin visit visited visiting vital voice voiced voicing volume vote voted voting voyage vulture waded wading waffle wage wagon waist wait waited waiter waiting wake waking walk walked walking wall wallet walnut walrus wander wandered want wanted wanting warm warmed warming warn warned warning wash washed washing wasp waste wasted wasting watch watched watching water watered watering wave waved waving weak wealth wear wearing weary weasel weather weave weaving wedding week weigh weighed weighing weight weird welcomed well went were west whale wheat wheel when where which while whip whipped whipping whisper whistle whistled white whole wide widow width wife wild will willow wind window windy wine wing wink winked winking winner winning winter wipe wiped wiping wire wise wish wished wishing witch with wizard wobbled wobbling woke wolf woman wonder wondered wood wooden wool word wore work worked worker working world worm worn worried worry worrying worse worst worth would wound wove wrap wrapped wrapping wreck wrecked wrecking wrist write writer writing written wrong wrote yard yarn yawn yawned yawning year yell yelled yelling yellow yield yielded yielding yogurt young youth zebra zero zone zoomed zooming".split(" ");
+  const set = new Set(list);
+  return { list, has: (w) => set.has(w.toLowerCase()) };
+})();
+</script>
+<script>
+/* ===== Letter Web generator ===== */
+// Letter Web puzzle generator. Shared between the page and the Node test.
+function makeRng(seed) {
+  let s = seed >>> 0;
+  return function () {
+    s = (s + 0x6D2B79F5) >>> 0;
+    let t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function buildTrie(words) {
+  const root = {};
+  for (const w of words) {
+    let n = root;
+    for (const ch of w) n = n[ch] || (n[ch] = {});
+    n.$ = w;
+  }
+  return root;
+}
+
+const GEN_CONFIG = {
+  4: { maxLen: 7, min: 9, max: 15 },
+  5: { maxLen: 8, min: 15, max: 24 },
+};
+
+function generatePuzzle(N, seed, words, trie) {
+  const cfg = GEN_CONFIG[N];
+  const rand = makeRng(seed);
+  const C = N * N;
+  const adj = [];
+  for (let i = 0; i < C; i++) {
+    const r = Math.floor(i / N), c = i % N, list = [];
+    for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) {
+      if (!dr && !dc) continue;
+      const rr = r + dr, cc = c + dc;
+      if (rr >= 0 && rr < N && cc >= 0 && cc < N) list.push(rr * N + cc);
+    }
+    adj.push(list);
+  }
+  const ek = (a, b) => (a < b ? a + "-" + b : b + "-" + a);
+  const pool = words.filter((w) => w.length <= cfg.maxLen);
+  // Favor -ing/-ed words: tracing them also reveals their root word.
+  const forms = pool.filter((w) => /(ing|ed)$/.test(w));
+  const pick = () => {
+    const src = rand() < 0.3 ? forms : pool;
+    return src[Math.floor(rand() * src.length)];
+  };
+
+  function findPaths(word, letters, limit) {
+    const out = [], path = [], used = new Uint8Array(C);
+    function dfs(i, k) {
+      if (out.length >= limit) return;
+      if (letters[i] !== null && letters[i] !== word[k]) return;
+      path.push(i); used[i] = 1;
+      if (k === word.length - 1) out.push(path.slice());
+      else {
+        const nb = adj[i].slice().sort(() => rand() - 0.5);
+        for (const j of nb) if (!used[j]) dfs(j, k + 1);
+      }
+      path.pop(); used[i] = 0;
+    }
+    const starts = [...Array(C).keys()].sort(() => rand() - 0.5);
+    for (const s of starts) dfs(s, 0);
+    return out;
+  }
+
+  // Every word in the list that can be traced along the edges (no cell twice).
+  function enumerate(letters, edgeSet, placed) {
+    const nb = Array.from({ length: C }, () => []);
+    for (const e of edgeSet) {
+      const [a, b] = e.split("-").map(Number);
+      nb[a].push(b); nb[b].push(a);
+    }
+    const found = new Map();
+    for (const p of placed) found.set(p.word, p.path);
+    const used = new Uint8Array(C), path = [];
+    function dfs(i, node) {
+      const n = node[letters[i]];
+      if (!n) return;
+      path.push(i); used[i] = 1;
+      if (n.$ && !found.has(n.$)) found.set(n.$, path.slice());
+      for (const j of nb[i]) if (!used[j]) dfs(j, n);
+      path.pop(); used[i] = 0;
+    }
+    for (let i = 0; i < C; i++) dfs(i, trie);
+    return [...found].map(([word, path]) => ({ word, path }));
+  }
+
+  function tryPlace(letters, placed, usedWords, mode) {
+    let best = null;
+    for (let k = 0; k < 50; k++) {
+      const w = pick();
+      if (usedWords.has(w)) continue;
+      const paths = findPaths(w, letters, 12);
+      for (const p of paths) {
+        let fresh = 0;
+        for (const i of p) if (letters[i] === null) fresh++;
+        const overlap = p.length - fresh;
+        if (mode === "fill") {
+          if (fresh === 0) continue;
+          if (placed.length && overlap === 0) continue;
+        } else if (fresh !== 0) continue;
+        const score = fresh * 1.0 + overlap * 1.6 + rand() * 2;
+        if (!best || score > best.score) best = { word: w, path: p, score };
+      }
+    }
+    return best;
+  }
+
+  function apply(b, letters, edges, placed, usedWords) {
+    b.path.forEach((i, k) => (letters[i] = b.word[k]));
+    for (let k = 1; k < b.path.length; k++) edges.add(ek(b.path[k - 1], b.path[k]));
+    placed.push({ word: b.word, path: b.path });
+    usedWords.add(b.word);
+  }
+
+  for (let attempt = 0; attempt < 40; attempt++) {
+    const letters = Array(C).fill(null), edges = new Set(), placed = [], usedWords = new Set();
+    let steps = 0;
+    while (letters.includes(null) && steps++ < 60) {
+      const b = tryPlace(letters, placed, usedWords, "fill");
+      if (b) apply(b, letters, edges, placed, usedWords);
+    }
+    if (letters.includes(null)) continue;
+    let targets = enumerate(letters, edges, placed);
+    let extra = 0;
+    while (targets.length < cfg.min && extra++ < 12) {
+      const b = tryPlace(letters, placed, usedWords, "dense");
+      if (!b) break;
+      apply(b, letters, edges, placed, usedWords);
+      targets = enumerate(letters, edges, placed);
+    }
+    if (targets.length < cfg.min || targets.length > cfg.max) continue;
+    return { size: N, seed, letters, words: targets };
+  }
+  return null;
+}
+
+if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie, makeRng };
+
+</script>
+<script>
+(function () {
+  const STORE_KEY = "jota.letterweb.v1";
+  const HINTS = 3;
+  const words = window.JotaWords.list;
+  const trie = buildTrie(words);
+  const $ = (id) => document.getElementById(id);
+  const SVGNS = "http://www.w3.org/2000/svg";
+
+  function load() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } }
+  let store = load();
+  function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
+
+  let game = null;   // {puzzle, found:[], hintsLeft, hinted}
+  let size = 4;
+  let path = [];
+  let els = null;    // svg element refs
+  let busy = false;
+
+  function newGame(N) {
+    let p = null, seed;
+    while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, trie); }
+    return { puzzle: p, found: [], hintsLeft: HINTS, hinted: null };
+  }
+  function ensureGame(N) {
+    const g = store["g" + N];
+    if (g && g.puzzle && g.found.length < g.puzzle.words.length) return g;
+    const fresh = newGame(N);
+    store["g" + N] = fresh; save();
+    return fresh;
+  }
+
+  // ---------- derived state ----------
+  const ek = (a, b) => (a < b ? a + "-" + b : b + "-" + a);
+  function remaining() { return game.puzzle.words.filter((w) => !game.found.includes(w.word)); }
+  function visible() {
+    const nodes = new Set(), edges = new Set();
+    for (const w of remaining()) {
+      w.path.forEach((i, k) => { nodes.add(i); if (k) edges.add(ek(w.path[k - 1], i)); });
+    }
+    return { nodes, edges };
+  }
+  let vis = { nodes: new Set(), edges: new Set() };
+
+  // ---------- rendering ----------
+  function buildBoard() {
+    const N = game.puzzle.size, svg = $("board");
+    svg.innerHTML = "";
+    svg.setAttribute("viewBox", `0 0 ${N * 100} ${N * 100}`);
+    const xy = (i) => [(i % N) * 100 + 50, Math.floor(i / N) * 100 + 50];
+    const edgeG = document.createElementNS(SVGNS, "g");
+    const allEdges = new Set();
+    game.puzzle.words.forEach((w) => w.path.forEach((i, k) => { if (k) allEdges.add(ek(w.path[k - 1], i)); }));
+    const edgeEls = {};
+    for (const e of allEdges) {
+      const [a, b] = e.split("-").map(Number), [x1, y1] = xy(a), [x2, y2] = xy(b);
+      const l = document.createElementNS(SVGNS, "line");
+      l.setAttribute("class", "edge");
+      l.setAttribute("x1", x1); l.setAttribute("y1", y1); l.setAttribute("x2", x2); l.setAttribute("y2", y2);
+      edgeG.appendChild(l); edgeEls[e] = l;
+    }
+    const sel = document.createElementNS(SVGNS, "polyline");
+    sel.id = "selpath";
+    const nodeG = document.createElementNS(SVGNS, "g");
+    const nodeEls = [];
+    game.puzzle.letters.forEach((ch, i) => {
+      const [x, y] = xy(i);
+      const g = document.createElementNS(SVGNS, "g");
+      g.setAttribute("class", "node");
+      const c = document.createElementNS(SVGNS, "circle");
+      c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 39);
+      const t = document.createElementNS(SVGNS, "text");
+      t.setAttribute("x", x); t.setAttribute("y", y + 2); t.textContent = ch.toUpperCase();
+      g.append(c, t); nodeG.appendChild(g); nodeEls.push(g);
+    });
+    svg.append(edgeG, sel, nodeG);
+    els = { svg, edgeEls, nodeEls, sel, xy };
+  }
+
+  function render() {
+    vis = visible();
+    for (const e in els.edgeEls) els.edgeEls[e].classList.toggle("gone", !vis.edges.has(e));
+    const hintedPath = hintedWord() ? hintedWord().path.slice(0, 2) : [];
+    els.nodeEls.forEach((g, i) => {
+      g.classList.toggle("gone", !vis.nodes.has(i));
+      g.classList.toggle("sel", path.includes(i));
+      g.classList.toggle("hinted", hintedPath.includes(i) && !path.includes(i));
+    });
+    els.sel.setAttribute("points", path.map((i) => els.xy(i).join(",")).join(" "));
+    const total = game.puzzle.words.length, f = game.found.length, left = total - f;
+    $("count").textContent = left === 1 ? "1 word left" : `${left} words left`;
+    $("subcount").textContent = `${f} of ${total} found`;
+    $("hintCount").textContent = game.hintsLeft;
+    $("hintBtn").disabled = game.hintsLeft <= 0 || left === 0;
+    $("sizeTag").textContent = `${game.puzzle.size} × ${game.puzzle.size}`;
+    if (path.length) setTrace(path.map((i) => game.puzzle.letters[i]).join("").toUpperCase());
+    renderFound();
+  }
+
+  let lastFound = null;
+  function renderFound() {
+    const box = $("found");
+    box.innerHTML = "";
+    if (!game.found.length) {
+      const p = document.createElement("p");
+      p.className = "empty";
+      p.textContent = "Found words show up here.";
+      box.appendChild(p);
+      return;
+    }
+    [...game.found].reverse().forEach((w) => {
+      const s = document.createElement("span");
+      s.className = "chip" + (w === lastFound ? " new" : "");
+      s.textContent = w;
+      box.appendChild(s);
+    });
+  }
+
+  let traceTimer = null;
+  function setTrace(text, kind) {
+    const t = $("trace");
+    clearTimeout(traceTimer);
+    t.className = "trace" + (kind ? " msg " + kind : "");
+    t.textContent = text;
+    if (kind) { void t.offsetWidth; traceTimer = setTimeout(() => { if (!path.length) { t.textContent = ""; t.className = "trace"; } }, kind === "hint" ? 4000 : 1400); }
+  }
+
+  // ---------- hints ----------
+  function hintedWord() {
+    if (!game.hinted) return null;
+    return remaining().find((w) => w.word === game.hinted) || null;
+  }
+  function useHint() {
+    if (game.hintsLeft <= 0) return;
+    let w = hintedWord();
+    if (!w) {
+      const rem = remaining().sort((a, b) => a.word.length - b.word.length);
+      w = rem[Math.floor(Math.random() * Math.min(rem.length, 4))];
+      if (!w) return;
+      game.hinted = w.word; game.hintsLeft--; save();
+    }
+    path = []; render();
+    setTrace(`${w.word.length}-letter word starting ${w.word.slice(0, 2).toUpperCase()}…`, "hint");
+  }
+
+  // ---------- input ----------
+  const linked = (a, b) => vis.edges.has(ek(a, b));
+  function nodeAt(ev, radius) {
+    const pt = els.svg.createSVGPoint();
+    pt.x = ev.clientX; pt.y = ev.clientY;
+    const m = els.svg.getScreenCTM(); if (!m) return null;
+    const p = pt.matrixTransform(m.inverse());
+    const N = game.puzzle.size;
+    const c = Math.floor(p.x / 100), r = Math.floor(p.y / 100);
+    if (c < 0 || r < 0 || c >= N || r >= N) return null;
+    const i = r * N + c, [x, y] = els.xy(i);
+    if (Math.hypot(p.x - x, p.y - y) > radius) return null;
+    return vis.nodes.has(i) ? i : null;
+  }
+
+  let drag = null; // {moved, submitOnUp}
+  function onDown(ev) {
+    if (busy || !game) return;
+    const n = nodeAt(ev, 48);
+    if (n === null) { if (path.length) { path = []; setTrace(""); render(); } return; }
+    ev.preventDefault();
+    try { els.svg.setPointerCapture(ev.pointerId); } catch (e) {}
+    const last = path[path.length - 1];
+    drag = { moved: false, submitOnUp: false };
+    if (path.length && n === last) drag.submitOnUp = true;
+    else if (path.length >= 2 && n === path[path.length - 2]) path.pop();
+    else if (path.length && linked(last, n) && !path.includes(n)) path.push(n);
+    else path = [n];
+    render();
+  }
+  function onMove(ev) {
+    if (!drag) return;
+    const n = nodeAt(ev, 36);
+    const last = path[path.length - 1];
+    if (n === null || n === last) return;
+    if (path.length >= 2 && n === path[path.length - 2]) { path.pop(); drag.moved = true; }
+    else if (linked(last, n) && !path.includes(n)) { path.push(n); drag.moved = true; }
+    else return;
+    drag.submitOnUp = false;
+    render();
+  }
+  function onUp() {
+    if (!drag) return;
+    const d = drag; drag = null;
+    if (d.moved || d.submitOnUp) submit(d.moved);
+  }
+
+  function submit() {
+    const word = path.map((i) => game.puzzle.letters[i]).join("");
+    const used = path.slice();
+    if (word.length < 4) { path = []; render(); setTrace("Words need 4+ letters", "bad"); return; }
+    const target = remaining().find((w) => w.word === word);
+    if (target) {
+      busy = true;
+      els.sel.classList.add("ok");
+      used.forEach((i) => els.nodeEls[i].classList.add("ok"));
+      setTrace(word.toUpperCase(), "good");
+      try { navigator.vibrate && navigator.vibrate(18); } catch (e) {}
+      setTimeout(() => {
+        els.sel.classList.remove("ok");
+        used.forEach((i) => els.nodeEls[i].classList.remove("ok"));
+        game.found.push(word); lastFound = word;
+        if (game.hinted === word) game.hinted = null;
+        path = []; busy = false; save(); render();
+        if (game.found.length === game.puzzle.words.length) setTimeout(showWin, 550);
+      }, 380);
+      return;
+    }
+    path = []; render();
+    if (game.found.includes(word)) setTrace("Already found", "bad");
+    else setTrace("Not in this puzzle", "bad");
+  }
+
+  // ---------- screens ----------
+  function showWin() {
+    store["solved" + size] = (store["solved" + size] || 0) + 1; save();
+    const used = HINTS - game.hintsLeft;
+    $("winText").textContent = `You found all ${game.puzzle.words.length} words` +
+      (used ? ` using ${used} hint${used > 1 ? "s" : ""}.` : " with no hints.");
+    $("winSheet").hidden = false;
+  }
+  function openGame(N) {
+    size = N; game = ensureGame(N); path = []; lastFound = null;
+    $("home").hidden = true; $("game").hidden = false; $("winSheet").hidden = true;
+    buildBoard(); setTrace(""); render();
+  }
+  function openHome() {
+    $("game").hidden = true; $("winSheet").hidden = true; $("home").hidden = false;
+    for (const N of [4, 5]) {
+      const g = store["g" + N], solved = store["solved" + N] || 0;
+      let text = "New puzzle";
+      if (g && g.found.length && g.found.length < g.puzzle.words.length) text = `Continue · ${g.found.length}/${g.puzzle.words.length}`;
+      if (solved) text += ` · ${solved} solved`;
+      $("prog" + N).textContent = text;
+    }
+  }
+
+  let restartArmed = null;
+  function restart() {
+    const btn = $("restartBtn");
+    if (!restartArmed) {
+      btn.classList.add("armed");
+      setTrace("Tap restart again to clear your progress", "hint");
+      restartArmed = setTimeout(() => { btn.classList.remove("armed"); restartArmed = null; }, 3000);
+      return;
+    }
+    clearTimeout(restartArmed); restartArmed = null; btn.classList.remove("armed");
+    game.found = []; game.hinted = null; game.hintsLeft = HINTS; path = []; lastFound = null; save();
+    setTrace("Puzzle restarted", "hint"); render();
+  }
+
+  $("pick4").addEventListener("click", () => openGame(4));
+  $("pick5").addEventListener("click", () => openGame(5));
+  $("menuBtn").addEventListener("click", openHome);
+  $("restartBtn").addEventListener("click", restart);
+  $("hintBtn").addEventListener("click", useHint);
+  $("winHome").addEventListener("click", openHome);
+  $("winNext").addEventListener("click", () => {
+    store["g" + size] = newGame(size); save(); openGame(size);
+  });
+  const svg = $("board");
+  svg.addEventListener("pointerdown", onDown);
+  svg.addEventListener("pointermove", onMove);
+  svg.addEventListener("pointerup", onUp);
+  svg.addEventListener("pointercancel", () => { drag = null; });
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+  function start(data) {
+    if (data && data.screen === "game") openGame(data.size); else openHome();
+  }
+  if (window.claude && window.claude.hot) {
+    window.claude.hot.snapshot && window.claude.hot.snapshot(() => ({ screen: $("game").hidden ? "home" : "game", size }));
+  }
+  window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+})();
+</script>
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+}
+</script>
+</body>
+</html>

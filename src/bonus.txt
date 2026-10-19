@@ -2090,7 +2090,6 @@ anatase
 anathema
 anathematize
 anatomic
-anatomical
 anatomically
 anatomist
 anatomize
@@ -3549,14 +3548,12 @@ astrol
 astrolabe
 astrologer
 astrologic
-astrological
 astrologist
 astromancy
 astrometry
 astronautic
 astronomer
 astronomic
-astronomical
 astrophysics
 astrosphere
 astute
@@ -3569,7 +3566,6 @@ asunder
 aswarm
 asyllabic
 asymmetric
-asymmetrical
 asymmetry
 asymptomatic
 asymptote
@@ -3721,7 +3717,6 @@ attuning
 atty
 atween
 atwitter
-atypical
 atypically
 aubade
 auberge
@@ -5649,7 +5644,6 @@ binturong
 binucleate
 biocatalyst
 biocellate
-biochemical
 biochemist
 biochemistry
 biodegrade
@@ -5673,7 +5667,6 @@ biogenic
 biogeography
 biographer
 biographic
-biographical
 biologic
 biologically
 biologist
@@ -5682,7 +5675,6 @@ biomarker
 biomass
 biome
 biomechanics
-biomedical
 biomedicine
 biometric
 biometry
@@ -6615,7 +6607,6 @@ bossiness
 bossing
 bossism
 botanic
-botanical
 botanically
 botanist
 botanize
@@ -8227,7 +8218,6 @@ canoewood
 canola
 canoness
 canonic
-canonical
 canonically
 canonicate
 canonicity
@@ -9201,7 +9191,6 @@ ceruminous
 ceruse
 cerussite
 cervelat
-cervical
 cervices
 cervicitis
 cervine
@@ -10475,7 +10464,6 @@ clergymen
 clergywoman
 clergywomen
 cleric
-clerical
 clericalism
 clericalist
 clerically
@@ -11264,7 +11252,6 @@ comfortingly
 comfortless
 comfrey
 comfy
-comical
 comicality
 comically
 comicalness
@@ -12501,7 +12488,6 @@ corseted
 corseting
 corsetry
 cortege
-cortical
 corticate
 cortices
 cortisol
@@ -12548,7 +12534,6 @@ cosmogony
 cosmographer
 cosmography
 cosmologic
-cosmological
 cosmologist
 cosmology
 cosmonaut
@@ -13785,7 +13770,6 @@ cyclostyling
 cyclothymia
 cyclotron
 cygnet
-cylindrical
 cylindroid
 cylix
 cyma
@@ -13802,7 +13786,6 @@ cymoid
 cymophane
 cymose
 cynic
-cynical
 cynically
 cynicism
 cynosure
@@ -15250,7 +15233,6 @@ dhyana
 diabase
 diablerie
 diabolic
-diabolical
 diabolically
 diabolism
 diabolize
@@ -17321,7 +17303,6 @@ ecology
 econ
 econometric
 econometrist
-economical
 economically
 economism
 economist
@@ -17532,7 +17513,6 @@ egomaniacal
 egotism
 egotist
 egotistic
-egotistical
 egotize
 egregious
 egregiously
@@ -17708,7 +17688,6 @@ ellipsis
 ellipsoid
 ellipsoidal
 elliptic
-elliptical
 elliptically
 ellipticity
 elocution
@@ -19244,7 +19223,6 @@ evanescently
 evanescing
 evangel
 evangelic
-evangelical
 evangelism
 evangelist
 evangelistic
@@ -20118,7 +20096,6 @@ famished
 famishing
 famously
 famulus
-fanatical
 fanatically
 fanaticism
 fanaticize
@@ -20158,7 +20135,6 @@ fantasizer
 fantasizing
 fantasm
 fantast
-fantastical
 fantasying
 fantoccini
 fantom
@@ -23206,7 +23182,6 @@ gendarmerie
 gendered
 genderless
 geneal
-genealogical
 genealogist
 genealogize
 genera
@@ -23331,7 +23306,6 @@ geometrize
 geomorphic
 geophagy
 geophilous
-geophysical
 geophysicist
 geophysics
 geophyte
@@ -25982,7 +25956,6 @@ hereon
 heresiarch
 heresy
 heretic
-heretical
 heretically
 hereto
 heretofore
@@ -26151,7 +26124,6 @@ hiemal
 hierarch
 hierarchal
 hierarchic
-hierarchical
 hierarchize
 hieratic
 hieratically
@@ -27261,7 +27233,6 @@ hypochromia
 hypocorism
 hypocoristic
 hypocotyl
-hypocritical
 hypocycloid
 hypoderm
 hypoderma
@@ -27427,7 +27398,6 @@ ideogram
 ideograph
 ideographic
 ideography
-ideological
 ideologist
 ideologue
 ideomotor
@@ -27537,7 +27507,6 @@ illiteracy
 illiterately
 illocution
 illogic
-illogical
 illogicality
 illogically
 illume
@@ -27919,7 +27888,6 @@ impoundment
 impoverish
 impoverished
 impower
-impractical
 imprecate
 imprecated
 imprecating
@@ -32121,7 +32089,6 @@ logiest
 loginess
 logion
 logistic
-logistical
 logistically
 logistician
 logjam
@@ -32611,7 +32578,6 @@ lyophobic
 lyrate
 lyre
 lyrebird
-lyrical
 lyrically
 lyricism
 lyricist
@@ -34032,11 +33998,9 @@ metanoia
 metaph
 metaphase
 metaphoric
-metaphorical
 metaphrase
 metaphrast
 metaphysic
-metaphysical
 metaplasia
 metaplasm
 metaprotein
@@ -34082,7 +34046,6 @@ methenamine
 methinks
 methionine
 methodic
-methodical
 methodically
 methodize
 methotrexate
@@ -35994,7 +35957,6 @@ mythmaker
 mythmaking
 mythologer
 mythologic
-mythological
 mythologist
 mythologize
 mythologized
@@ -36202,7 +36164,6 @@ nauseously
 nauseousness
 naut
 nautch
-nautical
 nautically
 nautilus
 navar
@@ -36468,7 +36429,6 @@ neurogenic
 neuroglia
 neurogram
 neurologic
-neurological
 neurologist
 neurology
 neuroma
@@ -37017,7 +36977,6 @@ nonsectarian
 nonsecular
 nonselective
 nonself
-nonsensical
 nonsensitive
 nonsexist
 nonsinkable
@@ -39566,7 +39525,6 @@ paradisaical
 paradisiac
 paradisiacal
 parados
-paradoxical
 paradrop
 paraffin
 paraffinic
@@ -39943,7 +39901,6 @@ pathogenous
 pathognomy
 pathol
 pathologic
-pathological
 pathos
 patienter
 patientest
@@ -40531,7 +40488,6 @@ perineum
 perineuritis
 perineurium
 periodate
-periodical
 periodicity
 periodontal
 periodontics
@@ -44099,7 +44055,6 @@ purism
 purist
 puristic
 puritan
-puritanical
 puritanism
 purity
 purl
@@ -46530,7 +46485,6 @@ rhesus
 rhet
 rhetor
 rhetoric
-rhetorical
 rhetorically
 rhetorician
 rheum
@@ -47343,7 +47297,6 @@ ruttish
 rutty
 sabadilla
 sabayon
-sabbatical
 sabin
 sable
 sabot
@@ -47832,7 +47785,6 @@ satinwood
 satiny
 satire
 satiric
-satirical
 satirically
 satirist
 satirization
@@ -51098,7 +51050,6 @@ societal
 sociobiology
 sociol
 sociologic
-sociological
 sociologist
 sociometric
 sociometrist
@@ -51732,7 +51683,6 @@ sphenic
 sphenogram
 sphenoid
 sphere
-spherical
 spherically
 sphericity
 spherics
@@ -54541,7 +54491,6 @@ symbolized
 symbolizing
 symbology
 symmetric
-symmetrical
 symmetrize
 symmetrized
 symmetrizing
@@ -55717,7 +55666,6 @@ theodolite
 theogony
 theol
 theologian
-theological
 theologists
 theologize
 theologue
@@ -56509,7 +56457,6 @@ topi
 topiarian
 topiarist
 topiary
-topical
 topicality
 topically
 toping
@@ -57880,7 +57827,6 @@ typological
 typologist
 typology
 tyrannic
-tyrannical
 tyrannically
 tyrannicidal
 tyrannicide
@@ -57962,7 +57908,6 @@ ululation
 umbel
 umbellate
 umber
-umbilical
 umbilicate
 umbilication
 umbilici
@@ -60764,7 +60709,6 @@ whilom
 whimper
 whimpered
 whimperingly
-whimsical
 whimsicality
 whimsically
 whimsy
@@ -61884,7 +61828,6 @@ zookeeper
 zool
 zoolatry
 zoologic
-zoological
 zoologically
 zoologist
 zoology

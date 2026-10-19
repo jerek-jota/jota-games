@@ -154,6 +154,13 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .btn { border-radius: 16px; padding: 14px; font-size: 1.1rem; font-weight: 700; background: var(--tile); }
 .btn.primary { background: var(--accent); color: var(--accent-ink); }
 @keyframes rise { from { transform: translateY(40px); opacity: 0; } }
+.version { margin-top: auto; color: var(--muted); font-size: 0.8rem; text-align: center; font-variant-numeric: tabular-nums; }
+.update-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--accent); color: var(--accent-ink); font-family: var(--font); font-weight: 700; font-size: 1.05rem;
+  padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.update-bar button { font: inherit; background: var(--accent-ink); color: var(--accent); border: 0; border-radius: 12px; padding: 8px 16px; }
 @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
 </style>
 </head>
@@ -180,6 +187,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5">New puzzle</small></button>
     </div>
   </article>
+  <p class="version">Version Oct 19, 8:19 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -689,9 +697,23 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
 })();
 </script>
+<div class="update-bar" id="updateBar" hidden>
+  <span>New version available</span>
+  <button type="button" id="updateBtn">Update</button>
+</div>
 <script>
 if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-  addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (hadController) document.getElementById("updateBar").hidden = false;
+  });
+  document.getElementById("updateBtn").addEventListener("click", () => location.reload());
+  addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      // Check for a new version whenever the app comes back to the foreground.
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) reg.update().catch(() => {}); });
+    });
+  });
 }
 </script>
 </body>

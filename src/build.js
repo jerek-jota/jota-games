@@ -24,7 +24,8 @@ for (const w of read("bonus.txt").split(/\s+/).filter(Boolean)) {
 const app = read("app.src.html")
   .replace('"__WORDS__"', () => JSON.stringify(words.join(" ")))
   .replace('"__DICT__"', () => JSON.stringify(packed))
-  .replace("__GEN__", () => gen);
+  .replace("__GEN__", () => gen)
+  .replace("__BUILD__", () => new Date().toLocaleString("en-US", { timeZone: "America/Denver", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }));
 
 // Syntax-check every inline script.
 for (const m of app.matchAll(/<script>([\s\S]*?)<\/script>/g)) new Function(m[1]);
@@ -55,9 +56,23 @@ ${headPart.trim()}
 </head>
 <body>
 ${bodyPart.trim()}
+<div class="update-bar" id="updateBar" hidden>
+  <span>New version available</span>
+  <button type="button" id="updateBtn">Update</button>
+</div>
 <script>
 if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
-  addEventListener("load", () => navigator.serviceWorker.register("sw.js"));
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (hadController) document.getElementById("updateBar").hidden = false;
+  });
+  document.getElementById("updateBtn").addEventListener("click", () => location.reload());
+  addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      // Check for a new version whenever the app comes back to the foreground.
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) reg.update().catch(() => {}); });
+    });
+  });
 }
 </script>
 </body>

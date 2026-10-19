@@ -12,7 +12,12 @@ const CORE = [
 const FONT_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
 self.addEventListener("install", (event) => {
-  event.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
+  // cache: "reload" skips the phone's HTTP cache so a new version never stores an old page.
+  event.waitUntil(
+    caches.open(CACHE)
+      .then((c) => c.addAll(CORE.map((u) => new Request(u, { cache: "reload" }))))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", (event) => {
@@ -46,7 +51,7 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.open(CACHE).then(async (c) => {
       const hit = await c.match(req, { ignoreSearch: true });
-      const fresh = fetch(req)
+      const fresh = fetch(req, { cache: "no-cache" })
         .then((res) => {
           if (res.ok) c.put(req, res.clone());
           return res;

@@ -12184,7 +12184,6 @@ cookstove
 cooktop
 cookware
 coolant
-coolie
 coolish
 coolly
 coolness
@@ -13065,7 +13064,6 @@ cresting
 crestless
 cretaceous
 cretic
-cretin
 cretinism
 cretinoid
 cretinous
@@ -14027,14 +14025,12 @@ darken
 darkened
 darkener
 darkening
-darkie
 darkish
 darkle
 darkling
 darkly
 darkroom
 darksome
-darky
 darn
 darned
 darneder
@@ -21374,7 +21370,6 @@ floorer
 floorman
 floorshow
 floorwalker
-floozy
 flophouse
 flopped
 flopper
@@ -23532,7 +23527,6 @@ gimme
 gimmick
 gimmickry
 gimmicky
-gimp
 gimped
 gimping
 gimpy
@@ -24025,7 +24019,6 @@ golfed
 golfer
 golfing
 goliard
-golliwog
 golly
 gombroon
 gomphosis
@@ -24392,7 +24385,6 @@ greased
 greaseless
 greasepaint
 greaseproof
-greaser
 greasewood
 greasier
 greasiest
@@ -24966,9 +24958,7 @@ gynecomastia
 gyniatrics
 gynoecium
 gynophore
-gypped
 gypper
-gypping
 gypsophila
 gypster
 gypsum
@@ -25145,7 +25135,6 @@ halfpenny
 halftime
 halftone
 halftrack
-halfwit
 halfwitted
 halibut
 halide
@@ -25363,7 +25352,6 @@ harking
 harl
 harlequin
 harlequinade
-harlot
 harlotry
 harmattan
 harmer
@@ -27028,7 +27016,6 @@ huskiness
 husking
 husky
 hussar
-hussy
 hustings
 hustled
 hustling
@@ -27601,7 +27588,6 @@ imamate
 imaret
 imbalance
 imbalanced
-imbecile
 imbecilic
 imbecility
 imbibe
@@ -29716,7 +29702,6 @@ jibe
 jibed
 jibing
 jiff
-jigaboo
 jigged
 jigger
 jiggered
@@ -30576,7 +30561,6 @@ kraal
 kraft
 krait
 kraken
-kraut
 kremlin
 kreplach
 kreutzer
@@ -31717,7 +31701,6 @@ limerick
 limescale
 limestone
 limewater
-limey
 limicoline
 limicolous
 limier
@@ -35108,14 +35091,11 @@ moneyless
 moneymaker
 moneymaking
 moneywort
-mong
 monger
 mongered
 mongering
 mongo
-mongol
 mongolism
-mongoloid
 mongoose
 mongrel
 mongrelize
@@ -36074,7 +36054,6 @@ namelessness
 nameplate
 namer
 namesake
-nance
 nancy
 nankeen
 nankin
@@ -39492,7 +39471,6 @@ panoramic
 panpipe
 panpsychist
 pansophy
-pansy
 pantalets
 pantaloon
 pantechnicon
@@ -41195,7 +41173,6 @@ piccolo
 piccoloist
 pice
 piceous
-pickaninny
 pickax
 pickaxed
 pickaxing
@@ -42329,8 +42306,6 @@ pooched
 pooching
 pood
 pooed
-poof
-poofter
 pooh
 poohed
 poohing
@@ -45469,7 +45444,6 @@ redresser
 redroot
 redshank
 redshift
-redskin
 redstart
 redtop
 reducer
@@ -47625,7 +47599,6 @@ samarskite
 sambaed
 sambaing
 sambar
-sambo
 samekh
 sameness
 samey
@@ -49836,7 +49809,6 @@ shuttling
 shyer
 shyest
 shying
-shylock
 shyly
 shyness
 shyster
@@ -50449,7 +50421,6 @@ slatier
 slatiest
 slating
 slatted
-slattern
 slatternly
 slaty
 slaughtered
@@ -52249,7 +52220,6 @@ squatted
 squatter
 squattest
 squatting
-squaw
 squawk
 squawked
 squawker
@@ -53255,7 +53225,6 @@ strum
 struma
 strummed
 strumming
-strumpet
 strut
 struthious
 strutted
@@ -57416,7 +57385,6 @@ trolled
 troller
 trolleybus
 trolling
-trollop
 trombidiasis
 trombone
 trombonist

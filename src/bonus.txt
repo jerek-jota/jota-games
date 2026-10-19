@@ -9,7 +9,6 @@ abbess
 abbot
 abdicate
 abdomen
-abduct
 abductor
 abed
 aberrant
@@ -70,7 +69,6 @@ acidity
 acme
 acne
 acquaint
-acquire
 acquit
 acre
 acreage
@@ -246,7 +244,6 @@ alum
 amass
 amassed
 amassing
-amaze
 amazon
 amber
 ambiance
@@ -256,7 +253,6 @@ ambrosia
 ambushed
 amen
 amenable
-amend
 amending
 amethyst
 amiable
@@ -285,7 +281,6 @@ amply
 amputate
 amrita
 amulet
-amuse
 amused
 amygdala
 anabolic
@@ -323,7 +318,6 @@ angst
 anguish
 angular
 anil
-animate
 animator
 animus
 anise
@@ -332,7 +326,6 @@ anna
 annex
 annexed
 annotate
-annoy
 annually
 annuity
 annul
@@ -469,7 +462,6 @@ assert
 asserted
 assessed
 assessor
-assign
 assisted
 assoc
 assorted
@@ -498,7 +490,6 @@ atrocity
 atrophy
 atropine
 attaboy
-attach
 attache
 attacker
 attain
@@ -937,7 +928,6 @@ bladder
 blah
 bland
 blanked
-blare
 blarney
 blaster
 blasting
@@ -1100,7 +1090,6 @@ boredom
 borg
 borne
 borough
-borrow
 borrower
 borscht
 bosh
@@ -1498,7 +1487,6 @@ carte
 carted
 carter
 carting
-carve
 carver
 carving
 casa
@@ -1527,7 +1515,6 @@ cataract
 catcher
 catchy
 cate
-cater
 catered
 caterer
 catfish
@@ -1663,7 +1650,6 @@ chinook
 chipmunk
 chipper
 chippy
-chirp
 chirpy
 chisel
 chiseled
@@ -1726,7 +1712,6 @@ cisco
 cistern
 citadel
 citation
-cite
 citing
 citrus
 citywide
@@ -1741,7 +1726,6 @@ clamor
 clamp
 clamped
 clamping
-clang
 clank
 clanking
 clapper
@@ -1818,7 +1802,6 @@ closeout
 closeted
 closure
 clot
-clothe
 clothed
 clotted
 clotting
@@ -1948,7 +1931,6 @@ compadre
 comped
 compel
 competed
-compile
 compiler
 complied
 compose
@@ -2003,7 +1985,6 @@ conspire
 constant
 constr
 consul
-consume
 cont
 conte
 contra
@@ -2143,7 +2124,6 @@ crazed
 crazier
 craziest
 crazily
-creak
 creaky
 creamed
 creamer
@@ -2430,7 +2410,6 @@ dedicate
 deduce
 deduced
 deejay
-deem
 deepen
 deepened
 defame
@@ -2538,7 +2517,6 @@ diabetic
 diagnose
 diagonal
 diagram
-dial
 dialect
 dialog
 dialysis
@@ -2608,7 +2586,6 @@ dirk
 dirtied
 dirtier
 dirtiest
-disable
 discern
 disciple
 disclose
@@ -2923,7 +2900,6 @@ edible
 edict
 edifice
 educ
-educate
 educator
 eerily
 effected
@@ -3021,7 +2997,6 @@ enchant
 encircle
 enclose
 enclosed
-encode
 encoded
 encoder
 encore
@@ -3172,7 +3147,6 @@ evilly
 evite
 evoke
 evoked
-evolve
 evolving
 exacting
 exalted
@@ -3815,7 +3789,6 @@ gallop
 gallows
 galore
 gambit
-gamble
 gambled
 gamer
 gammy
@@ -3924,7 +3897,6 @@ gibbon
 giddy
 gigabit
 gigabyte
-giggle
 gigolo
 gilbert
 gilded
@@ -4473,7 +4445,6 @@ hinge
 hippie
 hippy
 hipster
-hiss
 hist
 hitched
 hitching
@@ -4539,8 +4510,6 @@ honeybee
 honeydew
 hong
 honing
-honk
-honor
 honorary
 honoring
 hooch
@@ -4598,7 +4567,6 @@ houseman
 hove
 hovel
 howdy
-howl
 howled
 hubbub
 hubby
@@ -4737,7 +4705,6 @@ implied
 implode
 imploded
 implore
-imply
 impolite
 imported
 importer
@@ -4775,7 +4742,6 @@ indie
 indigent
 indigo
 indirect
-induce
 inducing
 indulge
 indulged
@@ -4788,7 +4754,6 @@ infamous
 infamy
 infancy
 infantry
-infect
 infer
 inferior
 infernal
@@ -4823,7 +4788,6 @@ initiate
 inject
 injected
 injector
-injure
 injuring
 inkling
 inky
@@ -4890,13 +4854,11 @@ irrigate
 irritate
 islander
 isle
-isolate
 isotope
 issuance
 issuer
 issuing
 italic
-itch
 itchy
 ivory
 jabber
@@ -5982,7 +5944,6 @@ mitt
 mitzvah
 mixer
 mnemonic
-moan
 moaned
 moat
 mobbed
@@ -6101,7 +6062,6 @@ moulin
 mound
 mounties
 mounting
-mourn
 mourned
 mournful
 mousse
@@ -6140,7 +6100,6 @@ mulligan
 mulling
 multi
 multiply
-mumble
 mumbled
 munch
 munching
@@ -6175,7 +6134,6 @@ muted
 mutilate
 mutiny
 mutt
-mutter
 mutton
 mutually
 muzak
@@ -6398,7 +6356,6 @@ obesity
 obit
 obituary
 objected
-oblige
 obliging
 oblique
 oblivion
@@ -6407,14 +6364,12 @@ obscene
 obscure
 obscured
 observer
-obsess
 obsidian
 obsolete
 obstruct
 obtuse
 occult
 occupant
-occupy
 oceanic
 octagon
 octave
@@ -6503,7 +6458,6 @@ ordnance
 oregano
 organism
 organist
-orient
 oriental
 orifice
 orig
@@ -6677,7 +6631,6 @@ panned
 panning
 panorama
 pansy
-pant
 pantheon
 panther
 pantie
@@ -7053,7 +7006,6 @@ plucked
 plucking
 plucky
 plumage
-plumb
 plume
 plummet
 plump
@@ -7364,7 +7316,6 @@ pushy
 puss
 putative
 putrid
-putt
 putter
 putty
 putz
@@ -7486,7 +7437,6 @@ randomly
 randy
 ranged
 ranger
-rank
 ranked
 ransack
 rant
@@ -7899,7 +7849,6 @@ ruffle
 ruffled
 rugged
 rumba
-rumble
 rumbled
 rummage
 rummy
@@ -7923,7 +7872,6 @@ rusk
 rusted
 rustic
 rusting
-rustle
 rusty
 rutabaga
 ruth
@@ -8266,7 +8214,6 @@ settee
 setter
 settler
 seventy
-sever
 severing
 severity
 sewage
@@ -8361,7 +8308,6 @@ shire
 shirk
 shiv
 shiva
-shiver
 shoal
 shocker
 shod
@@ -8675,7 +8621,6 @@ snappy
 snapshot
 snare
 snarky
-snarl
 snatcher
 snazzy
 sneaked
@@ -8705,7 +8650,6 @@ snoopy
 snoot
 snooty
 snooze
-snore
 snorkel
 snort
 snorted
@@ -8724,7 +8668,6 @@ snuff
 snuffed
 snug
 snuggle
-soak
 soapbox
 soapy
 soar
@@ -8827,7 +8770,6 @@ spam
 span
 spandex
 spaniel
-spank
 spanked
 spanner
 spanning
@@ -8991,7 +8933,6 @@ staked
 stakeout
 staking
 stalag
-stalk
 stalked
 stalled
 stalling
@@ -9120,7 +9061,6 @@ stowed
 straddle
 strained
 strait
-strand
 strapped
 strata
 strayed
@@ -9157,7 +9097,6 @@ stud
 studded
 studious
 stuffy
-stumble
 stumped
 stumpy
 stun
@@ -9523,7 +9462,6 @@ tempered
 tempest
 tempo
 temporal
-tempt
 tempura
 tenacity
 tenant
@@ -9887,7 +9825,6 @@ tsunamis
 tubby
 tubing
 tubular
-tuck
 tucker
 tuckered
 tuff
@@ -10212,7 +10149,6 @@ vinegar
 vineyard
 vino
 viola
-violate
 violet
 viper
 viral

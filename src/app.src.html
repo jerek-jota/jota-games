@@ -164,22 +164,20 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .mw-bound { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; background: var(--surface); border-radius: 16px; padding: 10px 14px; }
 .mw-bound em { font-style: normal; font-size: 1.05rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; line-height: 1.15; }
 .mw-bound b { font-size: 1.45rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; overflow-wrap: anywhere; }
+.mw-form { margin: 0; }
 .mw-entry {
-  min-height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 16px;
-  border: 2px dashed var(--accent); font-size: 2rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+  display: block; width: 100%; box-sizing: border-box; height: 60px; border-radius: 16px; padding: 0 12px;
+  border: 2px dashed var(--accent); background: transparent; outline: none; text-align: center;
+  font: 800 2rem var(--font); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+  -webkit-user-select: text; user-select: text; caret-color: var(--accent);
 }
-.mw-entry:empty::before { content: "Type a word"; font-size: 1rem; letter-spacing: 0.02em; font-weight: 600; color: var(--muted); text-transform: none; }
+.mw-entry:focus { border-style: solid; }
+.mw-entry::placeholder { font-size: 1rem; letter-spacing: 0.02em; font-weight: 600; color: var(--muted); text-transform: none; }
 .mw-bar { position: relative; height: 10px; border-radius: 5px; background: var(--tile); margin: 4px 2px 0; overflow: hidden; }
 .mw-bar i { position: absolute; top: 0; bottom: 0; left: 0; width: 100%; background: var(--accent); border-radius: 5px; min-width: 6px; transition: left 0.35s, width 0.35s; }
 .mw-history { flex: 1; min-height: 0; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 6px; overflow-y: auto; padding-bottom: 8px; }
 .mw-history .chip { background: var(--surface); color: var(--ink); }
 .mw-history .chip i { font-style: normal; color: var(--muted); margin-left: 4px; }
-.kb { flex: none; display: flex; flex-direction: column; gap: 6px; padding-top: 6px; }
-.kb-row { display: flex; gap: 5px; justify-content: center; }
-.key { flex: 1 1 0; max-width: 44px; height: 50px; border-radius: 10px; background: var(--tile); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; }
-.key.wide { flex: 1.6 1 0; max-width: 70px; font-size: 0.85rem; text-transform: none; }
-.key.go { background: var(--accent); color: var(--accent-ink); }
-.key:active { transform: scale(0.94); }
 .mw-secret { font-size: 2.1rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); line-height: 1.1; overflow-wrap: anywhere; }
 .hist { display: flex; flex-direction: column; gap: 4px; text-align: left; }
 .hist-row { display: grid; grid-template-columns: 46px minmax(0, 1fr); align-items: center; gap: 8px; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
@@ -283,13 +281,14 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
   </div>
   <div class="mw-range">
     <div class="mw-bound"><b id="mwAfter">A</b><em id="mwAfterDist"></em></div>
-    <div class="mw-entry" id="mwEntry" aria-live="polite"></div>
+    <form class="mw-form" id="mwForm" autocomplete="off">
+      <input class="mw-entry" id="mwEntry" type="text" inputmode="text" enterkeyhint="go" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" maxlength="12" placeholder="Type a word" aria-label="Your guess">
+    </form>
     <div class="mw-bound"><b id="mwBefore">Z</b><em id="mwBeforeDist"></em></div>
     <div class="mw-bar" aria-hidden="true"><i id="mwWindow"></i></div>
   </div>
   <div class="trace" id="mwMsg" aria-live="polite"></div>
   <div class="mw-history" id="mwHistory"></div>
-  <div class="kb" id="mwKb"></div>
 </section>
 
 <div class="sheet-back" id="mwSheet" hidden>
@@ -803,9 +802,9 @@ __GEN__
     const { lo, hi } = bounds();
     $("mwAfter").textContent = lo || "A";
     $("mwBefore").textContent = hi || "Z";
-    const dist = (el, w) => { el.textContent = w ? fmtAway(away(w)) : ""; };
+    const dist = (el, w) => { el.textContent = w ? `${fmtAway(away(w))} away` : ""; };
     dist($("mwAfterDist"), lo); dist($("mwBeforeDist"), hi);
-    $("mwEntry").textContent = typed;
+    if ($("mwEntry").value !== typed) $("mwEntry").value = typed;
     const n = game.guesses.length;
     $("mwCount").textContent = game.done ? "Solved" : `Guess ${n + 1}`;
     $("mwSub").textContent = n ? `${n} guess${n > 1 ? "es" : ""} so far` : "The secret word is somewhere between A and Z";
@@ -899,39 +898,23 @@ __GEN__
       const s = document.createElement("span"); s.textContent = k;
       d.append(b, s); $("mwStats").appendChild(d);
     });
+    $("mwEntry").blur();
     $("mwSheet").hidden = false;
   }
 
-  // ---------- keyboard ----------
-  function press(k) {
-    if (!game || game.done) return;
-    if (k === "enter") return submit();
-    if (k === "back") typed = typed.slice(0, -1);
-    else if (/^[a-z]$/.test(k) && typed.length < MAX_LEN) typed += k;
-    $("mwEntry").textContent = typed;
-  }
-  const kb = $("mwKb");
-  ["qwertyuiop", "asdfghjkl", "<zxcvbnm>"].forEach((row) => {
-    const r = document.createElement("div");
-    r.className = "kb-row";
-    for (const ch of row) {
-      const b = document.createElement("button");
-      b.type = "button";
-      if (ch === "<") { b.className = "key wide go"; b.textContent = "Enter"; b.dataset.k = "enter"; }
-      else if (ch === ">") { b.className = "key wide"; b.textContent = "⌫"; b.setAttribute("aria-label", "Delete"); b.dataset.k = "back"; }
-      else { b.className = "key"; b.textContent = ch; b.dataset.k = ch; }
-      r.appendChild(b);
-    }
-    kb.appendChild(r);
+  // ---------- typing (device keyboard) ----------
+  const entry = $("mwEntry");
+  entry.addEventListener("input", () => {
+    const clean = entry.value.toLowerCase().replace(/[^a-z]/g, "").slice(0, MAX_LEN);
+    if (clean !== entry.value) entry.value = clean;
+    typed = clean;
   });
-  kb.addEventListener("click", (e) => { const b = e.target.closest(".key"); if (b) press(b.dataset.k); });
-  document.addEventListener("keydown", (e) => {
-    if ($("midword").hidden || e.metaKey || e.ctrlKey || e.altKey) return;
-    if (e.key === "Enter") press("enter");
-    else if (e.key === "Backspace") press("back");
-    else if (/^[a-zA-Z]$/.test(e.key)) press(e.key.toLowerCase());
-    else return;
+  $("mwForm").addEventListener("submit", (e) => {
     e.preventDefault();
+    if (!game || game.done) return;
+    typed = entry.value.toLowerCase();
+    submit();
+    if (!game.done) entry.focus();
   });
 
   // ---------- give up (tap twice) ----------
@@ -956,8 +939,9 @@ __GEN__
     $("mwSheet").hidden = true;
     W.sorted();
     render(); showTime(); startTimer();
+    $("mwEntry").focus();
   }
-  function goHome() { stopTimer(); $("mwSheet").hidden = true; window.JotaHome(); }
+  function goHome() { $("mwEntry").blur(); stopTimer(); $("mwSheet").hidden = true; window.JotaHome(); }
   function updateCard() {
     const st = store.stats, g = store.game;
     let t = g && !g.done && g.guesses.length ? `Continue · guess ${g.guesses.length + 1}` : "Guess the secret word";

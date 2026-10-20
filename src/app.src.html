@@ -161,8 +161,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 /* Midword */
 #midword { gap: 0; }
 .mw-range { flex: none; display: flex; flex-direction: column; gap: 8px; padding-top: 6px; }
-.mw-bound { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 8px; align-items: center; background: var(--surface); border-radius: 16px; padding: 10px 14px; }
-.mw-bound span { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mw-bound { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; background: var(--surface); border-radius: 16px; padding: 10px 14px; }
 .mw-bound em { font-style: normal; font-size: 1.05rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right; line-height: 1.15; }
 .mw-bound b { font-size: 1.45rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; overflow-wrap: anywhere; }
 .mw-entry {
@@ -283,9 +282,9 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <div class="subcount" id="mwSub">The secret word is somewhere between A and Z</div>
   </div>
   <div class="mw-range">
-    <div class="mw-bound"><span>After</span><b id="mwAfter">A</b><em id="mwAfterDist"></em></div>
+    <div class="mw-bound"><b id="mwAfter">A</b><em id="mwAfterDist"></em></div>
     <div class="mw-entry" id="mwEntry" aria-live="polite"></div>
-    <div class="mw-bound"><span>Before</span><b id="mwBefore">Z</b><em id="mwBeforeDist"></em></div>
+    <div class="mw-bound"><b id="mwBefore">Z</b><em id="mwBeforeDist"></em></div>
     <div class="mw-bar" aria-hidden="true"><i id="mwWindow"></i></div>
   </div>
   <div class="trace" id="mwMsg" aria-live="polite"></div>

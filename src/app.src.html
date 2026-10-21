@@ -281,7 +281,6 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     </button>
   </div>
   <div class="status">
-    <div class="count" id="mwCount">Guess 1</div>
     <div class="subcount" id="mwSub">The secret word is somewhere between A and Z</div>
   </div>
   <div class="mw-range">
@@ -821,7 +820,6 @@ __GEN__
     dist($("mwAfterDist"), lo); dist($("mwBeforeDist"), hi);
     if ($("mwEntry").value !== typed) $("mwEntry").value = typed;
     const n = game.guesses.length;
-    $("mwCount").textContent = game.done ? "Solved" : `Guess ${n + 1}`;
     $("mwSub").textContent = n ? `${n} guess${n > 1 ? "es" : ""} so far` : "The secret word is somewhere between A and Z";
     const known = knownPrefix();
     $("mwKnown").hidden = !known;

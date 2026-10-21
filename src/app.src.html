@@ -738,9 +738,9 @@ __GEN__
 (function () {
   const STORE_KEY = "jota.midword.v1";
   const MAX_LEN = 12;
-  // Histogram buckets for the number of guesses a win took.
-  const BUCKETS = [[1, 6], [7, 8], [9, 10], [11, 12], [13, 14], [15, 16], [17, 18], [19, 20], [21, Infinity]];
-  const bucketLabel = ([a, b]) => (b === Infinity ? `${a}+` : a === 1 ? `≤${b}` : `${a}–${b}`);
+  // Histogram rows for the number of guesses a win took: <3, then 3 through 10 each on their own, then >10.
+  const BUCKETS = [[1, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, Infinity]];
+  const bucketLabel = ([a, b]) => (b === Infinity ? `>${a - 1}` : a === 1 ? `<${b + 1}` : `${a}`);
   const bucketOf = (n) => BUCKETS.findIndex(([a, b]) => n >= a && n <= b);
   const $ = (id) => document.getElementById(id);
   const W = window.JotaWords;
@@ -750,7 +750,14 @@ __GEN__
 
   function load() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } }
   const store = load();
-  store.stats = store.stats || { played: 0, won: 0, gaveUp: 0, totalGuesses: 0, best: null, bestTime: null, dist: BUCKETS.map(() => 0) };
+  store.stats = store.stats || { played: 0, won: 0, gaveUp: 0, totalGuesses: 0, best: null, bestTime: null, counts: {} };
+  // Wins are counted per exact number of guesses. Older saves only kept ranges; place those at each range's low end.
+  if (!store.stats.counts) {
+    const old = [1, 7, 9, 11, 13, 15, 17, 19, 21], c = {};
+    (store.stats.dist || []).forEach((v, i) => { if (v) c[old[i] === 1 ? 6 : old[i]] = (c[old[i] === 1 ? 6 : old[i]] || 0) + v; });
+    store.stats.counts = c; delete store.stats.dist;
+  }
+  const bucketCounts = () => BUCKETS.map(([a, b]) => Object.entries(store.stats.counts).reduce((t, [n, v]) => (+n >= a && +n <= b ? t + v : t), 0));
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
 
   let game = null, typed = "";
@@ -879,7 +886,7 @@ __GEN__
     st.played++;
     let record = false;
     if (won) {
-      st.won++; st.totalGuesses += n; st.dist[bucketOf(n)]++;
+      st.won++; st.totalGuesses += n; st.counts[n] = (st.counts[n] || 0) + 1;
       if (st.best === null || n < st.best) { st.best = n; record = true; }
       if (st.bestTime === null || game.elapsed < st.bestTime) st.bestTime = game.elapsed;
     } else st.gaveUp++;
@@ -896,14 +903,15 @@ __GEN__
     // Histogram of guesses per solved word
     const hist = $("mwHist");
     hist.innerHTML = "";
-    const max = Math.max(1, ...st.dist);
+    const dist = bucketCounts();
+    const max = Math.max(1, ...dist);
     if (!st.won) {
       const p = document.createElement("p"); p.className = "hist-empty"; p.textContent = "Solve a word to start your guess chart"; hist.appendChild(p);
     } else BUCKETS.forEach((bk, i) => {
       const row = document.createElement("div");
       row.className = "hist-row" + (won && i === bucketOf(n) ? " now" : "");
       const l = document.createElement("span"); l.textContent = bucketLabel(bk);
-      const bar = document.createElement("b"); bar.textContent = st.dist[i]; bar.style.setProperty("--w", Math.max(8, (st.dist[i] / max) * 100) + "%");
+      const bar = document.createElement("b"); bar.textContent = dist[i]; bar.style.setProperty("--w", Math.max(8, (dist[i] / max) * 100) + "%");
       row.append(l, bar); hist.appendChild(row);
     });
     const stats = [

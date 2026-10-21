@@ -7,6 +7,7 @@ ado
 aft
 age
 ago
+ah
 aha
 ai
 aid
@@ -35,12 +36,14 @@ ask
 asp
 at
 ate
+aw
 awe
 ax
 aye
 baa
 bad
 bag
+bah
 ban
 bar
 bat
@@ -127,6 +130,7 @@ dub
 dud
 due
 dug
+duh
 dun
 duo
 dye
@@ -137,6 +141,7 @@ ed
 eel
 egg
 ego
+eh
 el
 elf
 elk
@@ -153,12 +158,14 @@ eve
 ex
 exp
 eye
+fa
 fab
 fad
 fam
 fan
 far
 fat
+fax
 fay
 fed
 fee
@@ -167,6 +174,7 @@ few
 fez
 fib
 fie
+fig
 fin
 fir
 fit
@@ -184,6 +192,7 @@ fun
 fur
 gab
 gag
+gal
 gap
 gar
 gas
@@ -191,6 +200,7 @@ gay
 gee
 gel
 gem
+gen
 get
 gig
 gin
@@ -227,6 +237,7 @@ him
 hip
 his
 hit
+hmm
 ho
 hoe
 hog
@@ -237,6 +248,7 @@ how
 hub
 hue
 hug
+huh
 hum
 hut
 ice
@@ -275,6 +287,7 @@ kid
 kin
 kip
 kit
+la
 lab
 lac
 lad
@@ -294,6 +307,7 @@ lid
 lie
 lip
 lit
+lo
 log
 loo
 lot
@@ -306,6 +320,7 @@ mad
 mag
 man
 map
+mar
 mat
 maw
 max
@@ -315,8 +330,10 @@ meg
 men
 met
 mew
+mi
 mid
 mil
+mo
 mob
 mod
 moi
@@ -331,9 +348,11 @@ mum
 my
 nab
 nag
+nah
 nap
 nay
 nee
+net
 new
 nil
 nim
@@ -355,6 +374,7 @@ ode
 of
 off
 oft
+oh
 ohm
 oi
 oil
@@ -362,6 +382,7 @@ old
 on
 one
 oof
+ooh
 op
 opt
 or
@@ -370,6 +391,7 @@ ore
 oui
 our
 out
+ow
 owe
 owl
 own
@@ -430,7 +452,9 @@ raw
 ray
 re
 red
+ref
 rep
+rev
 rib
 rid
 rig
@@ -453,6 +477,7 @@ sac
 sad
 sag
 sap
+sat
 saw
 sax
 say
@@ -482,8 +507,10 @@ sow
 soy
 spa
 spy
+sub
 sue
 sum
+sun
 tab
 tad
 tag
@@ -500,6 +527,7 @@ tee
 ten
 the
 thy
+ti
 tic
 tie
 til
@@ -521,6 +549,9 @@ tum
 tut
 tux
 two
+ugh
+uh
+um
 up
 urn
 us
@@ -542,6 +573,7 @@ wax
 way
 we
 web
+wed
 wee
 wet
 who
@@ -556,19 +588,23 @@ won
 woo
 wow
 xu
+ya
 yak
 yam
 yap
 ye
 yea
 yen
+yep
 yet
 yin
 yip
+yo
 yon
 you
 yuk
 yum
+yup
 zap
 zed
 zee

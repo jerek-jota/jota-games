@@ -173,7 +173,9 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 }
 .mw-entry:focus { border-style: solid; }
 .mw-entry::placeholder { font-size: 1rem; letter-spacing: 0.02em; font-weight: 600; color: var(--muted); text-transform: none; }
-.mw-bar { position: relative; height: 10px; border-radius: 5px; background: var(--tile); margin: 4px 2px 0; overflow: hidden; }
+.mw-bar { position: relative; height: 10px; border-radius: 5px; background: var(--tile); margin: 6px 8px 2px; }
+/* The secret word's spot in the alphabet */
+.mw-dot { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 3px var(--bg); transform: translate(-50%, -50%); }
 .mw-bar i { position: absolute; top: 0; bottom: 0; left: 0; width: 100%; background: var(--accent); border-radius: 5px; min-width: 6px; transition: left 0.35s, width 0.35s; }
 .mw-known { text-align: center; font-size: 0.95rem; color: var(--muted); font-weight: 600; }
 .mw-known b { color: var(--accent); font-size: 1.15rem; letter-spacing: 0.12em; text-transform: uppercase; }
@@ -289,7 +291,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <input class="mw-entry" id="mwEntry" type="text" inputmode="text" enterkeyhint="go" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" maxlength="12" placeholder="Type a word" aria-label="Your guess">
     </form>
     <div class="mw-bound"><b id="mwBefore">Z</b><em id="mwBeforeDist"></em></div>
-    <div class="mw-bar" aria-hidden="true"><i id="mwWindow"></i></div>
+    <div class="mw-bar" aria-hidden="true"><i id="mwWindow"></i><span class="mw-dot" id="mwDot"></span></div>
     <div class="mw-known" id="mwKnown" hidden>Starts with <b id="mwPrefix"></b></div>
   </div>
   <div class="trace" id="mwMsg" aria-live="polite"></div>
@@ -828,6 +830,7 @@ __GEN__
     const left = lo ? position(lo) : 0, right = hi ? position(hi) : 1;
     $("mwWindow").style.left = (left * 100) + "%";
     $("mwWindow").style.width = (Math.max(0, right - left) * 100) + "%";
+    $("mwDot").style.left = (position(game.secret) * 100) + "%";
     const box = $("mwHistory");
     box.innerHTML = "";
     [...game.guesses].reverse().forEach((g) => {

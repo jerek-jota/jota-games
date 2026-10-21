@@ -757,6 +757,9 @@ __GEN__
     (store.stats.dist || []).forEach((v, i) => { if (v) c[old[i] === 1 ? 6 : old[i]] = (c[old[i] === 1 ? 6 : old[i]] || 0) + v; });
     store.stats.counts = c; delete store.stats.dist;
   }
+  // Every finished game, oldest first, kept regardless of how the stats are displayed:
+  // { at: finish time (ms since 1970), word, guesses: exact count, won, gaveUp, ms: time taken, hints }
+  store.stats.history = store.stats.history || [];
   const bucketCounts = () => BUCKETS.map(([a, b]) => Object.entries(store.stats.counts).reduce((t, [n, v]) => (+n >= a && +n <= b ? t + v : t), 0));
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
 
@@ -890,6 +893,7 @@ __GEN__
       if (st.best === null || n < st.best) { st.best = n; record = true; }
       if (st.bestTime === null || game.elapsed < st.bestTime) st.bestTime = game.elapsed;
     } else st.gaveUp++;
+    st.history.push({ at: Date.now(), word: game.secret, guesses: n, won, gaveUp: !won, ms: Math.round(game.elapsed), hints: game.hints || 0 });
     save(); render();
     showResult(won, record);
   }

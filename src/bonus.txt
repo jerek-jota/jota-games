@@ -1233,6 +1233,7 @@ aguish
 ahchoo
 ahem
 ahimsa
+ahoy
 aided
 aider
 aiding
@@ -2636,6 +2637,7 @@ antsy
 anuran
 anuria
 anurous
+anus
 anvil
 anxiously
 anxiousness
@@ -4542,6 +4544,7 @@ bareness
 barer
 baresark
 barest
+barf
 barfed
 barfing
 barfly
@@ -5225,6 +5228,7 @@ benignly
 benison
 benjamin
 benne
+bennet
 benny
 benthic
 benthos
@@ -5363,6 +5367,7 @@ betake
 betaken
 betaking
 betatron
+betcha
 betel
 beth
 bethel
@@ -5508,6 +5513,7 @@ bier
 biestings
 bifacial
 bifarious
+biff
 biffed
 biffin
 biffing
@@ -8814,6 +8820,7 @@ catchphrase
 catchpole
 catchweight
 catchword
+cate
 catechetic
 catechetical
 catechin
@@ -9753,6 +9760,7 @@ chinking
 chinless
 chinned
 chinning
+chino
 chinoiserie
 chinook
 chinquapin
@@ -13715,6 +13723,7 @@ cutin
 cutinize
 cutis
 cutlass
+cutler
 cutlery
 cutlet
 cutoff
@@ -16468,6 +16477,7 @@ dosser
 dosshouse
 dossier
 dossing
+dost
 dotage
 dotard
 dotation
@@ -16510,6 +16520,7 @@ doubtless
 doubtlessly
 douce
 douceur
+douche
 douched
 douching
 doughboy
@@ -21031,6 +21042,7 @@ flaccid
 flaccidity
 flaccidly
 flaccidness
+flack
 flackery
 flacon
 flagella
@@ -22735,6 +22747,7 @@ gabionade
 gable
 gabled
 gablet
+gaby
 gadabout
 gadded
 gadder
@@ -22753,6 +22766,7 @@ gaffe
 gaffed
 gaffer
 gaffing
+gaga
 gagged
 gagger
 gagging
@@ -24143,6 +24157,7 @@ gossipmonger
 gossipry
 gossipy
 gossoon
+gotcha
 goth
 gotta
 gouache
@@ -29838,6 +29853,7 @@ jorum
 joshed
 josher
 joshing
+joss
 jostle
 jostled
 jostler
@@ -30576,6 +30592,7 @@ krimmer
 kris
 krona
 krone
+kroner
 kronor
 kronur
 kroon
@@ -30767,6 +30784,7 @@ laity
 lakefront
 laker
 lakeside
+lakh
 laky
 lalapalooza
 lallation
@@ -31364,6 +31382,7 @@ leitmotif
 leitmotiv
 leman
 lemmata
+lemme
 lemming
 lemniscate
 lemnisci
@@ -32049,6 +32068,7 @@ lobed
 lobelia
 lobeline
 loblolly
+lobo
 lobotomize
 lobotomized
 lobotomizing
@@ -33407,6 +33427,7 @@ matchwood
 mated
 matelot
 matelote
+mater
 materialism
 materialist
 materiality
@@ -34817,6 +34838,7 @@ misstated
 misstatement
 misstating
 misstep
+missus
 missy
 mistakable
 mistakenly
@@ -39181,6 +39203,7 @@ pacemaker
 pacemaking
 pacer
 pacesetter
+pacey
 pacha
 pachalic
 pachisi
@@ -40737,6 +40760,7 @@ peruse
 perused
 peruser
 perusing
+perv
 pervade
 pervaded
 pervading
@@ -42967,6 +42991,7 @@ preliterate
 prelude
 preludial
 prelusive
+prem
 premarital
 prematurely
 prematurity
@@ -47461,6 +47486,7 @@ sagittal
 sagittate
 sago
 saguaro
+sahib
 sahuaro
 saiga
 sailboard
@@ -47484,6 +47510,7 @@ saintliness
 saintly
 saith
 saker
+salaam
 salaamed
 salaaming
 salability
@@ -49405,6 +49432,7 @@ shaven
 shaver
 shaw
 shawm
+shay
 sheaf
 shear
 sheared
@@ -49961,6 +49989,7 @@ signified
 signifier
 signify
 signifying
+signor
 signore
 signori
 signorina
@@ -50836,6 +50865,7 @@ smugger
 smuggest
 smugly
 smugness
+smurf
 smut
 smutch
 smutched
@@ -51361,6 +51391,7 @@ sopping
 soppy
 sopranino
 soprano
+sora
 sorb
 sorbed
 sorbet
@@ -51400,6 +51431,7 @@ sorrowed
 sorrowful
 sorrowfully
 sorrowing
+sorta
 sortable
 sorter
 sortie
@@ -54317,6 +54349,7 @@ swagging
 swaging
 swagman
 swagsman
+swain
 swale
 swallower
 swallowtail
@@ -55846,6 +55879,7 @@ thimbleful
 thimblerig
 thimbleweed
 thimerosal
+thine
 thingamabob
 thingamajig
 thingumabob
@@ -60683,6 +60717,7 @@ whalebone
 whaled
 whaler
 whaling
+wham
 whammed
 whamming
 whammy
@@ -60703,6 +60738,7 @@ wheaten
 wheatgerm
 wheatmeal
 wheatworm
+whee
 wheedle
 wheedled
 wheedler
@@ -60969,6 +61005,7 @@ wieldier
 wieldiest
 wielding
 wieldy
+wiener
 wienie
 wifehood
 wifeless
@@ -61563,6 +61600,7 @@ wulfenite
 wunderkind
 wunderkinder
 wurst
+wuss
 wussier
 wussiest
 wussy
@@ -61714,6 +61752,7 @@ yesteryear
 yestreen
 yeti
 yetis
+yikes
 yipe
 yipped
 yippee
@@ -61747,6 +61786,7 @@ yorker
 youngish
 youngling
 younker
+yous
 youthen
 youthfully
 youthfulness

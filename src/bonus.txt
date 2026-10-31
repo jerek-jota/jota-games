@@ -50,6 +50,7 @@ abduce
 abduced
 abducent
 abducing
+abduct
 abductee
 abducting
 abductor
@@ -1521,6 +1522,7 @@ allayed
 allaying
 allee
 allegation
+allege
 allegeable
 alleger
 alleging
@@ -2253,6 +2255,7 @@ animality
 animalize
 animalized
 animalizing
+animate
 animatedly
 animating
 animatism
@@ -5940,6 +5943,7 @@ blanking
 blankly
 blankness
 blanquette
+blare
 blared
 blarney
 blarneyed
@@ -8848,6 +8852,7 @@ catenated
 catenating
 catenation
 catenoid
+cater
 cateran
 catercorner
 catered
@@ -9792,6 +9797,7 @@ chiropody
 chiropractic
 chiropractor
 chiropteran
+chirp
 chirped
 chirpier
 chirpiest
@@ -10619,6 +10625,7 @@ closeup
 clostridium
 closure
 clothbound
+clothe
 clothed
 clotheshorse
 clothesline
@@ -12964,6 +12971,7 @@ craze
 crazily
 crazing
 crazyweed
+creak
 creaked
 creakier
 creakiest
@@ -14417,6 +14425,7 @@ deductively
 deeded
 deeding
 deejay
+deem
 deeming
 deemster
 deepen
@@ -15081,6 +15090,7 @@ desquamated
 desquamating
 dessertspoon
 dessiatine
+destine
 destining
 destitute
 destitution
@@ -18101,6 +18111,7 @@ enclitic
 enclitically
 enclose
 enclosing
+encode
 encoded
 encoder
 encomiast
@@ -18484,6 +18495,7 @@ enticing
 enticingly
 entirety
 entitative
+entitle
 entitlement
 entitling
 entoblast
@@ -26284,6 +26296,7 @@ hirudin
 hirundine
 hispid
 hispidulous
+hiss
 hissed
 hist
 histaminase
@@ -28277,6 +28290,7 @@ indoxyl
 indraft
 indubitably
 induc
+induce
 inducement
 inducer
 inducible
@@ -28569,6 +28583,7 @@ inject
 injecting
 injector
 injunctive
+injure
 injurer
 injuring
 injurious
@@ -35634,6 +35649,7 @@ muezzin
 muff
 muffed
 muffing
+muffle
 muffler
 muffling
 mufti
@@ -35751,6 +35767,7 @@ multivitamin
 multivocal
 multiyear
 multure
+mumble
 mumbled
 mumbler
 mumbletypeg
@@ -35929,6 +35946,7 @@ mutinously
 mutinying
 mutism
 mutt
+mutter
 mutterer
 muttonchops
 muttonhead
@@ -37565,6 +37583,7 @@ observance
 observant
 observantly
 observer
+obsess
 obsessing
 obsessional
 obsessively
@@ -41913,6 +41932,7 @@ plugola
 plumage
 plumaged
 plumate
+plumb
 plumbable
 plumbago
 plumbed
@@ -44229,6 +44249,7 @@ putrid
 putridity
 putridness
 putsch
+putt
 putted
 puttee
 putter
@@ -47357,6 +47378,7 @@ rustiest
 rustily
 rustiness
 rusting
+rustle
 rustled
 rustler
 rustproof
@@ -49232,6 +49254,7 @@ sevenfold
 sevenpence
 seventeenth
 seventieth
+sever
 severable
 severally
 severalty
@@ -50218,6 +50241,7 @@ siting
 sitology
 sitter
 situ
+situate
 situating
 situational
 situationism
@@ -50919,6 +50943,7 @@ snark
 snarkier
 snarkiest
 snarky
+snarl
 snarled
 snarler
 snarlier

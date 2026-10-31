@@ -257,7 +257,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     </header>
     <button class="size-btn" id="mwPlay" type="button"><b>Play</b><small id="mwProg"></small></button>
   </article>
-  <p class="version">Version Oct 31, 9:45 AM</p>
+  <p class="version">Version Oct 31, 9:48 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -1176,7 +1176,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     const st = store.stats, g = store.game;
     const lines = [];
     if (g && !g.done && g.guesses.length) lines.push(`Continue, guess ${g.guesses.length + 1}`);
-    if (st.played) lines.push(`${st.played} played`);
+    if (st.won) lines.push(`${st.won} solved`);
     if (st.won) lines.push(`Avg ${(st.totalGuesses / st.won).toFixed(1)} guesses`);
     $("mwProg").textContent = lines.join("\n");
   }

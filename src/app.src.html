@@ -991,7 +991,7 @@ __GEN__
     const st = store.stats, g = store.game;
     const lines = [];
     if (g && !g.done && g.guesses.length) lines.push(`Continue, guess ${g.guesses.length + 1}`);
-    if (st.played) lines.push(`${st.played} played`);
+    if (st.won) lines.push(`${st.won} solved`);
     if (st.won) lines.push(`Avg ${(st.totalGuesses / st.won).toFixed(1)} guesses`);
     $("mwProg").textContent = lines.join("\n");
   }

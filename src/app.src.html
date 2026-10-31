@@ -68,7 +68,8 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
   display: flex; flex-direction: column; gap: 0;
 }
 .size-btn b { font-size: 1.35rem; font-weight: 700; line-height: 1.2; }
-.size-btn small { color: var(--muted); font-size: 0.88rem; font-variant-numeric: tabular-nums; }
+.size-btn small { color: var(--muted); font-size: 0.88rem; line-height: 1.35; white-space: pre-line; font-variant-numeric: tabular-nums; }
+.size-btn small:empty { display: none; }
 .size-btn:active { transform: scale(0.97); }
 .soon { color: var(--muted); font-size: 0.95rem; text-align: center; margin: 0; }
 
@@ -219,8 +220,8 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <button class="level-btn" type="button" data-level="hard">Hard</button>
     </div>
     <div class="sizes">
-      <button class="size-btn" id="pick4" type="button"><b>4 × 4</b><small id="prog4">New puzzle</small></button>
-      <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5">New puzzle</small></button>
+      <button class="size-btn" id="pick4" type="button"><b>4 × 4</b><small id="prog4"></small></button>
+      <button class="size-btn" id="pick5" type="button"><b>5 × 5</b><small id="prog5"></small></button>
     </div>
   </article>
   <article class="game-card">
@@ -235,7 +236,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       </svg>
       <h2>Midword</h2>
     </header>
-    <button class="size-btn" id="mwPlay" type="button"><b>Play</b><small id="mwProg">Guess the secret word</small></button>
+    <button class="size-btn" id="mwPlay" type="button"><b>Play</b><small id="mwProg"></small></button>
   </article>
   <p class="version">Version __BUILD__</p>
 </section>
@@ -679,11 +680,11 @@ __GEN__
     document.querySelectorAll(".level-btn").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.level === level)));
     for (const N of [4, 5]) {
       const g = store[key("g", N)], solved = store[key("solved", N)] || 0;
-      let text = "New puzzle";
-      if (g && g.found.length && g.found.length < g.puzzle.words.length) text = `Continue · ${g.found.length}/${g.puzzle.words.length}`;
-      if (solved) text += ` · ${solved} solved`;
-      if (store[key("best", N)]) text += ` · Best ${fmt(store[key("best", N)])}`;
-      $("prog" + N).textContent = text;
+      const lines = [];
+      if (g && g.found.length && g.found.length < g.puzzle.words.length) lines.push(`Continue ${g.found.length}/${g.puzzle.words.length}`);
+      if (solved) lines.push(`${solved} solved`);
+      if (store[key("best", N)]) lines.push(`Best ${fmt(store[key("best", N)])}`);
+      $("prog" + N).textContent = lines.join("\n");
     }
   }
 
@@ -988,9 +989,11 @@ __GEN__
   function goHome() { $("mwEntry").blur(); stopTimer(); $("mwSheet").hidden = true; window.JotaHome(); }
   function updateCard() {
     const st = store.stats, g = store.game;
-    let t = g && !g.done && g.guesses.length ? `Continue · guess ${g.guesses.length + 1}` : "Guess the secret word";
-    if (st.won) t += ` · avg ${(st.totalGuesses / st.won).toFixed(1)}`;
-    $("mwProg").textContent = t;
+    const lines = [];
+    if (g && !g.done && g.guesses.length) lines.push(`Continue, guess ${g.guesses.length + 1}`);
+    if (st.played) lines.push(`${st.played} played`);
+    if (st.won) lines.push(`Avg ${(st.totalGuesses / st.won).toFixed(1)} guesses`);
+    $("mwProg").textContent = lines.join("\n");
   }
   (window.JotaHomeHooks = window.JotaHomeHooks || []).push(() => { stopTimer(); updateCard(); });
   updateCard();

@@ -50,7 +50,6 @@ abduce
 abduced
 abducent
 abducing
-abduct
 abductee
 abducting
 abductor
@@ -50241,7 +50240,6 @@ siting
 sitology
 sitter
 situ
-situate
 situating
 situational
 situationism

@@ -1184,15 +1184,20 @@ __GEN__
         while (size > 0.5 && (t.scrollWidth > t.clientWidth + 1 || t.scrollHeight > t.clientHeight + 1)) { size -= 0.04; t.style.fontSize = size + "rem"; }
       });
     }
+    justSolved = null;   // a bar animates only the first time it appears
     const dots = $("qtDots");
     dots.innerHTML = "";
     for (let i = 0; i < MAX_MISTAKES; i++) { const d = document.createElement("i"); if (i >= MAX_MISTAKES - game.mistakes) d.className = "used"; dots.appendChild(d); }
-    $("qtSubmit").disabled = game.done || selected.length !== 4;
-    $("qtClear").disabled = game.done || !selected.length;
-    $("qtShuffle").disabled = game.done;
+    updateControls();
     const n = PUZZLES.indexOf(puzzle) + 1;
     $("qtNum").textContent = `#${n}`;
     $("qtSub").textContent = game.done ? (game.won ? "Solved" : "Better luck next time") : "Make four groups of four";
+  }
+
+  function updateControls() {
+    $("qtSubmit").disabled = game.done || selected.length !== 4;
+    $("qtClear").disabled = game.done || !selected.length;
+    $("qtShuffle").disabled = game.done;
   }
 
   let msgTimer = null;
@@ -1210,9 +1215,15 @@ __GEN__
     const w = t.dataset.w;
     if (selected.includes(w)) selected = selected.filter((x) => x !== w);
     else if (selected.length < 4) selected.push(w);
-    render();
+    t.classList.toggle("sel", selected.includes(w));
+    updateControls();
   });
-  $("qtClear").addEventListener("click", () => { if (!busy) { selected = []; render(); } });
+  $("qtClear").addEventListener("click", () => {
+    if (busy) return;
+    selected = [];
+    document.querySelectorAll(".qt-tile.sel").forEach((t) => t.classList.remove("sel"));
+    updateControls();
+  });
   $("qtShuffle").addEventListener("click", () => {
     if (busy) return;
     const left = game.order.filter((w) => !game.solved.includes(groupOf(w).level));

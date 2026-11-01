@@ -407,12 +407,12 @@
    },
    {
     "level": 1,
-    "name": "BASEBALL ACTIONS",
+    "name": "SOCCER TERMS",
     "members": [
-     "BUNT",
-     "STEAL",
-     "SWING",
-     "STRIKE"
+     "GOAL",
+     "CORNER",
+     "HEADER",
+     "TACKLE"
     ]
    },
    {
@@ -1329,12 +1329,12 @@
    },
    {
     "level": 2,
-    "name": "BIRDS",
+    "name": "SHADES OF GRAY",
     "members": [
-     "LARK",
-     "TERN",
-     "HERON",
-     "EGRET"
+     "SMOKE",
+     "GRAPHITE",
+     "CHARCOAL",
+     "STEEL"
     ]
    },
    {

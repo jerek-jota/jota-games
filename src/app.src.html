@@ -1130,6 +1130,9 @@ __GEN__
   }
   function startGame(p) {
     puzzle = p;
+    // An unfinished game saved before the puzzle was edited starts over with the new words.
+    const words = p.groups.flatMap((g) => g.members), g0 = store.games[p.id];
+    if (g0 && !g0.done && (g0.order.length !== words.length || g0.order.some((w) => !words.includes(w)))) delete store.games[p.id];
     if (!store.games[p.id]) store.games[p.id] = { order: shuffle(p.groups.flatMap((g) => g.members)), solved: [], mistakes: 0, guesses: [], done: false, won: false, elapsed: 0 };
     game = store.games[p.id];
     selected = [];

@@ -238,6 +238,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .qt-dots i.used { background: var(--tile); }
 .qt-actions { flex: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding-top: 4px; }
 .qt-actions .btn { padding: 12px 6px; font-size: 1rem; }
+.qt-results { flex: none; margin-top: 4px; padding: 14px; font-size: 1.1rem; animation: reveal 0.5s ease-out; }
 .qt-actions .btn[disabled] { opacity: 0.4; }
 .qt-grid-summary { display: grid; grid-template-columns: repeat(4, 18px); gap: 4px; justify-content: center; }
 .qt-grid-summary i { width: 18px; height: 18px; border-radius: 4px; }
@@ -387,7 +388,8 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
   <div class="qt-board" id="qtBoard"></div>
   <div class="qt-mistakes"><span>Mistakes left</span><span class="qt-dots" id="qtDots"></span></div>
   <div class="qt-toast" id="qtMsg" role="status" aria-live="polite"></div>
-  <div class="qt-actions">
+  <button class="btn primary qt-results" id="qtResults" type="button" hidden>See results</button>
+  <div class="qt-actions" id="qtActions">
     <button class="btn" id="qtShuffle" type="button">Shuffle</button>
     <button class="btn" id="qtClear" type="button">Deselect</button>
     <button class="btn primary" id="qtSubmit" type="button">Submit</button>
@@ -1195,6 +1197,9 @@ __GEN__
   }
 
   function updateControls() {
+    // Once the puzzle is over the board stays up; one button leads to the stats.
+    $("qtActions").hidden = game.done;
+    $("qtResults").hidden = !game.done;
     $("qtSubmit").disabled = game.done || selected.length !== 4;
     $("qtClear").disabled = game.done || !selected.length;
     $("qtShuffle").disabled = game.done;
@@ -1265,7 +1270,6 @@ __GEN__
     game.done = true; game.won = won; selected = [];
     store.history.push({ at: Date.now(), id: puzzle.id, won, mistakes: game.mistakes, ms: Math.round(game.elapsed), order: game.solved.slice() });
     save(); render();
-    setTimeout(() => showResult(won), won ? 1300 : 1500);
   }
 
   function showResult(won) {
@@ -1323,5 +1327,6 @@ __GEN__
   $("qtMenu").addEventListener("click", goHome);
   $("qtHome").addEventListener("click", goHome);
   $("qtNext").addEventListener("click", open);
+  $("qtResults").addEventListener("click", () => showResult(game.won));
 })();
 </script>

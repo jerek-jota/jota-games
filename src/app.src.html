@@ -15,6 +15,7 @@
   --good: #5AAE75;
   --bonus: #4C8DF5;
   --bonus-ink: #0B1630;
+  --q0: #E9B949; --q1: #5AAE75; --q2: #5B93E8; --q3: #A47ADB; --q-ink: #17140F;
   --bad: #E26B5E;
   --badge: #4C6EF5;
   --font: "Baloo 2", ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
@@ -196,6 +197,35 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .mw-stats div { display: flex; flex-direction: column; }
 .mw-stats b { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .mw-stats span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+/* Quartets */
+.qt-num { min-width: 0; text-align: right; padding: 0 4px 0 0; font-variant-numeric: tabular-nums; }
+.qt-board { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 8px; padding-top: 10px; max-height: 470px; align-self: stretch; width: 100%; }
+.qt-tile {
+  border-radius: 12px; background: var(--tile); color: var(--ink); font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.02em; line-height: 1.1; padding: 4px; display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow-wrap: normal; word-break: keep-all; min-width: 0; min-height: 58px; transition: transform 0.12s, background 0.12s;
+}
+.qt-tile.sel { background: var(--ink); color: var(--bg); }
+.qt-tile:active { transform: scale(0.95); }
+.qt-tile.shake { animation: shake 0.35s; }
+.qt-solved {
+  grid-column: 1 / -1; border-radius: 12px; color: var(--q-ink); display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 6px 10px; min-height: 58px; animation: pop 0.3s ease-out;
+}
+.qt-solved b { font-size: 1rem; font-weight: 800; letter-spacing: 0.04em; }
+.qt-solved span { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
+.qt-solved.missed { opacity: 0.75; }
+.qt-l0 { background: var(--q0); } .qt-l1 { background: var(--q1); } .qt-l2 { background: var(--q2); } .qt-l3 { background: var(--q3); }
+@keyframes pop { from { transform: scale(0.94); opacity: 0.4; } }
+.qt-mistakes { flex: none; display: flex; justify-content: center; align-items: center; gap: 10px; padding-top: 12px; color: var(--muted); font-size: 0.95rem; font-weight: 600; }
+.qt-dots { display: inline-flex; gap: 6px; }
+.qt-dots i { width: 12px; height: 12px; border-radius: 50%; background: var(--ink); }
+.qt-dots i.used { background: var(--tile); }
+.qt-actions { flex: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding-top: 4px; }
+.qt-actions .btn { padding: 12px 6px; font-size: 1rem; }
+.qt-actions .btn[disabled] { opacity: 0.4; }
+.qt-grid-summary { display: grid; grid-template-columns: repeat(4, 18px); gap: 4px; justify-content: center; }
+.qt-grid-summary i { width: 18px; height: 18px; border-radius: 4px; }
 @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
 </style>
 
@@ -239,6 +269,18 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <h2>Midword</h2>
     </header>
     <button class="size-btn" id="mwPlay" type="button"><b>Play</b><small id="mwProg"></small></button>
+  </article>
+  <article class="game-card">
+    <header>
+      <svg class="mini" viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="4" y="4" width="44" height="44" rx="10" fill="var(--q0)"/>
+        <rect x="52" y="4" width="44" height="44" rx="10" fill="var(--q1)"/>
+        <rect x="4" y="52" width="44" height="44" rx="10" fill="var(--q2)"/>
+        <rect x="52" y="52" width="44" height="44" rx="10" fill="var(--q3)"/>
+      </svg>
+      <h2>Quartets</h2>
+    </header>
+    <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
   <p class="version">Version __BUILD__</p>
 </section>
@@ -311,6 +353,42 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <div class="row">
       <button class="btn" id="mwHome" type="button">All games</button>
       <button class="btn primary" id="mwNext" type="button">New word</button>
+    </div>
+  </div>
+</div>
+
+<section class="screen" id="quartets" hidden>
+  <div class="toolbar">
+    <button class="icon-btn" id="qtMenu" type="button" aria-label="Back to games">
+      <svg viewBox="0 0 32 32"><path d="M6 9h20M6 16h20M6 23h20"/></svg>
+    </button>
+    <span class="size-tag" id="qtTag">Quartets</span>
+    <span class="spacer"></span>
+    <span class="timer" id="qtTimer" aria-label="Time">0:00</span>
+    <span class="spacer"></span>
+    <span class="size-tag qt-num" id="qtNum"></span>
+  </div>
+  <div class="status"><div class="subcount" id="qtSub">Make four groups of four</div></div>
+  <div class="qt-board" id="qtBoard"></div>
+  <div class="qt-mistakes"><span>Mistakes left</span><span class="qt-dots" id="qtDots"></span></div>
+  <div class="trace" id="qtMsg" aria-live="polite"></div>
+  <div class="qt-actions">
+    <button class="btn" id="qtShuffle" type="button">Shuffle</button>
+    <button class="btn" id="qtClear" type="button">Deselect</button>
+    <button class="btn primary" id="qtSubmit" type="button">Submit</button>
+  </div>
+</section>
+
+<div class="sheet-back" id="qtSheet" hidden>
+  <div class="sheet" role="dialog" aria-labelledby="qtResultTitle">
+    <h3 id="qtResultTitle">Solved!</h3>
+    <p id="qtResultText">No mistakes · 1:42</p>
+    <div class="qt-grid-summary" id="qtSummary" aria-hidden="true"></div>
+    <div class="hist" id="qtHist"></div>
+    <div class="mw-stats" id="qtStats"></div>
+    <div class="row">
+      <button class="btn" id="qtHome" type="button">All games</button>
+      <button class="btn primary" id="qtNext" type="button">Next puzzle</button>
     </div>
   </div>
 </div>
@@ -677,6 +755,7 @@ __GEN__
   function openHome() {
     stopTimer();
     $("midword").hidden = true; $("mwSheet").hidden = true;
+    $("quartets").hidden = true; $("qtSheet").hidden = true;
     (window.JotaHomeHooks || []).forEach((f) => f());
     $("game").hidden = true; $("winSheet").hidden = true; $("home").hidden = false;
     document.querySelectorAll(".level-btn").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.level === level)));
@@ -1003,5 +1082,211 @@ __GEN__
   $("mwMenu").addEventListener("click", goHome);
   $("mwHome").addEventListener("click", goHome);
   $("mwNext").addEventListener("click", () => { newGame(); open(); });
+})();
+</script>
+<script>
+/* ===== Quartets: sort 16 words into four groups of four (yellow easiest → purple hardest) ===== */
+(function () {
+  const PUZZLES = "__QUARTETS__";           // [{id, groups: [{level, name, members}]}], groups ordered yellow → purple
+  const STORE_KEY = "jota.quartets.v1";
+  const MAX_MISTAKES = 4;
+  const $ = (id) => document.getElementById(id);
+  const ROWS = [["No mistakes", (h) => h.won && h.mistakes === 0], ["1 mistake", (h) => h.won && h.mistakes === 1],
+                ["2 mistakes", (h) => h.won && h.mistakes === 2], ["3 mistakes", (h) => h.won && h.mistakes === 3],
+                ["Missed", (h) => !h.won]];
+
+  function load() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } }
+  const store = load();
+  store.games = store.games || {};
+  // Every finished puzzle: { at, id, won, mistakes, ms, order: levels in the order they were solved }
+  store.history = store.history || [];
+  function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
+
+  let puzzle = null, game = null, selected = [];
+  const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const groupOf = (w) => puzzle.groups.find((g) => g.members.includes(w));
+  const played = (id) => store.games[id] && store.games[id].done;
+
+  function pickPuzzle() {
+    const cur = PUZZLES.find((p) => store.games[p.id] && !store.games[p.id].done);
+    return cur || PUZZLES.find((p) => !played(p.id)) || null;
+  }
+  function startGame(p) {
+    puzzle = p;
+    if (!store.games[p.id]) store.games[p.id] = { order: shuffle(p.groups.flatMap((g) => g.members)), solved: [], mistakes: 0, guesses: [], done: false, won: false, elapsed: 0 };
+    game = store.games[p.id];
+    selected = [];
+    save();
+  }
+
+  // ---------- timer (pauses when hidden) ----------
+  let tStart = null, tTick = null, tSave = 0;
+  const fmt = (ms) => { const t = Math.floor(ms / 1000); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`; };
+  const elapsed = () => (game ? game.elapsed + (tStart !== null ? performance.now() - tStart : 0) : 0);
+  function showTime() { $("qtTimer").textContent = fmt(elapsed()); $("qtTimer").classList.toggle("paused", tStart === null); }
+  function startTimer() {
+    if (!game || game.done || tStart !== null || $("quartets").hidden || document.hidden) return;
+    tStart = performance.now();
+    tTick = setInterval(() => {
+      showTime();
+      if (performance.now() - tSave > 5000) { tSave = performance.now(); game.elapsed = elapsed(); tStart = performance.now(); save(); }
+    }, 250);
+  }
+  function stopTimer() { if (tStart === null) return; game.elapsed = elapsed(); tStart = null; clearInterval(tTick); tTick = null; save(); showTime(); }
+  document.addEventListener("visibilitychange", () => (document.hidden ? stopTimer() : startTimer()));
+  addEventListener("pagehide", stopTimer);
+
+  // ---------- rendering ----------
+  function fontFor(word) {
+    const longest = Math.max(...word.split(" ").map((p) => p.length));
+    return longest <= 5 ? "1.1rem" : longest <= 7 ? "0.98rem" : longest <= 9 ? "0.84rem" : longest <= 11 ? "0.74rem" : "0.66rem";
+  }
+  function render() {
+    const board = $("qtBoard");
+    board.innerHTML = "";
+    const bar = (g, missed) => {
+      const d = document.createElement("div");
+      d.className = `qt-solved qt-l${g.level}` + (missed ? " missed" : "");
+      const b = document.createElement("b"); b.textContent = g.name;
+      const s = document.createElement("span"); s.textContent = g.members.join(", ");
+      d.append(b, s); board.appendChild(d);
+    };
+    game.solved.forEach((lv) => bar(puzzle.groups.find((g) => g.level === lv), false));
+    if (game.done && !game.won) puzzle.groups.filter((g) => !game.solved.includes(g.level)).forEach((g) => bar(g, true));
+    if (!game.done) {
+      game.order.filter((w) => !game.solved.includes(groupOf(w).level)).forEach((w) => {
+        const t = document.createElement("button");
+        t.type = "button";
+        t.className = "qt-tile" + (selected.includes(w) ? " sel" : "");
+        t.textContent = w;
+        t.style.fontSize = fontFor(w);
+        t.dataset.w = w;
+        board.appendChild(t);
+      });
+      // Shrink any word that doesn't fit its tile on one line (two-word answers may wrap between words).
+      board.querySelectorAll(".qt-tile").forEach((t) => {
+        let size = parseFloat(t.style.fontSize);
+        while (size > 0.5 && (t.scrollWidth > t.clientWidth + 1)) { size -= 0.04; t.style.fontSize = size + "rem"; }
+      });
+    }
+    const dots = $("qtDots");
+    dots.innerHTML = "";
+    for (let i = 0; i < MAX_MISTAKES; i++) { const d = document.createElement("i"); if (i >= MAX_MISTAKES - game.mistakes) d.className = "used"; dots.appendChild(d); }
+    $("qtSubmit").disabled = game.done || selected.length !== 4;
+    $("qtClear").disabled = game.done || !selected.length;
+    $("qtShuffle").disabled = game.done;
+    const n = PUZZLES.indexOf(puzzle) + 1;
+    $("qtNum").textContent = `#${n}`;
+    $("qtSub").textContent = game.done ? (game.won ? "Solved" : "Better luck next time") : "Make four groups of four";
+  }
+
+  let msgTimer = null;
+  function message(text, kind) {
+    const m = $("qtMsg");
+    clearTimeout(msgTimer);
+    m.className = "trace msg " + (kind || ""); void m.offsetWidth; m.textContent = text;
+    msgTimer = setTimeout(() => { m.textContent = ""; m.className = "trace"; }, 1800);
+  }
+
+  // ---------- play ----------
+  $("qtBoard").addEventListener("click", (e) => {
+    const t = e.target.closest(".qt-tile");
+    if (!t || game.done) return;
+    const w = t.dataset.w;
+    if (selected.includes(w)) selected = selected.filter((x) => x !== w);
+    else if (selected.length < 4) selected.push(w);
+    render();
+  });
+  $("qtClear").addEventListener("click", () => { selected = []; render(); });
+  $("qtShuffle").addEventListener("click", () => {
+    const left = game.order.filter((w) => !game.solved.includes(groupOf(w).level));
+    const done = game.order.filter((w) => game.solved.includes(groupOf(w).level));
+    game.order = done.concat(shuffle(left)); save(); render();
+  });
+  $("qtSubmit").addEventListener("click", () => {
+    if (game.done || selected.length !== 4) return;
+    const key = selected.slice().sort().join("|");
+    if (game.guesses.includes(key)) return message("Already guessed", "hint");
+    game.guesses.push(key);
+    const counts = puzzle.groups.map((g) => selected.filter((w) => g.members.includes(w)).length);
+    const hit = counts.indexOf(4);
+    if (hit >= 0) {
+      game.solved.push(puzzle.groups[hit].level);
+      selected = [];
+      if (game.solved.length === 4) return finish(true);
+      save(); render();
+      return;
+    }
+    game.mistakes++;
+    const oneAway = counts.includes(3);
+    document.querySelectorAll(".qt-tile.sel").forEach((t) => { t.classList.remove("shake"); void t.offsetWidth; t.classList.add("shake"); });
+    if (game.mistakes >= MAX_MISTAKES) { save(); setTimeout(() => finish(false), 450); return; }
+    save();
+    setTimeout(render, 360);
+    message(oneAway ? "One away…" : "Not a group", oneAway ? "hint" : "bad");
+  });
+
+  function finish(won) {
+    stopTimer();
+    game.done = true; game.won = won; selected = [];
+    store.history.push({ at: Date.now(), id: puzzle.id, won, mistakes: game.mistakes, ms: Math.round(game.elapsed), order: game.solved.slice() });
+    save(); render();
+    setTimeout(() => showResult(won), won ? 500 : 900);
+  }
+
+  function showResult(won) {
+    const h = store.history, mine = h.filter((x) => x.id === puzzle.id).pop();
+    $("qtResultTitle").textContent = won ? (game.mistakes === 0 ? "Perfect!" : "Solved!") : "So close";
+    const m = game.mistakes;
+    $("qtResultText").textContent = (won ? (m === 0 ? "No mistakes" : `${m} mistake${m > 1 ? "s" : ""}`) : "Out of mistakes") + ` · ${fmt(game.elapsed)}`;
+    // the colors in the order you found them
+    const sum = $("qtSummary"); sum.innerHTML = "";
+    (mine ? mine.order : []).forEach((lv) => { for (let i = 0; i < 4; i++) { const d = document.createElement("i"); d.className = `qt-l${lv}`; sum.appendChild(d); } });
+    const hist = $("qtHist"); hist.innerHTML = "";
+    const counts = ROWS.map(([, f]) => h.filter(f).length), max = Math.max(1, ...counts);
+    const nowRow = won ? Math.min(m, 3) : 4;
+    ROWS.forEach(([label], i) => {
+      const row = document.createElement("div"); row.className = "hist-row" + (i === nowRow ? " now" : "");
+      row.style.gridTemplateColumns = "92px minmax(0, 1fr)";
+      const l = document.createElement("span"); l.textContent = label;
+      const b = document.createElement("b"); b.textContent = counts[i]; b.style.setProperty("--w", Math.max(8, (counts[i] / max) * 100) + "%");
+      row.append(l, b); hist.appendChild(row);
+    });
+    const wins = h.filter((x) => x.won);
+    const best = wins.length ? Math.min(...wins.map((x) => x.ms)) : null;
+    $("qtStats").innerHTML = "";
+    [["Played", h.length], ["Solved", wins.length], ["Perfect", wins.filter((x) => x.mistakes === 0).length], ["Best time", best !== null ? fmt(best) : "–"]].forEach(([k, v]) => {
+      const d = document.createElement("div"), b = document.createElement("b"), s = document.createElement("span");
+      b.textContent = v; s.textContent = k; d.append(b, s); $("qtStats").appendChild(d);
+    });
+    const next = PUZZLES.find((p) => !played(p.id));
+    $("qtNext").hidden = !next;
+    $("qtSheet").hidden = false;
+  }
+
+  // ---------- screens ----------
+  function open() {
+    const p = pickPuzzle();
+    if (!p) { $("qtProg").textContent = "All puzzles played\nMore coming soon"; return; }
+    startGame(p);
+    document.querySelectorAll(".screen").forEach((el) => (el.hidden = el.id !== "quartets"));
+    $("qtSheet").hidden = true;
+    render(); showTime(); startTimer();
+  }
+  function goHome() { stopTimer(); $("qtSheet").hidden = true; window.JotaHome(); }
+  function updateCard() {
+    const h = store.history, inProgress = PUZZLES.find((p) => store.games[p.id] && !store.games[p.id].done && store.games[p.id].guesses.length);
+    const lines = [];
+    if (inProgress) lines.push(`#${PUZZLES.indexOf(inProgress) + 1} in progress`);
+    if (h.length) lines.push(`${h.filter((x) => x.won).length} solved`);
+    lines.push(`${h.length ? new Set(h.map((x) => x.id)).size : 0}/${PUZZLES.length} played`);
+    $("qtProg").textContent = lines.join("\n");
+  }
+  (window.JotaHomeHooks = window.JotaHomeHooks || []).push(() => { stopTimer(); updateCard(); });
+  updateCard();
+  $("qtPlay").addEventListener("click", open);
+  $("qtMenu").addEventListener("click", goHome);
+  $("qtHome").addEventListener("click", goHome);
+  $("qtNext").addEventListener("click", open);
 })();
 </script>

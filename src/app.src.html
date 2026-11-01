@@ -199,18 +199,20 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .mw-stats span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 /* Quads */
 .qt-num { min-width: 0; text-align: right; padding: 0 4px 0 0; font-variant-numeric: tabular-nums; }
-.qt-board { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 8px; padding-top: 10px; max-height: 470px; align-self: stretch; width: 100%; }
+/* Square tiles: each row is exactly as tall as a column is wide */
+#quads { container-type: inline-size; }
+.qt-board { flex: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: calc((100cqw - 24px) / 4); gap: 8px; margin-top: 10px; width: 100%; }
 .qt-tile {
   border-radius: 12px; background: var(--tile); color: var(--ink); font-weight: 800; text-transform: uppercase;
   letter-spacing: 0.02em; line-height: 1.1; padding: 4px; display: flex; align-items: center; justify-content: center;
-  text-align: center; overflow-wrap: normal; word-break: keep-all; min-width: 0; min-height: 58px; transition: transform 0.12s, background 0.12s;
+  text-align: center; overflow-wrap: normal; word-break: keep-all; min-width: 0; height: 100%; transition: transform 0.12s, background 0.12s;
 }
 .qt-tile.sel { background: var(--ink); color: var(--bg); }
 .qt-tile:active { transform: scale(0.95); }
 .qt-tile.shake { animation: shake 0.35s; }
 .qt-solved {
   grid-column: 1 / -1; border-radius: 12px; color: var(--q-ink); display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 6px 10px; min-height: 58px; animation: pop 0.3s ease-out;
+  text-align: center; padding: 6px 10px; height: 100%; box-sizing: border-box; animation: pop 0.3s ease-out;
 }
 .qt-solved b { font-size: 1rem; font-weight: 800; letter-spacing: 0.04em; }
 .qt-solved span { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
@@ -1166,7 +1168,7 @@ __GEN__
       // Shrink any word that doesn't fit its tile on one line (two-word answers may wrap between words).
       board.querySelectorAll(".qt-tile").forEach((t) => {
         let size = parseFloat(t.style.fontSize);
-        while (size > 0.5 && (t.scrollWidth > t.clientWidth + 1)) { size -= 0.04; t.style.fontSize = size + "rem"; }
+        while (size > 0.5 && (t.scrollWidth > t.clientWidth + 1 || t.scrollHeight > t.clientHeight + 1)) { size -= 0.04; t.style.fontSize = size + "rem"; }
       });
     }
     const dots = $("qtDots");

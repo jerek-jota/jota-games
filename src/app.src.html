@@ -1128,6 +1128,14 @@ __GEN__
     store.idv = 2;
     save();
   }
+  // Nov 2026: in #6, BRIEF MOMENT moved from blue to green and PHOTOGRAPHY TERMS from green to blue.
+  if (store.idv < 3) {
+    const swap = (lv) => (lv === 1 ? 2 : lv === 2 ? 1 : lv);
+    if (store.games[6]) store.games[6].solved = store.games[6].solved.map(swap);
+    store.history.forEach((h) => { if (h.id === 6) h.order = h.order.map(swap); });
+    store.idv = 3;
+    save();
+  }
 
   let puzzle = null, game = null, selected = [], justSolved = null, busy = false;
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };

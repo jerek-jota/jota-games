@@ -2386,5 +2386,529 @@
    }
   ],
   "herrings": "DAWN is a time of day; NEW means beginning; FULL also makes FULL HOUSE."
+ },
+ {
+  "id": 51,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BATHROOM FIXTURES",
+    "members": [
+     "SINK",
+     "TUB",
+     "SHOWER",
+     "TOILET"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "NERVOUS",
+    "members": [
+     "JUMPY",
+     "EDGY",
+     "JITTERY",
+     "TWITCHY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "THINGS THAT FLOAT",
+    "members": [
+     "BUOY",
+     "CORK",
+     "RAFT",
+     "LILY PAD"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "___JACK",
+    "members": [
+     "HI",
+     "CAR",
+     "UNION",
+     "BLACK"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 52,
+  "groups": [
+   {
+    "level": 0,
+    "name": "NAP",
+    "members": [
+     "DOZE",
+     "SNOOZE",
+     "SIESTA",
+     "CATNAP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "HORSE GAITS",
+    "members": [
+     "WALK",
+     "TROT",
+     "CANTER",
+     "GALLOP"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "STRIPED",
+    "members": [
+     "ZEBRA",
+     "CANDY CANE",
+     "BARBER POLE",
+     "REFEREE"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "___ LILY",
+    "members": [
+     "TIGER",
+     "WATER",
+     "CALLA",
+     "EASTER"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "TIGER is striped, but it is needed for ___ LILY."
+ },
+ {
+  "id": 53,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SEA CREATURES",
+    "members": [
+     "SQUID",
+     "CLAM",
+     "OCTOPUS",
+     "EEL"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "BOSS",
+    "members": [
+     "HEAD",
+     "CHIEF",
+     "HONCHO",
+     "SKIPPER"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "TALK ON AND ON",
+    "members": [
+     "RAMBLE",
+     "DRONE",
+     "WAFFLE",
+     "BLATHER"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "___ CAKE",
+    "members": [
+     "CRAB",
+     "SPONGE",
+     "LAYER",
+     "CHEESE"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "CRAB and SPONGE are sea creatures, but ___ CAKE needs both."
+ },
+ {
+  "id": 54,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FURNITURE",
+    "members": [
+     "SOFA",
+     "DRESSER",
+     "BOOKCASE",
+     "OTTOMAN"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "TOLERATE",
+    "members": [
+     "STAND",
+     "STOMACH",
+     "ABIDE",
+     "HANDLE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "YOGA POSES",
+    "members": [
+     "CAMEL",
+     "CHAIR",
+     "CROW",
+     "BOAT"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "POLAR ___",
+    "members": [
+     "BEAR",
+     "VORTEX",
+     "EXPRESS",
+     "OPPOSITE"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "CHAIR is furniture but is needed for YOGA POSES; BEAR means tolerate but is needed for POLAR ___."
+ },
+ {
+  "id": 55,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FAKE",
+    "members": [
+     "PHONY",
+     "FAUX",
+     "DUMMY",
+     "SHAM"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "PICNIC ITEMS",
+    "members": [
+     "BLANKET",
+     "THERMOS",
+     "SANDWICH",
+     "NAPKIN"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "DATED WORDS FOR GREAT",
+    "members": [
+     "NIFTY",
+     "KEEN",
+     "SWELL",
+     "PEACHY"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 3,
+    "name": "BABY TALK WHEN DOUBLED",
+    "members": [
+     "CHOO",
+     "BOO",
+     "NIGHT",
+     "BYE"
+    ],
+    "type": "other_wordplay",
+    "check": {
+     "doubledIn": [
+      "choochoo",
+      "booboo",
+      "nightnight",
+      "byebye"
+     ]
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 56,
+  "groups": [
+   {
+    "level": 0,
+    "name": "PROBLEM",
+    "members": [
+     "SNAG",
+     "HITCH",
+     "GLITCH",
+     "HICCUP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "___ FIGHT",
+    "members": [
+     "PILLOW",
+     "FIST",
+     "DOG",
+     "BAR"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 2,
+    "name": "KNOTS",
+    "members": [
+     "GRANNY",
+     "REEF",
+     "BOWLINE",
+     "FIGURE EIGHT"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "WHAT 'BUG' CAN MEAN",
+    "members": [
+     "INSECT",
+     "ANNOY",
+     "WIRETAP",
+     "ILLNESS"
+    ],
+    "type": "multiple_meanings"
+   }
+  ],
+  "herrings": "HITCH is also a knot and GLITCH is also a bug, but PROBLEM needs both."
+ },
+ {
+  "id": 57,
+  "groups": [
+   {
+    "level": 0,
+    "name": "A LITTLE BIT",
+    "members": [
+     "DASH",
+     "HINT",
+     "TOUCH",
+     "SPLASH"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "FAIL",
+    "members": [
+     "FLOP",
+     "BOMB",
+     "TANK",
+     "FIZZLE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "IN 'ALICE IN WONDERLAND'",
+    "members": [
+     "HATTER",
+     "CATERPILLAR",
+     "QUEEN",
+     "DORMOUSE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE FARM ANIMALS",
+    "members": [
+     "HOARSE",
+     "BORE",
+     "YOU",
+     "FOUL"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 58,
+  "groups": [
+   {
+    "level": 0,
+    "name": "PRAISE",
+    "members": [
+     "LAUD",
+     "HAIL",
+     "TOUT",
+     "EXTOL"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "PENNY-PINCHING",
+    "members": [
+     "TIGHT",
+     "CHEAP",
+     "MISERLY",
+     "STINGY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "SOAP BRANDS",
+    "members": [
+     "DOVE",
+     "DIAL",
+     "IVORY",
+     "ZEST"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 3,
+    "name": "FRUITS MINUS FIRST LETTER",
+    "members": [
+     "EAR",
+     "EACH",
+     "LIVE",
+     "ATE"
+    ],
+    "type": "truncation",
+    "check": {
+     "tailOf": [
+      "pear",
+      "peach",
+      "olive",
+      "date"
+     ]
+    }
+   }
+  ],
+  "herrings": "Light: ZEST sounds fruity."
+ },
+ {
+  "id": 59,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SEEN AT A MAGIC SHOW",
+    "members": [
+     "WAND",
+     "TOP HAT",
+     "RABBIT",
+     "ASSISTANT"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 1,
+    "name": "COMPLETELY",
+    "members": [
+     "FULLY",
+     "WHOLLY",
+     "TOTALLY",
+     "UTTERLY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "SITCOMS",
+    "members": [
+     "CHEERS",
+     "SCRUBS",
+     "COMMUNITY",
+     "MONK"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "BIRDS WITH FIRST LETTER CHANGED",
+    "members": [
+     "BROW",
+     "LOVE",
+     "BARK",
+     "FERN"
+    ],
+    "type": "letter_change",
+    "check": {
+     "firstChangedFrom": [
+      "crow",
+      "dove",
+      "lark",
+      "tern"
+     ]
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 60,
+  "groups": [
+   {
+    "level": 0,
+    "name": "COMMOTION",
+    "members": [
+     "RUCKUS",
+     "STIR",
+     "FUSS",
+     "RACKET"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "PIRATE STUFF",
+    "members": [
+     "PLANK",
+     "PARROT",
+     "EYE PATCH",
+     "TREASURE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "VOLLEYBALL MOVES",
+    "members": [
+     "SET",
+     "SPIKE",
+     "DIG",
+     "BLOCK"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "___PIE",
+    "members": [
+     "MAG",
+     "CUTIE",
+     "HUMBLE",
+     "MUD"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "Light: RACKET suggests sport."
  }
 ]

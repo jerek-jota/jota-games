@@ -230,11 +230,24 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .qt-tile.shake { animation: shake 0.35s; }
 .qt-solved {
   grid-column: 1 / -1; border-radius: 12px; color: var(--q-ink); display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 6px 10px; height: 100%; box-sizing: border-box; animation: pop 0.3s ease-out;
+  text-align: center; padding: 6px 10px; height: 100%; box-sizing: border-box;
 }
 .qt-solved b { font-size: 1rem; font-weight: 800; letter-spacing: 0.04em; }
 .qt-solved span { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; }
 .qt-solved.missed { opacity: 0.75; }
+.qt-solved.new { animation: reveal 0.7s ease-out; }
+@keyframes reveal { from { opacity: 0; transform: scale(0.9); } 60% { opacity: 1; transform: scale(1.02); } }
+/* Correct guess: tiles hop one after another, then fade before the bar appears */
+.qt-tile.hop { animation: hop 0.5s ease-in-out both; }
+@keyframes hop { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-12px); } }
+.qt-tile.leaving { transition: opacity 0.4s ease, transform 0.4s ease; opacity: 0; transform: scale(0.85); }
+/* Small message that pops up mid-screen and fades on its own */
+.qt-toast {
+  position: fixed; left: 50%; top: 45%; transform: translate(-50%, -50%) scale(0.96); z-index: 40; pointer-events: none;
+  background: var(--ink); color: var(--bg); font-weight: 700; font-size: 1rem; padding: 10px 18px; border-radius: 999px;
+  opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; white-space: nowrap;
+}
+.qt-toast.show { opacity: 0.94; transform: translate(-50%, -50%) scale(1); }
 .qt-l0 { background: var(--q0); } .qt-l1 { background: var(--q1); } .qt-l2 { background: var(--q2); } .qt-l3 { background: var(--q3); }
 @keyframes pop { from { transform: scale(0.94); opacity: 0.4; } }
 .qt-mistakes { flex: none; display: flex; justify-content: center; align-items: center; gap: 10px; padding-top: 12px; color: var(--muted); font-size: 0.95rem; font-weight: 600; }
@@ -303,7 +316,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     </header>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
-  <p class="version">Version Nov 1, 4:39 AM</p>
+  <p class="version">Version Nov 1, 4:42 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -392,7 +405,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
   <div class="status"><div class="subcount" id="qtSub">Make four groups of four</div></div>
   <div class="qt-board" id="qtBoard"></div>
   <div class="qt-mistakes"><span>Mistakes left</span><span class="qt-dots" id="qtDots"></span></div>
-  <div class="trace" id="qtMsg" aria-live="polite"></div>
+  <div class="qt-toast" id="qtMsg" role="status" aria-live="polite"></div>
   <div class="qt-actions">
     <button class="btn" id="qtShuffle" type="button">Shuffle</button>
     <button class="btn" id="qtClear" type="button">Deselect</button>
@@ -1289,7 +1302,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   store.history = store.history || [];
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
 
-  let puzzle = null, game = null, selected = [];
+  let puzzle = null, game = null, selected = [], justSolved = null, busy = false;
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const groupOf = (w) => puzzle.groups.find((g) => g.members.includes(w));
   const played = (id) => store.games[id] && store.games[id].done;
@@ -1333,7 +1346,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     board.innerHTML = "";
     const bar = (g, missed) => {
       const d = document.createElement("div");
-      d.className = `qt-solved qt-l${g.level}` + (missed ? " missed" : "");
+      d.className = `qt-solved qt-l${g.level}` + (missed ? " missed new" : "") + (g.level === justSolved ? " new" : "");
       const b = document.createElement("b"); b.textContent = g.name;
       const s = document.createElement("span"); s.textContent = g.members.join(", ");
       d.append(b, s); board.appendChild(d);
@@ -1368,49 +1381,57 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   }
 
   let msgTimer = null;
-  function message(text, kind) {
+  function message(text) {
     const m = $("qtMsg");
     clearTimeout(msgTimer);
-    m.className = "trace msg " + (kind || ""); void m.offsetWidth; m.textContent = text;
-    msgTimer = setTimeout(() => { m.textContent = ""; m.className = "trace"; }, 1800);
+    m.textContent = text; m.classList.add("show");
+    msgTimer = setTimeout(() => m.classList.remove("show"), 1400);
   }
 
   // ---------- play ----------
   $("qtBoard").addEventListener("click", (e) => {
     const t = e.target.closest(".qt-tile");
-    if (!t || game.done) return;
+    if (!t || game.done || busy) return;
     const w = t.dataset.w;
     if (selected.includes(w)) selected = selected.filter((x) => x !== w);
     else if (selected.length < 4) selected.push(w);
     render();
   });
-  $("qtClear").addEventListener("click", () => { selected = []; render(); });
+  $("qtClear").addEventListener("click", () => { if (!busy) { selected = []; render(); } });
   $("qtShuffle").addEventListener("click", () => {
+    if (busy) return;
     const left = game.order.filter((w) => !game.solved.includes(groupOf(w).level));
     const done = game.order.filter((w) => game.solved.includes(groupOf(w).level));
     game.order = done.concat(shuffle(left)); save(); render();
   });
   $("qtSubmit").addEventListener("click", () => {
-    if (game.done || selected.length !== 4) return;
+    if (game.done || busy || selected.length !== 4) return;
     const key = selected.slice().sort().join("|");
-    if (game.guesses.includes(key)) return message("Already guessed", "hint");
+    if (game.guesses.includes(key)) return message("Already guessed");
     game.guesses.push(key);
     const counts = puzzle.groups.map((g) => selected.filter((w) => g.members.includes(w)).length);
     const hit = counts.indexOf(4);
     if (hit >= 0) {
-      game.solved.push(puzzle.groups[hit].level);
-      selected = [];
-      if (game.solved.length === 4) return finish(true);
-      save(); render();
+      // Hop the four tiles one by one, fade them out, then ease the colored bar in.
+      busy = true;
+      const tiles = [...document.querySelectorAll(".qt-tile.sel")];
+      tiles.forEach((t, i) => { t.style.animationDelay = (i * 0.12) + "s"; t.classList.add("hop"); });
+      setTimeout(() => tiles.forEach((t) => t.classList.add("leaving")), 950);
+      setTimeout(() => {
+        const lv = puzzle.groups[hit].level;
+        game.solved.push(lv); justSolved = lv; selected = []; busy = false;
+        if (game.solved.length === 4) return finish(true);
+        save(); render();
+      }, 1400);
       return;
     }
     game.mistakes++;
     const oneAway = counts.includes(3);
     document.querySelectorAll(".qt-tile.sel").forEach((t) => { t.classList.remove("shake"); void t.offsetWidth; t.classList.add("shake"); });
-    if (game.mistakes >= MAX_MISTAKES) { save(); setTimeout(() => finish(false), 450); return; }
+    if (game.mistakes >= MAX_MISTAKES) { save(); justSolved = null; setTimeout(() => finish(false), 450); return; }
     save();
     setTimeout(render, 360);
-    message(oneAway ? "One away…" : "Not a group", oneAway ? "hint" : "bad");
+    message(oneAway ? "One away…" : "Not a group");
   });
 
   function finish(won) {
@@ -1418,7 +1439,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     game.done = true; game.won = won; selected = [];
     store.history.push({ at: Date.now(), id: puzzle.id, won, mistakes: game.mistakes, ms: Math.round(game.elapsed), order: game.solved.slice() });
     save(); render();
-    setTimeout(() => showResult(won), won ? 500 : 900);
+    setTimeout(() => showResult(won), won ? 1300 : 1500);
   }
 
   function showResult(won) {
@@ -1456,6 +1477,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     const p = pickPuzzle();
     if (!p) { $("qtProg").textContent = "All puzzles played\nMore coming soon"; return; }
     startGame(p);
+    justSolved = null; busy = false;
     document.querySelectorAll(".screen").forEach((el) => (el.hidden = el.id !== "quads"));
     $("qtSheet").hidden = true;
     render(); showTime(); startTimer();

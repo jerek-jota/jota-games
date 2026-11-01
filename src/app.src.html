@@ -1118,6 +1118,16 @@ __GEN__
   // Every finished puzzle: { at, id, won, mistakes, ms, order: levels in the order they were solved }
   store.history = store.history || [];
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
+  // Nov 2026: the puzzles were shuffled once and renumbered 1–50. Move saved games to their new numbers.
+  if (!store.idv) {
+    const R = {"1":32,"2":1,"3":44,"4":46,"5":10,"6":49,"7":11,"8":48,"9":38,"10":37,"11":20,"12":31,"13":28,"14":4,"15":41,"16":29,"17":5,"18":40,"19":7,"20":16,"21":21,"22":39,"23":12,"24":18,"25":14,"26":47,"27":22,"28":15,"29":36,"30":25,"31":8,"32":35,"33":2,"34":24,"35":30,"36":26,"37":17,"38":33,"39":23,"40":9,"41":3,"42":42,"43":27,"44":13,"45":45,"46":43,"47":6,"48":50,"49":34,"50":19};
+    const games = {};
+    for (const [id, g] of Object.entries(store.games)) games[R[id] || id] = g;
+    store.games = games;
+    store.history.forEach((h) => { if (R[h.id]) h.id = R[h.id]; });
+    store.idv = 2;
+    save();
+  }
 
   let puzzle = null, game = null, selected = [], justSolved = null, busy = false;
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
@@ -1126,11 +1136,8 @@ __GEN__
 
   function pickPuzzle() {
     const cur = PUZZLES.find((p) => store.games[p.id] && !store.games[p.id].done);
-    if (cur) return cur;
-    // Next puzzle is a random unplayed one, so batches written together don't come in a row
-    // and new puzzles mix in with the rest.
-    const left = PUZZLES.filter((p) => !played(p.id));
-    return left.length ? left[Math.floor(Math.random() * left.length)] : null;
+    // Puzzles are stored already shuffled, so the next one is simply the lowest-numbered unplayed puzzle.
+    return cur || PUZZLES.find((p) => !played(p.id)) || null;
   }
   function startGame(p) {
     puzzle = p;

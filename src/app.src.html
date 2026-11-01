@@ -197,7 +197,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .mw-stats div { display: flex; flex-direction: column; }
 .mw-stats b { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .mw-stats span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-/* Quartets */
+/* Quads */
 .qt-num { min-width: 0; text-align: right; padding: 0 4px 0 0; font-variant-numeric: tabular-nums; }
 .qt-board { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 8px; padding-top: 10px; max-height: 470px; align-self: stretch; width: 100%; }
 .qt-tile {
@@ -278,7 +278,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
         <rect x="4" y="52" width="44" height="44" rx="10" fill="var(--q2)"/>
         <rect x="52" y="52" width="44" height="44" rx="10" fill="var(--q3)"/>
       </svg>
-      <h2>Quartets</h2>
+      <h2>Quads</h2>
     </header>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
@@ -357,12 +357,12 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
   </div>
 </div>
 
-<section class="screen" id="quartets" hidden>
+<section class="screen" id="quads" hidden>
   <div class="toolbar">
     <button class="icon-btn" id="qtMenu" type="button" aria-label="Back to games">
       <svg viewBox="0 0 32 32"><path d="M6 9h20M6 16h20M6 23h20"/></svg>
     </button>
-    <span class="size-tag" id="qtTag">Quartets</span>
+    <span class="size-tag" id="qtTag">Quads</span>
     <span class="spacer"></span>
     <span class="timer" id="qtTimer" aria-label="Time">0:00</span>
     <span class="spacer"></span>
@@ -755,7 +755,7 @@ __GEN__
   function openHome() {
     stopTimer();
     $("midword").hidden = true; $("mwSheet").hidden = true;
-    $("quartets").hidden = true; $("qtSheet").hidden = true;
+    $("quads").hidden = true; $("qtSheet").hidden = true;
     (window.JotaHomeHooks || []).forEach((f) => f());
     $("game").hidden = true; $("winSheet").hidden = true; $("home").hidden = false;
     document.querySelectorAll(".level-btn").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.level === level)));
@@ -1085,10 +1085,10 @@ __GEN__
 })();
 </script>
 <script>
-/* ===== Quartets: sort 16 words into four groups of four (yellow easiest → purple hardest) ===== */
+/* ===== Quads: sort 16 words into four groups of four (yellow easiest → purple hardest) ===== */
 (function () {
-  const PUZZLES = "__QUARTETS__";           // [{id, groups: [{level, name, members}]}], groups ordered yellow → purple
-  const STORE_KEY = "jota.quartets.v1";
+  const PUZZLES = "__QUADS__";           // [{id, groups: [{level, name, members}]}], groups ordered yellow → purple
+  const STORE_KEY = "jota.quads.v1";
   const MAX_MISTAKES = 4;
   const $ = (id) => document.getElementById(id);
   const ROWS = [["No mistakes", (h) => h.won && h.mistakes === 0], ["1 mistake", (h) => h.won && h.mistakes === 1],
@@ -1125,7 +1125,7 @@ __GEN__
   const elapsed = () => (game ? game.elapsed + (tStart !== null ? performance.now() - tStart : 0) : 0);
   function showTime() { $("qtTimer").textContent = fmt(elapsed()); $("qtTimer").classList.toggle("paused", tStart === null); }
   function startTimer() {
-    if (!game || game.done || tStart !== null || $("quartets").hidden || document.hidden) return;
+    if (!game || game.done || tStart !== null || $("quads").hidden || document.hidden) return;
     tStart = performance.now();
     tTick = setInterval(() => {
       showTime();
@@ -1269,7 +1269,7 @@ __GEN__
     const p = pickPuzzle();
     if (!p) { $("qtProg").textContent = "All puzzles played\nMore coming soon"; return; }
     startGame(p);
-    document.querySelectorAll(".screen").forEach((el) => (el.hidden = el.id !== "quartets"));
+    document.querySelectorAll(".screen").forEach((el) => (el.hidden = el.id !== "quads"));
     $("qtSheet").hidden = true;
     render(); showTime(); startTimer();
   }

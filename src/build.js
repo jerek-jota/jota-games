@@ -24,7 +24,7 @@ for (const w of read("bonus.txt").split(/\s+/).filter(Boolean)) {
 const app = read("app.src.html")
   .replace('"__WORDS__"', () => JSON.stringify(words.join(" ")))
   .replace('"__DICT__"', () => JSON.stringify(packed))
-  .replace('"__QUARTETS__"', () => JSON.stringify(JSON.parse(read("quartets.json")).map((p) => ({ id: p.id, groups: p.groups.map(({ level, name, members }) => ({ level, name, members })).sort((a, b) => a.level - b.level) }))))
+  .replace('"__QUADS__"', () => JSON.stringify(JSON.parse(read("quads.json")).map((p) => ({ id: p.id, groups: p.groups.map(({ level, name, members }) => ({ level, name, members })).sort((a, b) => a.level - b.level) }))))
   .replace('"__SHORT__"', () => JSON.stringify(read("short.txt").split(/\s+/).filter(Boolean).join(" ")))
   .replace("__GEN__", () => gen)
   .replace("__BUILD__", () => new Date().toLocaleString("en-US", { timeZone: "America/Denver", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }));

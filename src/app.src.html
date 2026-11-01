@@ -1126,7 +1126,11 @@ __GEN__
 
   function pickPuzzle() {
     const cur = PUZZLES.find((p) => store.games[p.id] && !store.games[p.id].done);
-    return cur || PUZZLES.find((p) => !played(p.id)) || null;
+    if (cur) return cur;
+    // Next puzzle is a random unplayed one, so batches written together don't come in a row
+    // and new puzzles mix in with the rest.
+    const left = PUZZLES.filter((p) => !played(p.id));
+    return left.length ? left[Math.floor(Math.random() * left.length)] : null;
   }
   function startGame(p) {
     puzzle = p;

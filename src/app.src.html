@@ -1118,9 +1118,9 @@ __GEN__
   // Every finished puzzle: { at, id, won, mistakes, ms, order: levels in the order they were solved }
   store.history = store.history || [];
   function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch (e) {} }
-  // The puzzle set was replaced (Nov 2026: first 50 retired, new puzzles numbered from 1).
+  // The puzzle set was replaced (Nov 2026; set 3 = 60 puzzles, numbered from 1).
   // A save from an older set refers to puzzles that no longer exist, so it starts fresh.
-  const PUZZLE_SET = 2;
+  const PUZZLE_SET = 3;
   if (store.set !== PUZZLE_SET) {
     store.games = {}; store.history = []; delete store.idv;
     store.set = PUZZLE_SET;

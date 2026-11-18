@@ -1052,7 +1052,6 @@ early
 ship
 black
 tested
-sally
 rush
 pulled
 carried
@@ -1338,7 +1337,6 @@ bent
 famous
 inch
 closet
-cooper
 upset
 congress
 reality
@@ -1356,7 +1354,6 @@ niece
 falling
 product
 usual
-tony
 scary
 like
 gold
@@ -1839,7 +1836,6 @@ horror
 hunting
 rarely
 episode
-mike
 idol
 established
 ranch
@@ -2762,7 +2758,6 @@ wave
 payment
 cached
 alley
-hart
 kicked
 statue
 bonus
@@ -2872,7 +2867,6 @@ unusual
 campaign
 suggest
 memorial
-tanner
 technical
 polar
 discovered
@@ -3071,7 +3065,6 @@ leap
 rusty
 blowing
 slipped
-turner
 woke
 entitled
 password
@@ -3083,7 +3076,6 @@ driven
 cruise
 prevent
 washing
-fisher
 except
 invite
 oldest
@@ -3265,7 +3257,6 @@ burial
 yourself
 petition
 organ
-jimmy
 iced
 adding
 forgotten
@@ -3371,7 +3362,6 @@ teenager
 debt
 bolt
 mummy
-josh
 farmer
 vintage
 vain

@@ -13498,6 +13498,7 @@ cooncan
 coonhound
 coonskin
 coontie
+cooper
 cooperage
 cooperated
 cooperatively
@@ -24026,6 +24027,7 @@ fiscally
 fishbolt
 fishbowl
 fishcake
+fisher
 fishery
 fisheye
 fishgig
@@ -28691,6 +28693,7 @@ harshest
 harshly
 harshness
 harslet
+hart
 hartal
 hartebeest
 hartshorn
@@ -34336,6 +34339,7 @@ jilted
 jilting
 jimjams
 jimmied
+jimmy
 jimmying
 jimsonweed
 jingled
@@ -34446,6 +34450,7 @@ jonquil
 jook
 jornada
 jorum
+josh
 joshed
 josher
 joshing
@@ -39255,6 +39260,7 @@ migrator
 migratory
 mihrab
 mikado
+mike
 miked
 miking
 mikva
@@ -55485,6 +55491,7 @@ sallowest
 sallowish
 sallowly
 sallowness
+sally
 sallying
 salmagundi
 salmagundis
@@ -63419,6 +63426,7 @@ tanking
 tannage
 tannate
 tanned
+tanner
 tannery
 tannest
 tannic
@@ -65108,6 +65116,7 @@ tonsured
 tonsuring
 tontine
 tonus
+tony
 tooled
 tooling
 toolmaker
@@ -66461,6 +66470,7 @@ turnaround
 turnbuckle
 turncoat
 turndown
+turner
 turnery
 turnkey
 turnoff

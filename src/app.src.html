@@ -440,8 +440,8 @@ window.JotaWords = (function () {
     return dict;
   }
   const short = new Set("__SHORT__".split(" "));     // everyday 2–3 letter words (for games that allow short guesses)
-  let sorted = null;
-  return {
+  let sorted = null, mid = null;
+  const JotaWords = {
     list,                                            // common words: puzzle answers
     has: (w) => set.has(w.toLowerCase()),
     isWord: (w) => dictionary().has(w.toLowerCase()), // puzzle words + bonus words
@@ -454,9 +454,19 @@ window.JotaWords = (function () {
       return dictionary().has(sing) || short.has(sing);
     },
     // Every known word in alphabetical order (built on first use).
-    sorted: () => sorted || (sorted = [...dictionary(), ...short].sort()),
+    sorted: () => sorted || (sorted = [...new Set([...dictionary(), ...short])].sort()),
+    // Midword: root words only (no plurals, no -ed/-ing forms). One bit per word of sorted().
+    midSorted: () => {
+      if (mid) return mid.list;
+      const all = JotaWords.sorted(), raw = atob("__MIDBITS__"), list = [], ok = new Set();
+      for (let i = 0; i < all.length; i++) if ((raw.charCodeAt(i >> 3) >> (i & 7)) & 1) { list.push(all[i]); ok.add(all[i]); }
+      mid = { list, ok };
+      return list;
+    },
+    midOk: (w) => (JotaWords.midSorted(), mid.ok.has(w.toLowerCase())),
     warm: () => dictionary(),
   };
+  return JotaWords;
 })();
 </script>
 <script>
@@ -845,7 +855,9 @@ __GEN__
   const W = window.JotaWords;
 
   // Secret words: everyday words from the easier part of the list, no -ing/-ed forms.
-  const pool = W.list.slice(0, 3500).filter((w) => w.length >= 4 && w.length <= 9 && !/(ing|ed)$/.test(w));
+  // Filtered lazily so the root-word list is only built when Midword is opened. Every secret is itself a valid guess.
+  let poolCache = null;
+  const secretPool = () => poolCache || (poolCache = W.list.slice(0, 3500).filter((w) => w.length >= 4 && w.length <= 9 && !/(ing|ed)$/.test(w) && W.midOk(w)));
 
   function load() { try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; } catch (e) { return {}; } }
   const store = load();
@@ -866,6 +878,7 @@ __GEN__
 
   function newGame() {
     let secret;
+    const pool = secretPool();
     do { secret = pool[Math.floor(Math.random() * pool.length)]; } while (store.game && store.game.secret === secret);
     store.game = { secret, guesses: [], elapsed: 0, done: false };
     save();
@@ -892,12 +905,12 @@ __GEN__
 
   // Index of a word in the alphabetical list of every known word.
   function indexOf(word) {
-    const all = W.sorted();
+    const all = W.midSorted();
     let a = 0, b = all.length;
     while (a < b) { const m = (a + b) >> 1; if (all[m] < word) a = m + 1; else b = m; }
     return a;
   }
-  const position = (word) => indexOf(word) / W.sorted().length;
+  const position = (word) => indexOf(word) / W.midSorted().length;
   // How many words away from the secret a guess is (1 = the very next word in the list).
   const away = (word) => Math.abs(indexOf(word) - indexOf(game.secret));
   const fmtAway = (n) => n.toLocaleString("en-US");
@@ -970,8 +983,11 @@ __GEN__
     if (!w) return;
     const { lo, hi } = bounds();
     if (w.length < 2) return message("Too short", "bad");
-    if (W.isPlural(w)) return message("No plurals", "bad");
-    if (!W.isWord(w) && !W.isShort(w)) return message("Not in word list", "bad");
+    if (!W.midOk(w)) {
+      if (W.isPlural(w)) return message("No plurals", "bad");
+      if (/(ed|ing)$/.test(w) && (W.isWord(w) || W.isShort(w))) return message("No -ed or -ing words", "bad");
+      return message("Not in word list", "bad");
+    }
     if (game.guesses.some((g) => g.w === w)) return message("Already guessed", "bad");
     if ((lo && w < lo) || (hi && w > hi)) return message(`Must be between ${(lo || "a").toUpperCase()} and ${(hi || "z").toUpperCase()}`, "bad");
     game.guesses.push({ w });
@@ -1080,7 +1096,7 @@ __GEN__
     typed = "";
     document.querySelectorAll(".screen").forEach((el) => (el.hidden = el.id !== "midword"));
     $("mwSheet").hidden = true;
-    W.sorted();
+    W.midSorted();
     render(); showTime(); startTimer();
     $("mwEntry").focus();
   }

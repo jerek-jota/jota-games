@@ -21,11 +21,18 @@ for (const w of read("bonus.txt").split(/\s+/).filter(Boolean)) {
   packed += k + w.slice(k);
   prev = w;
 }
+// Midword accepts root words only: a bit per word of the sorted full list (dictionary + short words), 1 = accepted.
+const shortWords = read("short.txt").split(/\s+/).filter(Boolean);
+const skip = new Set(read("midword_skip.txt").split(/\s+/).filter(Boolean));
+const universe = [...new Set([...words, ...read("bonus.txt").split(/\s+/).filter(Boolean), ...shortWords])].sort();
+const bits = Buffer.alloc(Math.ceil(universe.length / 8));
+universe.forEach((w, i) => { if (!skip.has(w)) bits[i >> 3] |= 1 << (i & 7); });
 const app = read("app.src.html")
   .replace('"__WORDS__"', () => JSON.stringify(words.join(" ")))
   .replace('"__DICT__"', () => JSON.stringify(packed))
   .replace('"__QUADS__"', () => JSON.stringify(JSON.parse(read("quads.json")).map((p) => ({ id: p.id, groups: p.groups.map(({ level, name, members }) => ({ level, name, members })).sort((a, b) => a.level - b.level) }))))
-  .replace('"__SHORT__"', () => JSON.stringify(read("short.txt").split(/\s+/).filter(Boolean).join(" ")))
+  .replace('"__SHORT__"', () => JSON.stringify(shortWords.join(" ")))
+  .replace('"__MIDBITS__"', () => JSON.stringify(bits.toString("base64")))
   .replace("__GEN__", () => gen)
   .replace("__BUILD__", () => new Date().toLocaleString("en-US", { timeZone: "America/Denver", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }));
 

@@ -347,7 +347,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <div class="subcount" id="mwSub">The secret word is somewhere between A and Z</div>
   </div>
   <div class="mw-range">
-    <div class="mw-bound"><b id="mwAfter">A</b><em id="mwAfterDist"></em></div>
+    <div class="mw-bound"><b id="mwAfter">AAA</b><em id="mwAfterDist"></em></div>
     <form class="mw-form" id="mwForm" autocomplete="off">
       <input class="mw-entry" id="mwEntry" type="text" inputmode="text" enterkeyhint="go" autocapitalize="none" autocorrect="off" autocomplete="off" spellcheck="false" maxlength="12" placeholder="Type a word" aria-label="Your guess">
     </form>
@@ -938,13 +938,13 @@ __GEN__
   // ---------- rendering ----------
   function render() {
     const { lo, hi } = bounds();
-    $("mwAfter").textContent = lo || "A";
+    $("mwAfter").textContent = lo || "AAA";
     $("mwBefore").textContent = hi || "ZZZ";
     const dist = (el, w) => { el.textContent = w ? `${fmtAway(away(w))} away` : ""; };
     dist($("mwAfterDist"), lo); dist($("mwBeforeDist"), hi);
     if ($("mwEntry").value !== typed) $("mwEntry").value = typed;
     const n = game.guesses.length;
-    $("mwSub").textContent = n ? `${n} guess${n > 1 ? "es" : ""} so far` : "The secret word is somewhere between A and ZZZ";
+    $("mwSub").textContent = n ? `${n} guess${n > 1 ? "es" : ""} so far` : "The secret word is somewhere between AAA and ZZZ";
     const known = knownPrefix();
     $("mwKnown").hidden = !known;
     $("mwPrefix").textContent = known;
@@ -989,7 +989,7 @@ __GEN__
       return message("Not in word list", "bad");
     }
     if (game.guesses.some((g) => g.w === w)) return message("Already guessed", "bad");
-    if ((lo && w < lo) || (hi && w > hi)) return message(`Must be between ${(lo || "a").toUpperCase()} and ${(hi || "zzz").toUpperCase()}`, "bad");
+    if ((lo && w < lo) || (hi && w > hi)) return message(`Must be between ${(lo || "aaa").toUpperCase()} and ${(hi || "zzz").toUpperCase()}`, "bad");
     game.guesses.push({ w });
     typed = "";
     if (w === game.secret) return finish(true);

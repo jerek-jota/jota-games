@@ -908,8 +908,8 @@ __GEN__
   const STORE_KEY = "jota.midword.v1";
   const MAX_LEN = 12;
   // Histogram rows for the number of guesses a win took: <3, then 3 through 10 each on their own, then >10.
-  const BUCKETS = [[1, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, Infinity]];
-  const bucketLabel = ([a, b]) => (b === Infinity ? `>${a - 1}` : a === 1 ? `<${b + 1}` : `${a}`);
+  const BUCKETS = [[1, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, 20], [21, Infinity]];
+  const bucketLabel = ([a, b]) => (b === Infinity ? `>${a - 1}` : a === 1 ? `<${b + 1}` : a === b ? `${a}` : `${a}–${b}`);
   const bucketOf = (n) => BUCKETS.findIndex(([a, b]) => n >= a && n <= b);
   const $ = (id) => document.getElementById(id);
   const W = window.JotaWords;

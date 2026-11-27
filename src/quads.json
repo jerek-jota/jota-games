@@ -7769,5 +7769,5216 @@
    }
   ],
   "herrings": "BELL (front-desk bell) pulls toward AT A HOTEL."
+ },
+ {
+  "id": 151,
+  "groups": [
+   {
+    "level": 0,
+    "name": "AT A HOSPITAL",
+    "members": [
+     "NURSE",
+     "WARD",
+     "GURNEY",
+     "SCRUBS"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 1,
+    "name": "CHARGE",
+    "members": [
+     "TOLL",
+     "LEVY",
+     "TARIFF",
+     "DUTY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "___MARK",
+    "members": [
+     "BENCH",
+     "HALL",
+     "BOOK",
+     "TRADE"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "mark"
+    }
+   },
+   {
+    "level": 3,
+    "name": "THINGS THAT CAN BE FLAT",
+    "members": [
+     "TIRE",
+     "NOTE",
+     "SODA",
+     "FEE"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "FEE looks like a CHARGE."
+ },
+ {
+  "id": 152,
+  "groups": [
+   {
+    "level": 0,
+    "name": "ICE CREAM FLAVORS",
+    "members": [
+     "VANILLA",
+     "PISTACHIO",
+     "ROCKY ROAD",
+     "MINT CHIP"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "CONCEITED",
+    "members": [
+     "VAIN",
+     "SMUG",
+     "COCKY",
+     "BIGHEADED"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "GUY, IN BRITISH SLANG",
+    "members": [
+     "BLOKE",
+     "CHAP",
+     "GEEZER",
+     "LAD"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 3,
+    "name": "HIDDEN COUNTRIES",
+    "members": [
+     "WOMAN",
+     "PERUSE",
+     "SCUBA",
+     "MALICE"
+    ],
+    "type": "hidden_word",
+    "check": {
+     "containsAny": [
+      "oman",
+      "peru",
+      "cuba",
+      "mali"
+     ]
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 153,
+  "groups": [
+   {
+    "level": 0,
+    "name": "ANGRY",
+    "members": [
+     "MAD",
+     "CROSS",
+     "IRATE",
+     "SORE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "AT A FIRE STATION",
+    "members": [
+     "POLE",
+     "SIREN",
+     "HOSE",
+     "DALMATIAN"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "LAUNDRY DETERGENTS",
+    "members": [
+     "CHEER",
+     "GAIN",
+     "ARM & HAMMER",
+     "PUREX"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE SEA LIFE",
+    "members": [
+     "SOUL",
+     "WAIL",
+     "CHORAL",
+     "MUSCLE"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 154,
+  "groups": [
+   {
+    "level": 0,
+    "name": "AMPHIBIANS",
+    "members": [
+     "FROG",
+     "TOAD",
+     "NEWT",
+     "SALAMANDER"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "DIPS",
+    "members": [
+     "SALSA",
+     "HUMMUS",
+     "GUACAMOLE",
+     "QUESO"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "CLOTHES, IN SLANG",
+    "members": [
+     "THREADS",
+     "DUDS",
+     "RAGS",
+     "TOGS"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 3,
+    "name": "WHAT 'BANK' CAN MEAN",
+    "members": [
+     "SHORE",
+     "TILT",
+     "RELY",
+     "ROW"
+    ],
+    "type": "multiple_meanings"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 155,
+  "groups": [
+   {
+    "level": 0,
+    "name": "EXPLODE",
+    "members": [
+     "BURST",
+     "ERUPT",
+     "DETONATE",
+     "BLOW UP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "'THE LION KING' CHARACTERS",
+    "members": [
+     "SIMBA",
+     "NALA",
+     "SCAR",
+     "RAFIKI"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 2,
+    "name": "BRAINIAC",
+    "members": [
+     "WHIZ",
+     "EGGHEAD",
+     "EINSTEIN",
+     "PRODIGY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "___STORM",
+    "members": [
+     "BRAIN",
+     "BARN",
+     "FIRE",
+     "SAND"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "storm"
+    }
+   }
+  ],
+  "herrings": "BRAIN looks like a fifth word for a genius."
+ },
+ {
+  "id": 156,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SCARED",
+    "members": [
+     "AFRAID",
+     "SPOOKED",
+     "FRIGHTENED",
+     "PETRIFIED"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "BRIEF",
+    "members": [
+     "TERSE",
+     "CURT",
+     "PITHY",
+     "SUCCINCT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "AT A TRACK MEET",
+    "members": [
+     "HEAT",
+     "RELAY",
+     "LANE",
+     "BATON"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "___PIECE",
+    "members": [
+     "CENTER",
+     "MOUTH",
+     "TIME",
+     "EAR"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "piece"
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 157,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SCARCE",
+    "members": [
+     "RARE",
+     "SCANT",
+     "SPARSE",
+     "THIN"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "HESITATE",
+    "members": [
+     "WAVER",
+     "FALTER",
+     "DITHER",
+     "HEDGE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "AT A POKER TABLE",
+    "members": [
+     "BLIND",
+     "TELL",
+     "RIVER",
+     "ANTE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "HONEY___",
+    "members": [
+     "COMB",
+     "DEW",
+     "MOON",
+     "POT"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "prefix": "honey"
+    }
+   }
+  ],
+  "herrings": "POT is also at a poker table."
+ },
+ {
+  "id": 158,
+  "groups": [
+   {
+    "level": 0,
+    "name": "TOY BRANDS",
+    "members": [
+     "LEGO",
+     "BARBIE",
+     "NERF",
+     "HOT WHEELS"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 1,
+    "name": "JAZZ BAND INSTRUMENTS",
+    "members": [
+     "SAXOPHONE",
+     "PIANO",
+     "BASS",
+     "DRUMS"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "ADMIT",
+    "members": [
+     "OWN",
+     "ALLOW",
+     "GRANT",
+     "CONCEDE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS WITH VALVES",
+    "members": [
+     "HEART",
+     "TRUMPET",
+     "TIRE",
+     "FAUCET"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "TRUMPET looks like a fifth jazz-band instrument."
+ },
+ {
+  "id": 159,
+  "groups": [
+   {
+    "level": 0,
+    "name": "CONTEMPT",
+    "members": [
+     "DISDAIN",
+     "DERISION",
+     "DISRESPECT",
+     "MOCKERY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "PERCUSSION INSTRUMENTS",
+    "members": [
+     "CYMBAL",
+     "GONG",
+     "TAMBOURINE",
+     "XYLOPHONE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "FOLLOW COVERTLY",
+    "members": [
+     "TAIL",
+     "SHADOW",
+     "DOG",
+     "STALK"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "HIDDEN GRAINS",
+    "members": [
+     "SCORN",
+     "PRICE",
+     "BRANCH",
+     "GOATEE"
+    ],
+    "type": "hidden_word",
+    "check": {
+     "containsAny": [
+      "corn",
+      "rice",
+      "bran",
+      "oat"
+     ]
+    }
+   }
+  ],
+  "herrings": "SCORN looks like CONTEMPT."
+ },
+ {
+  "id": 160,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DEADLY SINS",
+    "members": [
+     "GREED",
+     "WRATH",
+     "LUST",
+     "GLUTTONY"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "BASEBALL GEAR",
+    "members": [
+     "GLOVE",
+     "HELMET",
+     "CLEATS",
+     "BALL"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "IN A POLITICAL CAMPAIGN",
+    "members": [
+     "STUMP",
+     "RALLY",
+     "PLATFORM",
+     "POLL"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "MAMMALS",
+    "members": [
+     "FERRET",
+     "BADGER",
+     "SLOTH",
+     "BAT"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "SLOTH fits DEADLY SINS; BAT fits BASEBALL GEAR."
+ },
+ {
+  "id": 161,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SECRET",
+    "members": [
+     "COVERT",
+     "HUSH-HUSH",
+     "CLANDESTINE",
+     "UNDERCOVER"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SMALL BOATS",
+    "members": [
+     "ROWBOAT",
+     "SKIFF",
+     "PUNT",
+     "CANOE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "BRING UP, AS AN IDEA",
+    "members": [
+     "BROACH",
+     "FLOAT",
+     "PITCH",
+     "RAISE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "WHAT 'TENDER' CAN MEAN",
+    "members": [
+     "SORE",
+     "OFFER",
+     "LOVING",
+     "CURRENCY"
+    ],
+    "type": "multiple_meanings"
+   }
+  ],
+  "herrings": "OFFER looks like a fifth way to bring up an idea."
+ },
+ {
+  "id": 162,
+  "groups": [
+   {
+    "level": 0,
+    "name": "TIMEPIECES",
+    "members": [
+     "SUNDIAL",
+     "STOPWATCH",
+     "EGG TIMER",
+     "HOURGLASS"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "GO SLOWLY",
+    "members": [
+     "CREEP",
+     "PLOD",
+     "DAWDLE",
+     "EDGE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "DANCE STYLES",
+    "members": [
+     "TAP",
+     "SWING",
+     "LINE",
+     "BREAK"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "___WORK",
+    "members": [
+     "CLOCK",
+     "GUESS",
+     "PATCH",
+     "LEG"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "work"
+    }
+   }
+  ],
+  "herrings": "CLOCK looks like a timepiece."
+ },
+ {
+  "id": 163,
+  "groups": [
+   {
+    "level": 0,
+    "name": "TENSE",
+    "members": [
+     "ANXIOUS",
+     "UPTIGHT",
+     "ON EDGE",
+     "JITTERY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "CALL OFF",
+    "members": [
+     "AXE",
+     "NIX",
+     "SCRUB",
+     "SCRATCH"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "'FROZEN' CHARACTERS",
+    "members": [
+     "ANNA",
+     "HANS",
+     "SVEN",
+     "OLAF"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "ANAGRAMS OF BODY PARTS",
+    "members": [
+     "EARTH",
+     "BELOW",
+     "LAMP",
+     "CAFE"
+    ],
+    "type": "anagram_reversal",
+    "check": {
+     "anagramOf": [
+      "heart",
+      "elbow",
+      "palm",
+      "face"
+     ]
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 164,
+  "groups": [
+   {
+    "level": 0,
+    "name": "COATS",
+    "members": [
+     "PARKA",
+     "ANORAK",
+     "TRENCH",
+     "PEACOAT"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "RIVER FEATURES",
+    "members": [
+     "RAPIDS",
+     "BEND",
+     "MOUTH",
+     "BANK"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "GHOST",
+    "members": [
+     "SHADE",
+     "WRAITH",
+     "PHANTOM",
+     "SPOOK"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "AIRLINES",
+    "members": [
+     "DELTA",
+     "ALLEGIANT",
+     "FRONTIER",
+     "UNITED"
+    ],
+    "type": "brands"
+   }
+  ],
+  "herrings": "DELTA is a fifth RIVER FEATURE."
+ },
+ {
+  "id": 165,
+  "groups": [
+   {
+    "level": 0,
+    "name": "CROWD",
+    "members": [
+     "HORDE",
+     "THRONG",
+     "SWARM",
+     "HOST"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "WINTER SPORTS",
+    "members": [
+     "SKIING",
+     "LUGE",
+     "BOBSLED",
+     "CURLING"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "WOODWORKING JOINTS",
+    "members": [
+     "MITER",
+     "DOVETAIL",
+     "LAP",
+     "BUTT"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "___STER",
+    "members": [
+     "HIP",
+     "LOB",
+     "HAM",
+     "MOB"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "ster"
+    }
+   }
+  ],
+  "herrings": "MOB fits CROWD; HIP is a (body) joint next to the woodworking joints."
+ },
+ {
+  "id": 166,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DESERT ANIMALS",
+    "members": [
+     "CAMEL",
+     "COYOTE",
+     "SCORPION",
+     "RATTLESNAKE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "MINERALS",
+    "members": [
+     "QUARTZ",
+     "TALC",
+     "MICA",
+     "GYPSUM"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "IN 'CHARLIE AND THE CHOCOLATE FACTORY'",
+    "members": [
+     "TICKET",
+     "GUM",
+     "GOBSTOPPER",
+     "RIVER"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 2,
+    "name": "THINGS YOU HOLD, IN SAYINGS",
+    "members": [
+     "BREATH",
+     "TONGUE",
+     "HORSES",
+     "FORT"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 167,
+  "groups": [
+   {
+    "level": 0,
+    "name": "POLITE",
+    "members": [
+     "COURTEOUS",
+     "CIVIL",
+     "GRACIOUS",
+     "RESPECTFUL"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "GREEK GODS",
+    "members": [
+     "ZEUS",
+     "HERA",
+     "ATHENA",
+     "POSEIDON"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "SHORT FOR LONGER WORDS",
+    "members": [
+     "GYM",
+     "ZOO",
+     "PIANO",
+     "PUB"
+    ],
+    "type": "other_wordplay"
+   },
+   {
+    "level": 3,
+    "name": "___ISH",
+    "members": [
+     "PUN",
+     "FIN",
+     "VAN",
+     "PAR"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "ish"
+    }
+   }
+  ],
+  "herrings": "VAN (short for caravan) also fits SHORT FOR LONGER WORDS."
+ },
+ {
+  "id": 168,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BEVERAGES",
+    "members": [
+     "COFFEE",
+     "JUICE",
+     "LEMONADE",
+     "COCOA"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "POISON ___",
+    "members": [
+     "OAK",
+     "PILL",
+     "APPLE",
+     "IVY"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 3,
+    "name": "THINGS YOU READ",
+    "members": [
+     "MINDS",
+     "METER",
+     "RIOT ACT",
+     "TEA LEAVES"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 2,
+    "name": "BODY PARTS",
+    "members": [
+     "TEMPLE",
+     "PUPIL",
+     "CALF",
+     "PALM"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "PALM is read too (palm reading)."
+ },
+ {
+  "id": 169,
+  "groups": [
+   {
+    "level": 0,
+    "name": "ROTATE",
+    "members": [
+     "SPIN",
+     "TWIRL",
+     "WHIRL",
+     "REVOLVE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SAUSAGES",
+    "members": [
+     "BRATWURST",
+     "CHORIZO",
+     "KIELBASA",
+     "SALAMI"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "PARTS OF A PRINTED PAGE",
+    "members": [
+     "HEADER",
+     "FOOTER",
+     "GUTTER",
+     "COLUMN"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "HIDDEN DRINKS",
+    "members": [
+     "SWINE",
+     "MEADOW",
+     "TRUMPET",
+     "MARGIN"
+    ],
+    "type": "hidden_word",
+    "check": {
+     "containsAny": [
+      "wine",
+      "mead",
+      "rum",
+      "gin"
+     ]
+    }
+   }
+  ],
+  "herrings": "MARGIN is also a part of a printed page."
+ },
+ {
+  "id": 170,
+  "groups": [
+   {
+    "level": 0,
+    "name": "STOP",
+    "members": [
+     "HALT",
+     "CEASE",
+     "QUIT",
+     "DESIST"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "WEAR",
+    "members": [
+     "SPORT",
+     "ROCK",
+     "MODEL",
+     "HAVE ON"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "CHAIR STYLES",
+    "members": [
+     "WINGBACK",
+     "WINDSOR",
+     "BEANBAG",
+     "ROCKER"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "PAR___",
+    "members": [
+     "SNIP",
+     "DON",
+     "ROT",
+     "SON"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "prefix": "par"
+    }
+   }
+  ],
+  "herrings": "DON fits WEAR, but it is needed for PARDON."
+ },
+ {
+  "id": 171,
+  "groups": [
+   {
+    "level": 0,
+    "name": "AIRCRAFT",
+    "members": [
+     "JET",
+     "GLIDER",
+     "BLIMP",
+     "HELICOPTER"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "DECEIVE",
+    "members": [
+     "DUPE",
+     "FOOL",
+     "HOODWINK",
+     "BAMBOOZLE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "THINGS WITH LAYERS",
+    "members": [
+     "LASAGNA",
+     "PARFAIT",
+     "OGRE",
+     "ATMOSPHERE"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "BEGIN AND END WITH THE SAME TWO LETTERS",
+    "members": [
+     "CHURCH",
+     "ONION",
+     "ERASER",
+     "ICONIC"
+    ],
+    "type": "letter_props"
+   }
+  ],
+  "herrings": "ONION looks like a thing with layers."
+ },
+ {
+  "id": 172,
+  "groups": [
+   {
+    "level": 0,
+    "name": "THE BEATLES",
+    "members": [
+     "JOHN",
+     "PAUL",
+     "GEORGE",
+     "RINGO"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 1,
+    "name": "AT A TRAIN STATION",
+    "members": [
+     "PLATFORM",
+     "TURNSTILE",
+     "CONDUCTOR",
+     "TIMETABLE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "GRANDMA, INFORMALLY",
+    "members": [
+     "NANA",
+     "GRAMMY",
+     "MEEMAW",
+     "GRAN"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 3,
+    "name": "HIRED THUG",
+    "members": [
+     "HEAVY",
+     "HOOD",
+     "MUSCLE",
+     "GOON"
+    ],
+    "type": "synonyms"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 173,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DAIRY PRODUCTS",
+    "members": [
+     "MILK",
+     "CHEESE",
+     "YOGURT",
+     "BUTTER"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "PLUMP",
+    "members": [
+     "STOUT",
+     "PORTLY",
+     "ROTUND",
+     "PUDGY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "ON A FILM SET",
+    "members": [
+     "GRIP",
+     "BOOM",
+     "DOLLY",
+     "CLAPPER"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "___ MONEY",
+    "members": [
+     "HUSH",
+     "SEED",
+     "FUNNY",
+     "BLOOD"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "MILK (milk money) fits the fill-in but is needed for dairy."
+ },
+ {
+  "id": 174,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DAMP",
+    "members": [
+     "MOIST",
+     "DANK",
+     "HUMID",
+     "CLAMMY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "COWARDLY",
+    "members": [
+     "CHICKEN",
+     "GUTLESS",
+     "SPINELESS",
+     "TIMID"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "ROOT ___",
+    "members": [
+     "CANAL",
+     "CELLAR",
+     "CAUSE",
+     "VEGETABLE"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 3,
+    "name": "___ BELLY",
+    "members": [
+     "POT",
+     "BEER",
+     "YELLOW",
+     "PORK"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "YELLOW looks like a fifth COWARDLY word; BEER looks like a fifth ROOT ___ (root beer)."
+ },
+ {
+  "id": 175,
+  "groups": [
+   {
+    "level": 0,
+    "name": "CHOOSE",
+    "members": [
+     "PICK",
+     "SELECT",
+     "ELECT",
+     "OPT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "LOCK UP",
+    "members": [
+     "CAGE",
+     "IMPRISON",
+     "DETAIN",
+     "INTERN"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "AT A HAIR SALON",
+    "members": [
+     "FOIL",
+     "CAPE",
+     "HIGHLIGHTS",
+     "BLOWOUT"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "___CLOTH",
+    "members": [
+     "CHEESE",
+     "LOIN",
+     "SACK",
+     "OIL"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "cloth"
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 176,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SKETCH",
+    "members": [
+     "DOODLE",
+     "TRACE",
+     "OUTLINE",
+     "ILLUSTRATE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "MARTIAL ARTS",
+    "members": [
+     "KARATE",
+     "JUDO",
+     "AIKIDO",
+     "KUNG FU"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "CHESS TERMS",
+    "members": [
+     "SKEWER",
+     "GAMBIT",
+     "TEMPO",
+     "PROMOTION"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "___STRING",
+    "members": [
+     "HAM",
+     "BOW",
+     "PURSE",
+     "DRAW"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "DRAW: a fifth SKETCH synonym and also a chess result (a fifth CHESS TERM); only it completes ___STRING."
+ },
+ {
+  "id": 177,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SOFT",
+    "members": [
+     "FLUFFY",
+     "FUZZY",
+     "DOWNY",
+     "VELVETY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "CAR, IN SLANG",
+    "members": [
+     "WHEELS",
+     "RIDE",
+     "BEATER",
+     "JALOPY"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 2,
+    "name": "HORSE BREEDING TERMS",
+    "members": [
+     "SIRE",
+     "FOAL",
+     "STUD",
+     "FILLY"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "___AGE",
+    "members": [
+     "DAM",
+     "MESS",
+     "VOLT",
+     "MILE"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "age"
+    }
+   }
+  ],
+  "herrings": "DAM (a horse's mother) looks like a HORSE BREEDING TERM, but it is needed for DAMAGE."
+ },
+ {
+  "id": 178,
+  "groups": [
+   {
+    "level": 0,
+    "name": "WORRY",
+    "members": [
+     "FRET",
+     "STEW",
+     "AGONIZE",
+     "OBSESS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "FIRE___",
+    "members": [
+     "FLY",
+     "PLACE",
+     "ARM",
+     "WOOD"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "prefix": "fire"
+    }
+   },
+   {
+    "level": 2,
+    "name": "TRAIN",
+    "members": [
+     "DRILL",
+     "SCHOOL",
+     "COACH",
+     "GROOM"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS YOU SHED",
+    "members": [
+     "TEARS",
+     "LIGHT",
+     "SKIN",
+     "POUNDS"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "LIGHT (firelight) and DRILL (fire drill) both pull toward FIRE___."
+ },
+ {
+  "id": 179,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FARM ANIMALS",
+    "members": [
+     "GOAT",
+     "SHEEP",
+     "ROOSTER",
+     "DONKEY"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "DRAWBACK",
+    "members": [
+     "RUB",
+     "MINUS",
+     "CON",
+     "DOWNSIDE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS YOU CAN LOSE",
+    "members": [
+     "TEMPER",
+     "FACE",
+     "TRACK",
+     "SLEEP"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 2,
+    "name": "SCHOOLYARD GAMES",
+    "members": [
+     "TAG",
+     "CATCH",
+     "JACKS",
+     "MARBLES"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "CATCH means a drawback; you can lose your MARBLES."
+ },
+ {
+  "id": 180,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DOCK",
+    "members": [
+     "WHARF",
+     "JETTY",
+     "LANDING",
+     "MOORING"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SCORCH",
+    "members": [
+     "CHAR",
+     "SINGE",
+     "SEAR",
+     "BLACKEN"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "SKI TOWNS",
+    "members": [
+     "VAIL",
+     "STOWE",
+     "TAOS",
+     "STEAMBOAT"
+    ],
+    "type": "places"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE CAPITALS",
+    "members": [
+     "ROAM",
+     "BURN",
+     "LANCING",
+     "SOLE"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "BURN fits SCORCH."
+ },
+ {
+  "id": 181,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FACIAL EXPRESSIONS",
+    "members": [
+     "FROWN",
+     "SMIRK",
+     "GRIN",
+     "POUT"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "IN A FIRST-AID KIT",
+    "members": [
+     "GAUZE",
+     "TWEEZERS",
+     "OINTMENT",
+     "BANDAGE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "FOOTBALL PLAYS",
+    "members": [
+     "SCREEN",
+     "DRAW",
+     "SWEEP",
+     "BOOTLEG"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "HIDDEN FARM ANIMALS",
+    "members": [
+     "SCOWL",
+     "JEWEL",
+     "SHOGUN",
+     "BRAMBLE"
+    ],
+    "type": "hidden_word",
+    "check": {
+     "containsAny": [
+      "cow",
+      "ewe",
+      "hog",
+      "ram"
+     ]
+    }
+   }
+  ],
+  "herrings": "SCOWL looks like a fifth FACIAL EXPRESSION."
+ },
+ {
+  "id": 182,
+  "groups": [
+   {
+    "level": 0,
+    "name": "TALKATIVE",
+    "members": [
+     "CHATTY",
+     "GABBY",
+     "WORDY",
+     "LOQUACIOUS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "GROW QUICKLY",
+    "members": [
+     "BALLOON",
+     "BOOM",
+     "BURGEON",
+     "SNOWBALL"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "THINK UP",
+    "members": [
+     "COIN",
+     "HATCH",
+     "DREAM UP",
+     "CONCOCT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS WITH STEMS",
+    "members": [
+     "GOBLET",
+     "WATCH",
+     "BRAIN",
+     "MUSHROOM"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "MUSHROOM (verb) also fits GROW QUICKLY."
+ },
+ {
+  "id": 183,
+  "groups": [
+   {
+    "level": 0,
+    "name": "STARE",
+    "members": [
+     "GAZE",
+     "GAPE",
+     "GAWK",
+     "OGLE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SWORDS",
+    "members": [
+     "SABER",
+     "RAPIER",
+     "CUTLASS",
+     "KATANA"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "BRIBE",
+    "members": [
+     "KICKBACK",
+     "PAYOFF",
+     "SWEETENER",
+     "GREASE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "___ PIGEON",
+    "members": [
+     "STOOL",
+     "CLAY",
+     "CARRIER",
+     "PASSENGER"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "None deliberate (CARRIER and PASSENGER read as travel words, but no group uses that)."
+ },
+ {
+  "id": 184,
+  "groups": [
+   {
+    "level": 0,
+    "name": "PERFECT",
+    "members": [
+     "FLAWLESS",
+     "IDEAL",
+     "IMPECCABLE",
+     "SPOTLESS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "___ TABLE",
+    "members": [
+     "PICNIC",
+     "END",
+     "COFFEE",
+     "KITCHEN"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 2,
+    "name": "'GILLIGAN'S ISLAND' CASTAWAYS",
+    "members": [
+     "SKIPPER",
+     "PROFESSOR",
+     "GINGER",
+     "MARY ANN"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "___ FEVER",
+    "members": [
+     "CABIN",
+     "HAY",
+     "SPRING",
+     "SCARLET"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 185,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SHADE",
+    "members": [
+     "HUE",
+     "TINT",
+     "TINGE",
+     "COLOR"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "KIND",
+    "members": [
+     "SORT",
+     "BREED",
+     "GENRE",
+     "STRAIN"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "'BEAUTY AND THE BEAST' CHARACTERS",
+    "members": [
+     "CHIP",
+     "BELLE",
+     "GASTON",
+     "LUMIERE"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "SAME IN SINGULAR AND PLURAL",
+    "members": [
+     "SERIES",
+     "AIRCRAFT",
+     "MOOSE",
+     "SPECIES"
+    ],
+    "type": "other_wordplay"
+   }
+  ],
+  "herrings": "SPECIES also fits KIND."
+ },
+ {
+  "id": 186,
+  "groups": [
+   {
+    "level": 0,
+    "name": "CEREAL BRANDS",
+    "members": [
+     "CHEERIOS",
+     "WHEATIES",
+     "KIX",
+     "TRIX"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 1,
+    "name": "AT A PHARMACY",
+    "members": [
+     "PRESCRIPTION",
+     "REFILL",
+     "COPAY",
+     "VITAMINS"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "SPAN OF TIME",
+    "members": [
+     "SPELL",
+     "STINT",
+     "STRETCH",
+     "TERM"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "___LET",
+    "members": [
+     "HAM",
+     "BRACE",
+     "TAB",
+     "OUT"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "let"
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 187,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SLEEPWEAR",
+    "members": [
+     "PAJAMAS",
+     "NIGHTGOWN",
+     "ROBE",
+     "ONESIE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "EXTRA",
+    "members": [
+     "SPARE",
+     "SURPLUS",
+     "LEFTOVER",
+     "EXCESS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "REPEAT",
+    "members": [
+     "ECHO",
+     "RECITE",
+     "REGURGITATE",
+     "REHASH"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "VEGETABLES WITH FIRST LETTER CHANGED",
+    "members": [
+     "PARROT",
+     "UNION",
+     "SHARD",
+     "PALE"
+    ],
+    "type": "letter_change",
+    "check": {
+     "firstChangedFrom": [
+      "carrot",
+      "onion",
+      "chard",
+      "kale"
+     ]
+    }
+   }
+  ],
+  "herrings": "PARROT fits REPEAT."
+ },
+ {
+  "id": 188,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FALL",
+    "members": [
+     "TOPPLE",
+     "PLUNGE",
+     "SPILL",
+     "DROP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "MOCK",
+    "members": [
+     "DERIDE",
+     "JEER",
+     "TAUNT",
+     "SCOFF"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "SHADES OF BROWN",
+    "members": [
+     "TAUPE",
+     "SEPIA",
+     "UMBER",
+     "MOCHA"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "___WEED",
+    "members": [
+     "TUMBLE",
+     "SEA",
+     "DUCK",
+     "MILK"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "weed"
+    }
+   }
+  ],
+  "herrings": "TUMBLE looks like a fifth word for FALL."
+ },
+ {
+  "id": 189,
+  "groups": [
+   {
+    "level": 0,
+    "name": "TRICK",
+    "members": [
+     "RUSE",
+     "PLOY",
+     "HOAX",
+     "STUNT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "THINGS YOU ROAST",
+    "members": [
+     "CHESTNUT",
+     "MARSHMALLOW",
+     "TURKEY",
+     "PEANUT"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 1,
+    "name": "SHADES OF GREEN",
+    "members": [
+     "SAGE",
+     "OLIVE",
+     "FERN",
+     "JADE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "START WITH A DOUBLE LETTER",
+    "members": [
+     "AARDVARK",
+     "LLAMA",
+     "EEL",
+     "OODLES"
+    ],
+    "type": "letter_props",
+    "check": {
+     "startsWithAny": [
+      "aa",
+      "ll",
+      "ee",
+      "oo"
+     ]
+    }
+   }
+  ],
+  "herrings": "TURKEY makes a tempting fourth animal with AARDVARK, LLAMA and EEL."
+ },
+ {
+  "id": 190,
+  "groups": [
+   {
+    "level": 0,
+    "name": "ZODIAC SIGNS",
+    "members": [
+     "LEO",
+     "VIRGO",
+     "ARIES",
+     "LIBRA"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "CLOUD TYPES",
+    "members": [
+     "CIRRUS",
+     "CUMULUS",
+     "STRATUS",
+     "NIMBUS"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "PEPPERS",
+    "members": [
+     "BELL",
+     "GHOST",
+     "BANANA",
+     "CHERRY"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "___ SPOT",
+    "members": [
+     "BLIND",
+     "SOFT",
+     "SWEET",
+     "HOT"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "SWEET and HOT are also kinds of pepper (six pepper candidates)."
+ },
+ {
+  "id": 191,
+  "groups": [
+   {
+    "level": 0,
+    "name": "TEAM",
+    "members": [
+     "SQUAD",
+     "GANG",
+     "UNIT",
+     "POSSE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SHREWD",
+    "members": [
+     "CANNY",
+     "ASTUTE",
+     "SAVVY",
+     "PERCEPTIVE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "PARTS OF A TENT",
+    "members": [
+     "FLY",
+     "POLE",
+     "STAKE",
+     "GUY LINE"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "NECKLINES",
+    "members": [
+     "CREW",
+     "SWEETHEART",
+     "COWL",
+     "PLUNGE"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "CREW is a fifth TEAM synonym."
+ },
+ {
+  "id": 192,
+  "groups": [
+   {
+    "level": 0,
+    "name": "MONSTERS",
+    "members": [
+     "VAMPIRE",
+     "ZOMBIE",
+     "WEREWOLF",
+     "MUMMY"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "___FIELD",
+    "members": [
+     "CORN",
+     "OUT",
+     "BATTLE",
+     "OIL"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "field"
+    }
+   },
+   {
+    "level": 2,
+    "name": "SHADES OF YELLOW",
+    "members": [
+     "MUSTARD",
+     "CANARY",
+     "MAIZE",
+     "BUTTERCUP"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "THINGS WITH SHAFTS",
+    "members": [
+     "MINE",
+     "ELEVATOR",
+     "ARROW",
+     "GOLF CLUB"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "MINE also makes MINEFIELD; MAIZE (corn) nudges toward CORN."
+ },
+ {
+  "id": 193,
+  "groups": [
+   {
+    "level": 0,
+    "name": "HATE",
+    "members": [
+     "LOATHE",
+     "DETEST",
+     "DESPISE",
+     "ABHOR"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "CAUTIOUS",
+    "members": [
+     "WARY",
+     "CHARY",
+     "GUARDED",
+     "LEERY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "CHRISTOPHER NOLAN FILMS",
+    "members": [
+     "MEMENTO",
+     "TENET",
+     "INSOMNIA",
+     "INCEPTION"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "WHAT 'SOUND' CAN MEAN",
+    "members": [
+     "INLET",
+     "PROBE",
+     "HEALTHY",
+     "VALID"
+    ],
+    "type": "multiple_meanings"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 194,
+  "groups": [
+   {
+    "level": 2,
+    "name": "THINGS THAT BUZZ",
+    "members": [
+     "BEE",
+     "PHONE",
+     "ALARM",
+     "CLIPPERS"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 1,
+    "name": "GUIDE",
+    "members": [
+     "STEER",
+     "CONDUCT",
+     "NAVIGATE",
+     "LEAD"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 0,
+    "name": "BAGEL FLAVORS",
+    "members": [
+     "EVERYTHING",
+     "SESAME",
+     "ONION",
+     "POPPY SEED"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "OCCUPATIONS",
+    "members": [
+     "JUDGE",
+     "PILOT",
+     "USHER",
+     "BUTCHER"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "USHER and PILOT both fit GUIDE, but they are needed for OCCUPATIONS."
+ },
+ {
+  "id": 195,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BUILD",
+    "members": [
+     "CONSTRUCT",
+     "ERECT",
+     "ASSEMBLE",
+     "PUT UP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "PARTS OF A SKELETON",
+    "members": [
+     "SKULL",
+     "PELVIS",
+     "FEMUR",
+     "TIBIA"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "PARTS OF AN UMBRELLA",
+    "members": [
+     "RIB",
+     "CANOPY",
+     "SHAFT",
+     "HANDLE"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "CON ARTIST'S HELPER",
+    "members": [
+     "SHILL",
+     "PLANT",
+     "STOOGE",
+     "DECOY"
+    ],
+    "type": "synonyms"
+   }
+  ],
+  "herrings": "RIB looks like a fifth skeleton part."
+ },
+ {
+  "id": 196,
+  "groups": [
+   {
+    "level": 2,
+    "name": "SECURE",
+    "members": [
+     "STRAP",
+     "TIE",
+     "LASH",
+     "PIN"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "LINE OF WORK",
+    "members": [
+     "CALLING",
+     "TRADE",
+     "CAREER",
+     "OCCUPATION"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 0,
+    "name": "DIAMONDS, IN SLANG",
+    "members": [
+     "ICE",
+     "ROCKS",
+     "SPARKLERS",
+     "BLING"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 3,
+    "name": "CAN MEAN OPPOSITE THINGS",
+    "members": [
+     "DUST",
+     "SEED",
+     "CLIP",
+     "BUCKLE"
+    ],
+    "type": "other_wordplay"
+   }
+  ],
+  "herrings": "CLIP and BUCKLE both look like SECURE (fasten); each also means its opposite (cut off; give way)."
+ },
+ {
+  "id": 197,
+  "groups": [
+   {
+    "level": 3,
+    "name": "SOUND LIKE COLORS",
+    "members": [
+     "READ",
+     "BLEW",
+     "MAZE",
+     "PLUMB"
+    ],
+    "type": "homophone"
+   },
+   {
+    "level": 0,
+    "name": "CRAFT SUPPLIES",
+    "members": [
+     "GLITTER",
+     "YARN",
+     "FELT",
+     "GLUE STICK"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "ESSENTIAL",
+    "members": [
+     "VITAL",
+     "CRUCIAL",
+     "PIVOTAL",
+     "CENTRAL"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "PASS___",
+    "members": [
+     "PORT",
+     "WORD",
+     "OVER",
+     "KEY"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "prefix": "pass"
+    }
+   }
+  ],
+  "herrings": "KEY fits ESSENTIAL, but it is needed for PASSKEY."
+ },
+ {
+  "id": 198,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FLOORING",
+    "members": [
+     "TILE",
+     "HARDWOOD",
+     "LINOLEUM",
+     "VINYL"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "SQUANDER",
+    "members": [
+     "WASTE",
+     "FRITTER",
+     "DISSIPATE",
+     "BLOW"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "___ MILL",
+    "members": [
+     "SAW",
+     "TREAD",
+     "RUMOR",
+     "PEPPER"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 3,
+    "name": "___ BURN",
+    "members": [
+     "RAZOR",
+     "RUG",
+     "FREEZER",
+     "WIND"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "CARPET fits FLOORING (and CARPET MILL); WIND completes ___ MILL."
+ },
+ {
+  "id": 199,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FUNNY",
+    "members": [
+     "HILARIOUS",
+     "COMICAL",
+     "AMUSING",
+     "HUMOROUS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "MEDDLE (WITH)",
+    "members": [
+     "TINKER",
+     "MONKEY",
+     "TAMPER",
+     "MESS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "HOCKEY PENALTIES",
+    "members": [
+     "HOOKING",
+     "TRIPPING",
+     "SLASHING",
+     "ROUGHING"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "UNITS OF MEASURE",
+    "members": [
+     "YARD",
+     "STONE",
+     "GRAIN",
+     "PECK"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 200,
+  "groups": [
+   {
+    "level": 0,
+    "name": "THINGS THAT TICK",
+    "members": [
+     "CLOCK",
+     "METRONOME",
+     "TIME BOMB",
+     "POCKET WATCH"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 1,
+    "name": "GUARDIAN",
+    "members": [
+     "WARDEN",
+     "CUSTODIAN",
+     "CARETAKER",
+     "STEWARD"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "KINDS OF OWL",
+    "members": [
+     "BARN",
+     "SNOWY",
+     "SCREECH",
+     "SPOTTED"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "QUIDDITCH POSITIONS",
+    "members": [
+     "SEEKER",
+     "KEEPER",
+     "BEATER",
+     "CHASER"
+    ],
+    "type": "pop_culture"
+   }
+  ],
+  "herrings": "KEEPER fits GUARDIAN."
+ },
+ {
+  "id": 201,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BARGAIN",
+    "members": [
+     "DEAL",
+     "STEAL",
+     "MARKDOWN",
+     "DISCOUNT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "CANDY",
+    "members": [
+     "LICORICE",
+     "TAFFY",
+     "FUDGE",
+     "TOFFEE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "'SURVIVOR' TERMS",
+    "members": [
+     "TRIBE",
+     "IDOL",
+     "ALLIANCE",
+     "TORCH"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE SHIP PARTS",
+    "members": [
+     "BOUGH",
+     "SALE",
+     "BIRTH",
+     "MASSED"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "SALE looks like a fifth BARGAIN."
+ },
+ {
+  "id": 202,
+  "groups": [
+   {
+    "level": 0,
+    "name": "TRIFLING",
+    "members": [
+     "TRIVIAL",
+     "SLIGHT",
+     "PALTRY",
+     "MEASLY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "GULLIBLE",
+    "members": [
+     "NAIVE",
+     "CREDULOUS",
+     "TRUSTING",
+     "GREEN"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "FACADE",
+    "members": [
+     "FRONT",
+     "VENEER",
+     "MASK",
+     "GLOSS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "___SHOT",
+    "members": [
+     "MUG",
+     "EAR",
+     "UP",
+     "SLING"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "shot"
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 203,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SHY",
+    "members": [
+     "TIMID",
+     "BASHFUL",
+     "COY",
+     "SHEEPISH"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SHADES OF PURPLE",
+    "members": [
+     "LILAC",
+     "MAUVE",
+     "VIOLET",
+     "LAVENDER"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "SPREE",
+    "members": [
+     "BENDER",
+     "SPLURGE",
+     "TEAR",
+     "BINGE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "ASSOCIATED WITH 'PILOT'",
+    "members": [
+     "EPISODE",
+     "LIGHT",
+     "PEN",
+     "HONDA"
+    ],
+    "type": "associated"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 204,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BARBECUE FOODS",
+    "members": [
+     "BRISKET",
+     "BURGER",
+     "HOT DOG",
+     "KEBAB"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "SHORTAGE",
+    "members": [
+     "DEARTH",
+     "SCARCITY",
+     "DEFICIT",
+     "WANT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "IN A WEATHER FORECAST",
+    "members": [
+     "FRONT",
+     "WATCH",
+     "HIGH",
+     "ADVISORY"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "PIECES IN THE GAME OPERATION",
+    "members": [
+     "SPARE RIBS",
+     "BREAD BASKET",
+     "WISHBONE",
+     "CHARLEY HORSE"
+    ],
+    "type": "pop_culture"
+   }
+  ],
+  "herrings": "SPARE RIBS looks like a fifth BARBECUE FOOD."
+ },
+ {
+  "id": 205,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DIRTY",
+    "members": [
+     "GRIMY",
+     "MUDDY",
+     "FILTHY",
+     "GRUBBY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "BABY GEAR",
+    "members": [
+     "CRIB",
+     "STROLLER",
+     "HIGH CHAIR",
+     "PLAYPEN"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "WINNIE THE POOH CHARACTERS",
+    "members": [
+     "OWL",
+     "RABBIT",
+     "PIGLET",
+     "ROO"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "BEAT BADLY",
+    "members": [
+     "CREAM",
+     "SKUNK",
+     "SHELLAC",
+     "SMOKE"
+    ],
+    "type": "synonyms"
+   }
+  ],
+  "herrings": "SKUNK looks like it belongs with the animal names OWL, RABBIT and PIGLET."
+ },
+ {
+  "id": 206,
+  "groups": [
+   {
+    "level": 0,
+    "name": "CRY",
+    "members": [
+     "SOB",
+     "WEEP",
+     "BAWL",
+     "BLUBBER"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "IN A MATH CLASS",
+    "members": [
+     "PROTRACTOR",
+     "CALCULATOR",
+     "RULER",
+     "GRAPH PAPER"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "STINT",
+    "members": [
+     "HITCH",
+     "SHIFT",
+     "WATCH",
+     "TURN"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS WITH LEGS",
+    "members": [
+     "WINE",
+     "RELAY",
+     "TOUR",
+     "COMPASS"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "COMPASS belongs in a math class; TOUR (of duty) is a fifth STINT."
+ },
+ {
+  "id": 207,
+  "groups": [
+   {
+    "level": 0,
+    "name": "WICKED",
+    "members": [
+     "VILE",
+     "SINFUL",
+     "CORRUPT",
+     "IMMORAL"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "FICTIONAL REALMS",
+    "members": [
+     "NARNIA",
+     "NEVERLAND",
+     "WAKANDA",
+     "OZ"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 2,
+    "name": "UNDERGARMENTS",
+    "members": [
+     "BOXERS",
+     "BRIEFS",
+     "SLIP",
+     "GIRDLE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "NAMED AFTER PEOPLE",
+    "members": [
+     "LEOTARD",
+     "CARDIGAN",
+     "SIDEBURNS",
+     "BLOOMERS"
+    ],
+    "type": "people"
+   }
+  ],
+  "herrings": "BLOOMERS is also an undergarment."
+ },
+ {
+  "id": 208,
+  "groups": [
+   {
+    "level": 0,
+    "name": "PUNCTUATION",
+    "members": [
+     "COMMA",
+     "SEMICOLON",
+     "APOSTROPHE",
+     "ELLIPSIS"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "AT A LAUNDROMAT",
+    "members": [
+     "DRYER",
+     "WASHER",
+     "LINT TRAP",
+     "QUARTERS"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "PICKUP TRUCKS",
+    "members": [
+     "RANGER",
+     "FRONTIER",
+     "CANYON",
+     "TUNDRA"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 3,
+    "name": "HIDDEN FRUITS",
+    "members": [
+     "PEARL",
+     "FIGURE",
+     "PLUMBER",
+     "CANDIDATE"
+    ],
+    "type": "hidden_word",
+    "check": {
+     "containsAny": [
+      "pear",
+      "fig",
+      "plum",
+      "date"
+     ]
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 209,
+  "groups": [
+   {
+    "level": 0,
+    "name": "PROFESSIONS",
+    "members": [
+     "NURSE",
+     "LAWYER",
+     "DENTIST",
+     "ACCOUNTANT"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "CRIMINAL",
+    "members": [
+     "CROOK",
+     "OUTLAW",
+     "CONVICT",
+     "HOODLUM"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "SALADS",
+    "members": [
+     "CHEF",
+     "HOUSE",
+     "GREEK",
+     "COBB"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "FRUITS WITH FIRST LETTER CHANGED",
+    "members": [
+     "FELON",
+     "DEMON",
+     "TANGO",
+     "TEACH"
+    ],
+    "type": "letter_change",
+    "check": {
+     "firstChangedFrom": [
+      "melon",
+      "lemon",
+      "mango",
+      "peach"
+     ]
+    }
+   }
+  ],
+  "herrings": "FELON looks like a fifth CRIMINAL; CHEF looks like a fifth PROFESSION."
+ },
+ {
+  "id": 210,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FRESHWATER FISH",
+    "members": [
+     "TROUT",
+     "BASS",
+     "WALLEYE",
+     "CATFISH"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "FRANK",
+    "members": [
+     "CANDID",
+     "DIRECT",
+     "OUTSPOKEN",
+     "FORTHRIGHT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "KINDS OF ONIONS",
+    "members": [
+     "PEARL",
+     "SPRING",
+     "VIDALIA",
+     "RED"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "DIVING POSITIONS",
+    "members": [
+     "PIKE",
+     "TUCK",
+     "STRAIGHT",
+     "FREE"
+    ],
+    "type": "category_specialist"
+   }
+  ],
+  "herrings": "PIKE looks like a fifth freshwater fish; STRAIGHT (as in straight talk) looks like a fifth word for frank."
+ },
+ {
+  "id": 211,
+  "groups": [
+   {
+    "level": 0,
+    "name": "STONE FRUITS",
+    "members": [
+     "PEACH",
+     "NECTARINE",
+     "CHERRY",
+     "APRICOT"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "STUMBLE",
+    "members": [
+     "TRIP",
+     "LURCH",
+     "STAGGER",
+     "TOTTER"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "'NINJA TURTLES' CHARACTERS",
+    "members": [
+     "SPLINTER",
+     "SHREDDER",
+     "APRIL",
+     "BEBOP"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE WILD ANIMALS",
+    "members": [
+     "BARE",
+     "LINKS",
+     "GUERRILLA",
+     "MOUSSE"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 212,
+  "groups": [
+   {
+    "level": 0,
+    "name": "WATER BIRDS",
+    "members": [
+     "PELICAN",
+     "HERON",
+     "STORK",
+     "FLAMINGO"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "POSTPONE",
+    "members": [
+     "SHELVE",
+     "TABLE",
+     "DEFER",
+     "PUT OFF"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "THINGS YOU SERVE",
+    "members": [
+     "SENTENCE",
+     "SUBPOENA",
+     "PURPOSE",
+     "DINNER"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "SEASONINGS MINUS FIRST LETTER",
+    "members": [
+     "ACE",
+     "AGE",
+     "ILL",
+     "HIVE"
+    ],
+    "type": "truncation",
+    "check": {
+     "tailOf": [
+      "mace",
+      "sage",
+      "dill",
+      "chive"
+     ]
+    }
+   }
+  ],
+  "herrings": "ACE is also served (tennis)."
+ },
+ {
+  "id": 213,
+  "groups": [
+   {
+    "level": 3,
+    "name": "SOUND LIKE TOOLS",
+    "members": [
+     "ALL",
+     "PLAIN",
+     "VICE",
+     "SHEERS"
+    ],
+    "type": "homophone"
+   },
+   {
+    "level": 1,
+    "name": "CONFIDENCE",
+    "members": [
+     "FAITH",
+     "BELIEF",
+     "CREDENCE",
+     "CONVICTION"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 0,
+    "name": "ON A MAP",
+    "members": [
+     "KEY",
+     "SCALE",
+     "LEGEND",
+     "GRID"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "___WORTHY",
+    "members": [
+     "NEWS",
+     "AIR",
+     "TRUST",
+     "BLAME"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "worthy"
+    }
+   }
+  ],
+  "herrings": "TRUST is a fifth CONFIDENCE synonym."
+ },
+ {
+  "id": 214,
+  "groups": [
+   {
+    "level": 0,
+    "name": "VEGETABLES",
+    "members": [
+     "CARROT",
+     "CELERY",
+     "SPINACH",
+     "BROCCOLI"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "AT THE MOVIES",
+    "members": [
+     "TRAILER",
+     "USHER",
+     "MATINEE",
+     "CONCESSIONS"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "MONKEYS",
+    "members": [
+     "SPIDER",
+     "HOWLER",
+     "SQUIRREL",
+     "CAPUCHIN"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "___BACK",
+    "members": [
+     "HUNCH",
+     "PAPER",
+     "HORSE",
+     "PIGGY"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "back"
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 215,
+  "groups": [
+   {
+    "level": 0,
+    "name": "RAISED, AS A CHILD",
+    "members": [
+     "REARED",
+     "NURTURED",
+     "FOSTERED",
+     "BROUGHT UP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "AT A CONCERT",
+    "members": [
+     "ENCORE",
+     "OPENER",
+     "ROADIE",
+     "MOSH PIT"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "WATCH BRANDS",
+    "members": [
+     "FOSSIL",
+     "CITIZEN",
+     "OMEGA",
+     "SWATCH"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 3,
+    "name": "COLORS WITH A LETTER ADDED IN FRONT",
+    "members": [
+     "BRED",
+     "STEAL",
+     "PROSE",
+     "TRUST"
+    ],
+    "type": "addition",
+    "check": {
+     "addedInFront": [
+      "red",
+      "teal",
+      "rose",
+      "rust"
+     ]
+    }
+   }
+  ],
+  "herrings": "BRED fits RAISED, AS A CHILD."
+ },
+ {
+  "id": 216,
+  "groups": [
+   {
+    "level": 0,
+    "name": "GRAINS",
+    "members": [
+     "WHEAT",
+     "BARLEY",
+     "OATS",
+     "MILLET"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "SURGICAL INSTRUMENTS",
+    "members": [
+     "SCALPEL",
+     "FORCEPS",
+     "CLAMP",
+     "RETRACTOR"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "KINDS OF SHIRTS",
+    "members": [
+     "OXFORD",
+     "HENLEY",
+     "FLANNEL",
+     "MUSCLE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE PARTS OF A HOUSE",
+    "members": [
+     "SELLER",
+     "SEALING",
+     "STARES",
+     "PAIN"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 217,
+  "groups": [
+   {
+    "level": 0,
+    "name": "RESIDE",
+    "members": [
+     "DWELL",
+     "LODGE",
+     "INHABIT",
+     "ABIDE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SPELLED WITH A DOUBLE Z",
+    "members": [
+     "PIZZA",
+     "DIZZY",
+     "MUZZLE",
+     "BLIZZARD"
+    ],
+    "type": "letter_props",
+    "check": {
+     "containsAny": [
+      "zz"
+     ]
+    }
+   },
+   {
+    "level": 2,
+    "name": "CHIEF",
+    "members": [
+     "CARDINAL",
+     "PREMIER",
+     "PARAMOUNT",
+     "FOREMOST"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "TREES MINUS FIRST LETTER",
+    "members": [
+     "ARCH",
+     "LANE",
+     "OX",
+     "LIVE"
+    ],
+    "type": "truncation",
+    "check": {
+     "tailOf": [
+      "larch",
+      "plane",
+      "olive",
+      "box"
+     ]
+    }
+   }
+  ],
+  "herrings": "LIVE looks like a RESIDE synonym; ARCH (as in archrival) fits CHIEF."
+ },
+ {
+  "id": 218,
+  "groups": [
+   {
+    "level": 0,
+    "name": "COLD",
+    "members": [
+     "CHILLY",
+     "FRIGID",
+     "NIPPY",
+     "FROSTY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "WAYS TO SING",
+    "members": [
+     "CROON",
+     "WARBLE",
+     "TRILL",
+     "YODEL"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS YOU CAN SET",
+    "members": [
+     "TABLE",
+     "BONE",
+     "RECORD",
+     "TRAP"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 2,
+    "name": "SNITCH",
+    "members": [
+     "RAT",
+     "SING",
+     "FINK",
+     "TALK"
+    ],
+    "type": "synonyms"
+   }
+  ],
+  "herrings": "SING looks like a fifth WAYS TO SING word, but it is needed for SNITCH (sing = inform)."
+ },
+ {
+  "id": 219,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SEASONS",
+    "members": [
+     "WINTER",
+     "SPRING",
+     "SUMMER",
+     "AUTUMN"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "EASY",
+    "members": [
+     "SIMPLE",
+     "PAINLESS",
+     "EFFORTLESS",
+     "BREEZY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "TOM HANKS MOVIES",
+    "members": [
+     "BIG",
+     "SPLASH",
+     "GREYHOUND",
+     "CAST AWAY"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE GREEK LETTERS",
+    "members": [
+     "KNEW",
+     "PIE",
+     "SIGH",
+     "ROE"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 220,
+  "groups": [
+   {
+    "level": 0,
+    "name": "FATE",
+    "members": [
+     "CHANCE",
+     "KISMET",
+     "DESTINY",
+     "LOT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "AT A PET STORE",
+    "members": [
+     "LEASH",
+     "COLLAR",
+     "KIBBLE",
+     "CHEW TOY"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "KINDS OF ANTS",
+    "members": [
+     "FIRE",
+     "CARPENTER",
+     "BULLET",
+     "SUGAR"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "WHAT 'MINT' CAN MEAN",
+    "members": [
+     "HERB",
+     "FORTUNE",
+     "PRISTINE",
+     "CANDY"
+    ],
+    "type": "multiple_meanings"
+   }
+  ],
+  "herrings": "FORTUNE also fits FATE."
+ },
+ {
+  "id": 221,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BEG",
+    "members": [
+     "PLEAD",
+     "IMPLORE",
+     "BESEECH",
+     "ENTREAT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "AT A CAR WASH",
+    "members": [
+     "SPONGE",
+     "WAX",
+     "VACUUM",
+     "SQUEEGEE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "THINGS YOU PASS",
+    "members": [
+     "HAT",
+     "SALT",
+     "PLATE",
+     "BATON"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "COLORS MINUS FIRST LETTER",
+    "members": [
+     "REAM",
+     "LATE",
+     "RAY",
+     "BONY"
+    ],
+    "type": "truncation",
+    "check": {
+     "tailOf": [
+      "cream",
+      "slate",
+      "gray",
+      "ebony"
+     ]
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 222,
+  "groups": [
+   {
+    "level": 0,
+    "name": "HURRIED",
+    "members": [
+     "DASHED",
+     "RACED",
+     "SPED",
+     "BOLTED"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "FIELD EVENTS",
+    "members": [
+     "DISCUS",
+     "JAVELIN",
+     "POLE VAULT",
+     "SHOT PUT"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "OUTDO",
+    "members": [
+     "TOP",
+     "TRUMP",
+     "CAP",
+     "BETTER"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "___DOM",
+    "members": [
+     "RAN",
+     "BORE",
+     "FAN",
+     "KING"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "dom"
+    }
+   }
+  ],
+  "herrings": "RAN also fits HURRIED."
+ },
+ {
+  "id": 223,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SKINNY",
+    "members": [
+     "LEAN",
+     "SLIM",
+     "SLENDER",
+     "LANKY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "VIGOR",
+    "members": [
+     "PEP",
+     "ZIP",
+     "VIM",
+     "GUSTO"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "___ RAY",
+    "members": [
+     "MANTA",
+     "GAMMA",
+     "DEATH",
+     "SUN"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 2,
+    "name": "ONE-NAME SINGERS",
+    "members": [
+     "SEAL",
+     "DRAKE",
+     "PRINCE",
+     "STING"
+    ],
+    "type": "people"
+   }
+  ],
+  "herrings": "STING makes STINGRAY."
+ },
+ {
+  "id": 224,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DRY",
+    "members": [
+     "PARCHED",
+     "ARID",
+     "BONE-DRY",
+     "DEHYDRATED"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "FINE ___",
+    "members": [
+     "PRINT",
+     "ART",
+     "DINING",
+     "LINE"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 1,
+    "name": "AMERICAN ASTRONAUTS",
+    "members": [
+     "RIDE",
+     "GLENN",
+     "ARMSTRONG",
+     "ALDRIN"
+    ],
+    "type": "people"
+   },
+   {
+    "level": 3,
+    "name": "COUNTRIES",
+    "members": [
+     "CHINA",
+     "TURKEY",
+     "CHILE",
+     "TOGO"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "CHINA completes FINE ___."
+ },
+ {
+  "id": 225,
+  "groups": [
+   {
+    "level": 0,
+    "name": "HAPPINESS",
+    "members": [
+     "BLISS",
+     "MIRTH",
+     "GLADNESS",
+     "EUPHORIA"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "AT A SUSHI BAR",
+    "members": [
+     "WASABI",
+     "CHOPSTICKS",
+     "NIGIRI",
+     "EDAMAME"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 2,
+    "name": "EMPHASIZE",
+    "members": [
+     "STRESS",
+     "ACCENT",
+     "FEATURE",
+     "PLAY UP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "DISHWASHING BRANDS",
+    "members": [
+     "DAWN",
+     "JOY",
+     "CASCADE",
+     "METHOD"
+    ],
+    "type": "brands"
+   }
+  ],
+  "herrings": "JOY fits HAPPINESS, but it is a dish-soap brand."
+ },
+ {
+  "id": 226,
+  "groups": [
+   {
+    "level": 0,
+    "name": "REPTILES",
+    "members": [
+     "IGUANA",
+     "TORTOISE",
+     "ALLIGATOR",
+     "CHAMELEON"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "FALSIFIED",
+    "members": [
+     "DOCTORED",
+     "FUDGED",
+     "RIGGED",
+     "FORGED"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS YOU SKIP",
+    "members": [
+     "STONE",
+     "CLASS",
+     "ROPE",
+     "BEAT"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 2,
+    "name": "DONE FOR",
+    "members": [
+     "TOAST",
+     "SUNK",
+     "COOKED",
+     "HISTORY"
+    ],
+    "type": "synonyms"
+   }
+  ],
+  "herrings": "COOKED (as in cooked the books) also fits FALSIFIED."
+ },
+ {
+  "id": 227,
+  "groups": [
+   {
+    "level": 0,
+    "name": "NOCTURNAL ANIMALS",
+    "members": [
+     "OWL",
+     "BAT",
+     "OPOSSUM",
+     "FIREFLY"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "PLUNDER",
+    "members": [
+     "LOOT",
+     "PILLAGE",
+     "SACK",
+     "RAVAGE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "THINGS WITH ROOTS",
+    "members": [
+     "TOOTH",
+     "HAIR",
+     "SQUARE",
+     "WORD"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "TWO SETS OF DOUBLE LETTERS",
+    "members": [
+     "TATTOO",
+     "RACCOON",
+     "FOOTBALL",
+     "ADDRESS"
+    ],
+    "type": "other_wordplay"
+   }
+  ],
+  "herrings": "RACCOON looks like a fifth nocturnal animal; LOOT, PILLAGE, OPOSSUM and TOOTH each have one double letter."
+ },
+ {
+  "id": 228,
+  "groups": [
+   {
+    "level": 0,
+    "name": "WEAK",
+    "members": [
+     "FEEBLE",
+     "FRAIL",
+     "PUNY",
+     "FLIMSY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "SPOKEN",
+    "members": [
+     "VERBAL",
+     "VOCAL",
+     "UTTERED",
+     "VOICED"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "DENTAL CARE BRANDS",
+    "members": [
+     "CREST",
+     "SCOPE",
+     "AIM",
+     "ACT"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 3,
+    "name": "GEMS MINUS FIRST LETTER",
+    "members": [
+     "PAL",
+     "EARL",
+     "GATE",
+     "ORAL"
+    ],
+    "type": "truncation",
+    "check": {
+     "tailOf": [
+      "opal",
+      "pearl",
+      "agate",
+      "coral"
+     ]
+    }
+   }
+  ],
+  "herrings": "ORAL looks like a fifth SPOKEN word."
+ },
+ {
+  "id": 229,
+  "groups": [
+   {
+    "level": 0,
+    "name": "GOSSIP",
+    "members": [
+     "RUMOR",
+     "HEARSAY",
+     "SCUTTLEBUTT",
+     "DIRT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "KINDS OF SALT",
+    "members": [
+     "TABLE",
+     "KOSHER",
+     "EPSOM",
+     "GARLIC"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "KINDS OF DOORS",
+    "members": [
+     "FRENCH",
+     "DUTCH",
+     "POCKET",
+     "STORM"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "___WALL",
+    "members": [
+     "PAY",
+     "DRY",
+     "SEA",
+     "STONE"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "wall"
+    }
+   }
+  ],
+  "herrings": "SEA looks like a fifth KINDS OF SALT (sea salt)."
+ },
+ {
+  "id": 230,
+  "groups": [
+   {
+    "level": 0,
+    "name": "IN A CLASSROOM",
+    "members": [
+     "DESK",
+     "CHALKBOARD",
+     "GLOBE",
+     "PROJECTOR"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 1,
+    "name": "FOOLISHNESS",
+    "members": [
+     "LUNACY",
+     "FOLLY",
+     "IDIOCY",
+     "ABSURDITY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "BAR GLASSES",
+    "members": [
+     "FLUTE",
+     "COUPE",
+     "HIGHBALL",
+     "PINT"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "ASSOCIATED WITH 'MARCH'",
+    "members": [
+     "HARE",
+     "IDES",
+     "MADNESS",
+     "LION"
+    ],
+    "type": "associated"
+   }
+  ],
+  "herrings": "MADNESS fits FOOLISHNESS."
+ },
+ {
+  "id": 231,
+  "groups": [
+   {
+    "level": 0,
+    "name": "'TOY STORY' CHARACTERS",
+    "members": [
+     "BUZZ",
+     "REX",
+     "WOODY",
+     "JESSIE"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 2,
+    "name": "AGREE",
+    "members": [
+     "CONCUR",
+     "ASSENT",
+     "CONSENT",
+     "ACQUIESCE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "TEETH, INFORMALLY",
+    "members": [
+     "CHOMPERS",
+     "CHOPPERS",
+     "IVORIES",
+     "PEARLY WHITES"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 3,
+    "name": "___LING",
+    "members": [
+     "DUMP",
+     "STAR",
+     "SAP",
+     "YEAR"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "ling"
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 232,
+  "groups": [
+   {
+    "level": 0,
+    "name": "LAZY",
+    "members": [
+     "IDLE",
+     "SLOTHFUL",
+     "INDOLENT",
+     "SLUGGISH"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "FASTENERS",
+    "members": [
+     "BUTTON",
+     "ZIPPER",
+     "SNAP",
+     "VELCRO"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "OXYMORONS",
+    "members": [
+     "JUMBO SHRIMP",
+     "OPEN SECRET",
+     "PRETTY UGLY",
+     "ACT NATURALLY"
+    ],
+    "type": "other_wordplay"
+   },
+   {
+    "level": 3,
+    "name": "ANAGRAMS OF FRUITS",
+    "members": [
+     "CHEAP",
+     "LUMP",
+     "PARE",
+     "MELON"
+    ],
+    "type": "anagram_reversal",
+    "check": {
+     "anagramOf": [
+      "peach",
+      "plum",
+      "pear",
+      "lemon"
+     ]
+    }
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 233,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BORING",
+    "members": [
+     "DULL",
+     "TEDIOUS",
+     "DREARY",
+     "HUMDRUM"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "MOLLUSKS",
+    "members": [
+     "SNAIL",
+     "SLUG",
+     "MUSSEL",
+     "SQUID"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "THINGS YOU PICK",
+    "members": [
+     "LOCK",
+     "FIGHT",
+     "BRAIN",
+     "NOSE"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "SHADES OF WHITE",
+    "members": [
+     "BONE",
+     "LINEN",
+     "OYSTER",
+     "CHALK"
+    ],
+    "type": "category_common"
+   }
+  ],
+  "herrings": "OYSTER looks like a fifth MOLLUSK; BONE tempts THINGS YOU PICK (a bone to pick)."
+ },
+ {
+  "id": 234,
+  "groups": [
+   {
+    "level": 0,
+    "name": "BACKYARD BIRDS",
+    "members": [
+     "SPARROW",
+     "CARDINAL",
+     "BLUE JAY",
+     "ROBIN"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "___ PARK",
+    "members": [
+     "THEME",
+     "SKATE",
+     "TRAILER",
+     "WATER"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 2,
+    "name": "CLASSIC CLUE SUSPECTS",
+    "members": [
+     "PEACOCK",
+     "GREEN",
+     "WHITE",
+     "PLUM"
+    ],
+    "type": "pop_culture"
+   },
+   {
+    "level": 3,
+    "name": "CITIES MINUS LAST LETTER",
+    "members": [
+     "DOVE",
+     "PERT",
+     "SALE",
+     "TAMP"
+    ],
+    "type": "truncation",
+    "check": {
+     "headOf": [
+      "dover",
+      "perth",
+      "salem",
+      "tampa"
+     ]
+    }
+   }
+  ],
+  "herrings": "DOVE and PEACOCK look like birds (CARDINAL also looks like a color next to GREEN, WHITE, PLUM)."
+ },
+ {
+  "id": 235,
+  "groups": [
+   {
+    "level": 0,
+    "name": "THINGS YOU ROLL",
+    "members": [
+     "DICE",
+     "DOUGH",
+     "EYES",
+     "SLEEVES"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 2,
+    "name": "SILENT W",
+    "members": [
+     "SWORD",
+     "WHO",
+     "TWO",
+     "WRECK"
+    ],
+    "type": "letter_props"
+   },
+   {
+    "level": 1,
+    "name": "FAMOUS CHRISES",
+    "members": [
+     "ROCK",
+     "PINE",
+     "PRATT",
+     "EVANS"
+    ],
+    "type": "people"
+   },
+   {
+    "level": 3,
+    "name": "BANDS WITH MISSPELLED ANIMALS",
+    "members": [
+     "BEATLES",
+     "MONKEES",
+     "BYRDS",
+     "DEF LEPPARD"
+    ],
+    "type": "pop_culture"
+   }
+  ],
+  "herrings": "WHO (The Who) looks like a fifth band."
+ },
+ {
+  "id": 236,
+  "groups": [
+   {
+    "level": 0,
+    "name": "KINDS OF TRIANGLE",
+    "members": [
+     "ISOSCELES",
+     "SCALENE",
+     "EQUILATERAL",
+     "OBTUSE"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 1,
+    "name": "COOKIES",
+    "members": [
+     "SNICKERDOODLE",
+     "MACAROON",
+     "BISCOTTI",
+     "SHORTBREAD"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "THINGS YOU SETTLE",
+    "members": [
+     "SCORE",
+     "BILL",
+     "ESTATE",
+     "STOMACH"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 2,
+    "name": "___ BELT",
+    "members": [
+     "RUST",
+     "BIBLE",
+     "ASTEROID",
+     "CONVEYOR"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 237,
+  "groups": [
+   {
+    "level": 0,
+    "name": "JOKESTER",
+    "members": [
+     "WAG",
+     "PRANKSTER",
+     "COMEDIAN",
+     "CUTUP"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "PREDICT",
+    "members": [
+     "FORECAST",
+     "FORESEE",
+     "PROPHESY",
+     "DIVINE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "AT A CAR DEALERSHIP",
+    "members": [
+     "SHOWROOM",
+     "TRADE-IN",
+     "STICKER",
+     "TEST DRIVE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "___ SHARK",
+    "members": [
+     "LOAN",
+     "CARD",
+     "POOL",
+     "NURSE"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "CARD (a witty person) looks like a fifth jokester; LOAN (car financing) fits the dealership."
+ },
+ {
+  "id": 238,
+  "groups": [
+   {
+    "level": 0,
+    "name": "UNHAPPY",
+    "members": [
+     "GLUM",
+     "DOWNCAST",
+     "MOROSE",
+     "BLUE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "ZIGZAG",
+    "members": [
+     "TWIST",
+     "SNAKE",
+     "CURVE",
+     "MEANDER"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "PARTS OF A FRUIT",
+    "members": [
+     "RIND",
+     "PITH",
+     "CORE",
+     "ZEST"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "___FALL",
+    "members": [
+     "LAND",
+     "WIND",
+     "PIT",
+     "SHORT"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "fall"
+    }
+   }
+  ],
+  "herrings": "WIND (as in wind a road) looks like ZIGZAG; PIT looks like a part of a fruit."
+ },
+ {
+  "id": 239,
+  "groups": [
+   {
+    "level": 0,
+    "name": "STRENUOUS",
+    "members": [
+     "GRUELING",
+     "PUNISHING",
+     "TAXING",
+     "DEMANDING"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "LAVISH",
+    "members": [
+     "PLUSH",
+     "POSH",
+     "RITZY",
+     "SWANKY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "GIST",
+    "members": [
+     "DRIFT",
+     "THRUST",
+     "POINT",
+     "TENOR"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "___SHIP",
+    "members": [
+     "TOWN",
+     "KIN",
+     "COURT",
+     "HARD"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "ship"
+    }
+   }
+  ],
+  "herrings": "HARD fits STRENUOUS."
+ },
+ {
+  "id": 240,
+  "groups": [
+   {
+    "level": 0,
+    "name": "HEAP",
+    "members": [
+     "PILE",
+     "STACK",
+     "MOUND",
+     "LOAD"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "BUNGLE",
+    "members": [
+     "FLUB",
+     "MUFF",
+     "BOTCH",
+     "FUMBLE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "ANNIVERSARY GIFTS",
+    "members": [
+     "COTTON",
+     "LEATHER",
+     "TIN",
+     "CRYSTAL"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "___ JAM",
+    "members": [
+     "LOG",
+     "PAPER",
+     "SPACE",
+     "PEARL"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "PAPER (1st) and PEARL (30th) are anniversary gifts too."
+ },
+ {
+  "id": 241,
+  "groups": [
+   {
+    "level": 0,
+    "name": "GET RID OF",
+    "members": [
+     "DUMP",
+     "DITCH",
+     "SCRAP",
+     "JUNK"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "GRASSLANDS",
+    "members": [
+     "PRAIRIE",
+     "PASTURE",
+     "RANGE",
+     "STEPPE"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "SHOE BRANDS",
+    "members": [
+     "VANS",
+     "CROCS",
+     "TOMS",
+     "KEDS"
+    ],
+    "type": "brands"
+   },
+   {
+    "level": 3,
+    "name": "SOUND LIKE TREES",
+    "members": [
+     "FUR",
+     "EWE",
+     "BEACH",
+     "PLAIN"
+    ],
+    "type": "homophone"
+   }
+  ],
+  "herrings": "PLAIN looks like a grassland (the plains)."
+ },
+ {
+  "id": 242,
+  "groups": [
+   {
+    "level": 0,
+    "name": "VAGUE",
+    "members": [
+     "HAZY",
+     "FUZZY",
+     "MURKY",
+     "NEBULOUS"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "MUSICAL ENSEMBLES",
+    "members": [
+     "TRIO",
+     "CHOIR",
+     "ORCHESTRA",
+     "QUARTET"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "FLORIDA CITIES",
+    "members": [
+     "NAPLES",
+     "JUPITER",
+     "TAMPA",
+     "SARASOTA"
+    ],
+    "type": "places"
+   },
+   {
+    "level": 3,
+    "name": "___ WAGON",
+    "members": [
+     "BAND",
+     "CHUCK",
+     "STATION",
+     "WELCOME"
+    ],
+    "type": "fill_blank"
+   }
+  ],
+  "herrings": "BAND looks like a fifth musical ensemble."
+ },
+ {
+  "id": 243,
+  "groups": [
+   {
+    "level": 0,
+    "name": "DINOSAURS",
+    "members": [
+     "STEGOSAURUS",
+     "TRICERATOPS",
+     "VELOCIRAPTOR",
+     "BRONTOSAURUS"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "TRICKLE",
+    "members": [
+     "DRIP",
+     "SEEP",
+     "LEAK",
+     "DRIBBLE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "CRITICIZE",
+    "members": [
+     "PAN",
+     "SLAM",
+     "TRASH",
+     "SAVAGE"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "WHAT 'BLOW' CAN MEAN",
+    "members": [
+     "GUST",
+     "PUNCH",
+     "SETBACK",
+     "SQUANDER"
+    ],
+    "type": "multiple_meanings"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 244,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SAFE PLACE",
+    "members": [
+     "HAVEN",
+     "REFUGE",
+     "HARBOR",
+     "SANCTUARY"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "THINGS WITH SHELLS",
+    "members": [
+     "TACO",
+     "PEANUT",
+     "SNAIL",
+     "EGG"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 3,
+    "name": "SEWING TERMS",
+    "members": [
+     "BASTE",
+     "DART",
+     "TUCK",
+     "GATHER"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "___HOLE",
+    "members": [
+     "PIGEON",
+     "LOOP",
+     "PORT",
+     "BUTTON"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "hole"
+    }
+   }
+  ],
+  "herrings": "PORT looks like a SAFE PLACE (next to HARBOR)."
+ },
+ {
+  "id": 245,
+  "groups": [
+   {
+    "level": 0,
+    "name": "MEATS",
+    "members": [
+     "PORK",
+     "VEAL",
+     "LAMB",
+     "VENISON"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "THINGS YOU PIN",
+    "members": [
+     "CORSAGE",
+     "BLAME",
+     "MEDAL",
+     "DIAPER"
+    ],
+    "type": "things_that"
+   },
+   {
+    "level": 1,
+    "name": "___FRUIT",
+    "members": [
+     "PASSION",
+     "STAR",
+     "DRAGON",
+     "GRAPE"
+    ],
+    "type": "fill_blank"
+   },
+   {
+    "level": 3,
+    "name": "SPELLED USING ONLY A TO G",
+    "members": [
+     "CABBAGE",
+     "BADGE",
+     "FACADE",
+     "BEEF"
+    ],
+    "type": "letter_props"
+   }
+  ],
+  "herrings": "BEEF fits MEATS; BADGE is something you pin."
+ },
+ {
+  "id": 246,
+  "groups": [
+   {
+    "level": 0,
+    "name": "KINDS OF CAKE",
+    "members": [
+     "CARROT",
+     "BUNDT",
+     "RED VELVET",
+     "ANGEL FOOD"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "PARTY, INFORMALLY",
+    "members": [
+     "BASH",
+     "SHINDIG",
+     "RAGER",
+     "KEGGER"
+    ],
+    "type": "slang_foreign_short"
+   },
+   {
+    "level": 2,
+    "name": "KINDS OF WRENCHES",
+    "members": [
+     "MONKEY",
+     "TORQUE",
+     "PIPE",
+     "SOCKET"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 3,
+    "name": "CURLING TERMS",
+    "members": [
+     "HOUSE",
+     "BUTTON",
+     "HAMMER",
+     "SKIP"
+    ],
+    "type": "category_specialist"
+   }
+  ],
+  "herrings": "HAMMER looks like a tool for the WRENCHES group; HOUSE (party) is a light pull toward PARTY."
+ },
+ {
+  "id": 247,
+  "groups": [
+   {
+    "level": 0,
+    "name": "SNACK FOODS",
+    "members": [
+     "PRETZELS",
+     "POPCORN",
+     "CHIPS",
+     "CRACKERS"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 2,
+    "name": "___SIDE",
+    "members": [
+     "SEA",
+     "FIRE",
+     "COUNTRY",
+     "BED"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "suffix": "side"
+    }
+   },
+   {
+    "level": 1,
+    "name": "KINDS OF KNIVES",
+    "members": [
+     "BUTTER",
+     "STEAK",
+     "PARING",
+     "POCKET"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 3,
+    "name": "THINGS WITH RINGS",
+    "members": [
+     "ONION",
+     "SATURN",
+     "CIRCUS",
+     "OLYMPICS"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "None deliberate."
+ },
+ {
+  "id": 248,
+  "groups": [
+   {
+    "level": 0,
+    "name": "ATTEMPT",
+    "members": [
+     "SHOT",
+     "STAB",
+     "CRACK",
+     "WHIRL"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 1,
+    "name": "LOSE STRENGTH",
+    "members": [
+     "FLAG",
+     "WILT",
+     "DROOP",
+     "SAG"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "IN 'JACK AND THE BEANSTALK'",
+    "members": [
+     "COW",
+     "HARP",
+     "HEN",
+     "GIANT"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "CAR___",
+    "members": [
+     "PET",
+     "ROT",
+     "NATION",
+     "GO"
+    ],
+    "type": "fill_blank",
+    "check": {
+     "prefix": "car"
+    }
+   }
+  ],
+  "herrings": "GO also means an attempt ('have a go')."
+ },
+ {
+  "id": 249,
+  "groups": [
+   {
+    "level": 0,
+    "name": "CONTINENTS",
+    "members": [
+     "ASIA",
+     "EUROPE",
+     "AFRICA",
+     "ANTARCTICA"
+    ],
+    "type": "category_common"
+   },
+   {
+    "level": 1,
+    "name": "ROCK CLIMBING GEAR",
+    "members": [
+     "HARNESS",
+     "CARABINER",
+     "ROPE",
+     "CHALK"
+    ],
+    "type": "category_specialist"
+   },
+   {
+    "level": 2,
+    "name": "ON THE EVENING NEWS",
+    "members": [
+     "HEADLINES",
+     "WEATHER",
+     "SPORTS",
+     "TELEPROMPTER"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 3,
+    "name": "THINGS YOU WEIGH",
+    "members": [
+     "ANCHOR",
+     "OPTIONS",
+     "WORDS",
+     "EVIDENCE"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "ANCHOR looks like it belongs ON THE EVENING NEWS, and a climbing anchor fits ROCK CLIMBING GEAR; it is needed for THINGS YOU WEIGH (weigh anchor)."
+ },
+ {
+  "id": 250,
+  "groups": [
+   {
+    "level": 0,
+    "name": "IN A DECK OF CARDS",
+    "members": [
+     "ACE",
+     "JOKER",
+     "JACK",
+     "SPADE"
+    ],
+    "type": "associated"
+   },
+   {
+    "level": 1,
+    "name": "UPBEAT",
+    "members": [
+     "SUNNY",
+     "BUBBLY",
+     "ROSY",
+     "BRIGHT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 2,
+    "name": "SPRINKLE",
+    "members": [
+     "PEPPER",
+     "DUST",
+     "LITTER",
+     "DOT"
+    ],
+    "type": "synonyms"
+   },
+   {
+    "level": 3,
+    "name": "THINGS WITH CHAMBERS",
+    "members": [
+     "HEART",
+     "REVOLVER",
+     "PYRAMID",
+     "CONGRESS"
+    ],
+    "type": "things_that"
+   }
+  ],
+  "herrings": "HEART looks like a fifth deck-of-cards word (the suit)."
  }
 ]

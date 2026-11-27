@@ -73,7 +73,18 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .brand h1 { margin: 0; font-size: 2.6rem; line-height: 1; font-weight: 800; letter-spacing: -0.01em; }
 .brand h1 span { color: var(--accent); }
 .brand p { margin: 0; color: var(--muted); font-size: 1.05rem; }
-.game-card { background: var(--surface); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.game-card { position: relative; background: var(--surface); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.card-stats { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--muted); }
+.card-stats svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
+.card-stats:active { background: var(--tile); }
+/* Letter Web stats sheet */
+.lw-table { display: grid; grid-template-columns: auto 1fr 1fr; gap: 6px; align-items: stretch; }
+.lw-table > span { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); align-self: end; }
+.lw-table > em { font-style: normal; font-weight: 700; text-align: left; align-self: center; padding-right: 6px; }
+.lw-table > div { background: var(--tile); border-radius: 12px; padding: 8px 6px; display: flex; flex-direction: column; }
+.lw-table > div b { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.lw-table > div small { font-size: 0.75rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sheet .row.one { grid-template-columns: 1fr; }
 .game-card header { display: flex; align-items: center; gap: 14px; }
 .game-card h2 { margin: 0; font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
 .game-card .how { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; max-width: 60ch; }
@@ -281,6 +292,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       </svg>
       <h2>Letter Web</h2>
     </header>
+    <button class="card-stats" id="lwStatsBtn" type="button" aria-label="Letter Web stats"><svg viewBox="0 0 32 32"><path d="M8 25V16M16 25V8M24 25V13"/></svg></button>
     <div class="levels" role="group" aria-label="Difficulty">
       <button class="level-btn" type="button" data-level="easy">Easy</button>
       <button class="level-btn" type="button" data-level="medium">Medium</button>
@@ -303,6 +315,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       </svg>
       <h2>Midword</h2>
     </header>
+    <button class="card-stats" id="mwStatsBtn" type="button" aria-label="Midword stats"><svg viewBox="0 0 32 32"><path d="M8 25V16M16 25V8M24 25V13"/></svg></button>
     <button class="size-btn" id="mwPlay" type="button"><b>Play</b><small id="mwProg"></small></button>
   </article>
   <article class="game-card">
@@ -315,9 +328,10 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       </svg>
       <h2>Quads</h2>
     </header>
+    <button class="card-stats" id="qtStatsBtn" type="button" aria-label="Quads stats"><svg viewBox="0 0 32 32"><path d="M8 25V16M16 25V8M24 25V13"/></svg></button>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
-  <p class="version">Version Nov 26, 9:22 PM</p>
+  <p class="version">Version Nov 27, 6:04 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -425,6 +439,17 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <div class="row">
       <button class="btn" id="qtHome" type="button">All games</button>
       <button class="btn primary" id="qtNext" type="button">Next puzzle</button>
+    </div>
+  </div>
+</div>
+
+<div class="sheet-back" id="lwStatsSheet" hidden>
+  <div class="sheet" role="dialog" aria-labelledby="lwStatsTitle">
+    <h3 id="lwStatsTitle">Letter Web stats</h3>
+    <div class="mw-stats" id="lwTotals"></div>
+    <div class="lw-table" id="lwTable"></div>
+    <div class="row one">
+      <button class="btn primary" id="lwStatsClose" type="button">Close</button>
     </div>
   </div>
 </div>
@@ -1029,6 +1054,34 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   document.addEventListener("contextmenu", (e) => e.preventDefault());
 
   window.JotaHome = openHome;
+
+  // ---------- overall stats (all sizes and levels) ----------
+  function showStats() {
+    const totals = $("lwTotals"), table = $("lwTable");
+    const solved = (N, lv) => store[key("solved", N, lv)] || 0;
+    const lvs = Object.keys(LEVEL_NAMES);
+    const all = lvs.reduce((n, lv) => n + solved(4, lv) + solved(5, lv), 0);
+    totals.innerHTML = "";
+    [["Solved", all], ...lvs.map((lv) => [LEVEL_NAMES[lv], solved(4, lv) + solved(5, lv)])].forEach(([k, v]) => {
+      const d = document.createElement("div"), b = document.createElement("b"), sp = document.createElement("span");
+      b.textContent = v; sp.textContent = k; d.append(b, sp); totals.appendChild(d);
+    });
+    table.innerHTML = "";
+    ["Best time", "4 × 4", "5 × 5"].forEach((t, i) => { const h = document.createElement("span"); h.textContent = t; if (!i) h.style.textAlign = "left"; table.appendChild(h); });
+    lvs.forEach((lv) => {
+      const name = document.createElement("em"); name.textContent = LEVEL_NAMES[lv]; table.appendChild(name);
+      [4, 5].forEach((N) => {
+        const best = store[key("best", N, lv)], n = solved(N, lv);
+        const d = document.createElement("div"), b = document.createElement("b"), sm = document.createElement("small");
+        b.textContent = best ? fmt(best) : "–"; sm.textContent = `${n} solved`;
+        d.append(b, sm); table.appendChild(d);
+      });
+    });
+    $("lwStatsSheet").hidden = false;
+  }
+  $("lwStatsBtn").addEventListener("click", showStats);
+  $("lwStatsClose").addEventListener("click", () => ($("lwStatsSheet").hidden = true));
+  $("lwStatsSheet").addEventListener("click", (e) => { if (e.target.id === "lwStatsSheet") e.target.hidden = true; });
   function start(data) {
     if (data && data.level && LEVEL_NAMES[data.level]) level = data.level;
     if (data && data.screen === "game") openGame(data.size); else openHome();
@@ -1211,12 +1264,30 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     showResult(won, record);
   }
 
+  let statsOnly = false;   // sheet opened from the home screen's stats button
   function showResult(won, record) {
-    const st = store.stats, n = game.guesses.length;
+    const n = game.guesses.length;
+    statsOnly = false;
     $("mwResultTitle").textContent = won ? (record ? "New best!" : "Got it!") : "The word was";
-    $("mwSecret").textContent = game.secret;
+    $("mwSecret").textContent = game.secret; $("mwSecret").hidden = false;
     const h = game.hints || 0, hintText = h ? ` · ${h} hint${h > 1 ? "s" : ""}` : "";
     $("mwResultText").textContent = (won ? `${n} guess${n > 1 ? "es" : ""} · ${fmt(game.elapsed)}` : `You made ${n} guess${n === 1 ? "" : "es"}`) + hintText;
+    $("mwResultText").hidden = false;
+    $("mwHome").textContent = "All games"; $("mwNext").textContent = "New word";
+    renderChart(won ? bucketOf(n) : -1);
+    $("mwEntry").blur();
+    $("mwSheet").hidden = false;
+  }
+  function showStats() {
+    statsOnly = true;
+    $("mwResultTitle").textContent = "Midword stats";
+    $("mwSecret").hidden = true; $("mwResultText").hidden = true;
+    $("mwHome").textContent = "Close"; $("mwNext").textContent = "Play";
+    renderChart(-1);
+    $("mwSheet").hidden = false;
+  }
+  function renderChart(nowBucket) {
+    const st = store.stats;
     // Histogram of guesses per solved word
     const hist = $("mwHist");
     hist.innerHTML = "";
@@ -1226,7 +1297,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
       const p = document.createElement("p"); p.className = "hist-empty"; p.textContent = "Solve a word to start your guess chart"; hist.appendChild(p);
     } else BUCKETS.forEach((bk, i) => {
       const row = document.createElement("div");
-      row.className = "hist-row" + (won && i === bucketOf(n) ? " now" : "");
+      row.className = "hist-row" + (i === nowBucket ? " now" : "");
       const l = document.createElement("span"); l.textContent = bucketLabel(bk);
       const bar = document.createElement("b"); bar.textContent = dist[i]; bar.style.setProperty("--w", Math.max(8, (dist[i] / max) * 100) + "%");
       row.append(l, bar); hist.appendChild(row);
@@ -1244,8 +1315,6 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
       const s = document.createElement("span"); s.textContent = k;
       d.append(b, s); $("mwStats").appendChild(d);
     });
-    $("mwEntry").blur();
-    $("mwSheet").hidden = false;
   }
 
   // ---------- typing (device keyboard) ----------
@@ -1311,8 +1380,9 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   updateCard();
   $("mwPlay").addEventListener("click", open);
   $("mwMenu").addEventListener("click", goHome);
-  $("mwHome").addEventListener("click", goHome);
-  $("mwNext").addEventListener("click", () => { newGame(); open(); });
+  $("mwHome").addEventListener("click", () => (statsOnly ? ($("mwSheet").hidden = true) : goHome()));
+  $("mwNext").addEventListener("click", () => { if (!statsOnly) newGame(); open(); });
+  $("mwStatsBtn").addEventListener("click", showStats);
 })();
 </script>
 <script>
@@ -1498,17 +1568,31 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     save(); render();
   }
 
+  let statsOnly = false;   // sheet opened from the home screen's stats button
   function showResult(won) {
     const h = store.history, mine = h.filter((x) => x.id === puzzle.id).pop();
+    statsOnly = false;
     $("qtResultTitle").textContent = won ? (game.mistakes === 0 ? "Perfect!" : "Solved!") : "So close";
     const m = game.mistakes;
     $("qtResultText").textContent = (won ? (m === 0 ? "No mistakes" : `${m} mistake${m > 1 ? "s" : ""}`) : "Out of mistakes") + ` · ${fmt(game.elapsed)}`;
+    $("qtResultText").hidden = false; $("qtSummary").hidden = false;
+    $("qtHome").textContent = "All games"; $("qtNext").textContent = "Next puzzle";
     // the colors in the order you found them
     const sum = $("qtSummary"); sum.innerHTML = "";
     (mine ? mine.order : []).forEach((lv) => { for (let i = 0; i < 4; i++) { const d = document.createElement("i"); d.className = `qt-l${lv}`; sum.appendChild(d); } });
+    renderChart(won ? Math.min(m, 3) : 4);
+  }
+  function showStats() {
+    statsOnly = true;
+    $("qtResultTitle").textContent = "Quads stats";
+    $("qtResultText").hidden = true; $("qtSummary").hidden = true;
+    $("qtHome").textContent = "Close"; $("qtNext").textContent = "Play";
+    renderChart(-1);
+  }
+  function renderChart(nowRow) {
+    const h = store.history;
     const hist = $("qtHist"); hist.innerHTML = "";
     const counts = ROWS.map(([, f]) => h.filter(f).length), max = Math.max(1, ...counts);
-    const nowRow = won ? Math.min(m, 3) : 4;
     ROWS.forEach(([label], i) => {
       const row = document.createElement("div"); row.className = "hist-row" + (i === nowRow ? " now" : "");
       row.style.gridTemplateColumns = "92px minmax(0, 1fr)";
@@ -1551,8 +1635,9 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   updateCard();
   $("qtPlay").addEventListener("click", open);
   $("qtMenu").addEventListener("click", goHome);
-  $("qtHome").addEventListener("click", goHome);
+  $("qtHome").addEventListener("click", () => (statsOnly ? ($("qtSheet").hidden = true) : goHome()));
   $("qtNext").addEventListener("click", open);
+  $("qtStatsBtn").addEventListener("click", showStats);
   $("qtResults").addEventListener("click", () => showResult(game.won));
 })();
 </script>

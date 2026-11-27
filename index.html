@@ -317,7 +317,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     </header>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
-  <p class="version">Version Nov 26, 9:19 PM</p>
+  <p class="version">Version Nov 26, 9:22 PM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -690,15 +690,16 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   let els = null;    // svg element refs
   let busy = false;
 
-  // Words from the last few boards of this size and level are kept off the next board.
-  const RECENT_BOARDS = 3;
+  // Longer words (6+ letters) from the last 10 boards of this size and level are kept off the next board.
+  // Short words like RENT or RATE are allowed to come back.
+  const RECENT_BOARDS = 10, RECENT_MIN = 6;
   function newGame(N) {
     const rk = key("recent", N), recent = Array.isArray(store[rk]) ? store[rk] : [];
     const avoid = new Set(recent.flat());
     let p = null, seed, tries = 0;
     while (!p && tries++ < 40) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, level, avoid); }
     while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, level); }
-    store[rk] = recent.concat([p.words.map((w) => w.word)]).slice(-RECENT_BOARDS);
+    store[rk] = recent.concat([p.words.map((w) => w.word).filter((w) => w.length >= RECENT_MIN)]).slice(-RECENT_BOARDS);
     return { puzzle: p, found: [], bonus: [], order: [], hintsLeft: HINTS, hinted: null, elapsed: 0 };
   }
   function ensureGame(N) {

@@ -86,9 +86,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .lw-table > div b { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .lw-table > div small { font-size: 0.75rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
 .sheet { position: relative; }
-.sheet-x { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--muted); }
-.sheet-x svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
-.sheet-x:active { background: var(--tile); }
+.sheet .row.one { grid-template-columns: 1fr; }
 .game-card header { display: flex; align-items: center; gap: 14px; }
 .game-card h2 { margin: 0; font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
 .game-card .how { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; max-width: 60ch; }
@@ -335,7 +333,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <button class="card-stats" id="qtStatsBtn" type="button" aria-label="Quads stats"><svg viewBox="0 0 32 32"><path d="M8 25V16M16 25V8M24 25V13"/></svg></button>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
-  <p class="version">Version Nov 27, 6:30 AM</p>
+  <p class="version">Version Nov 27, 6:31 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -398,7 +396,6 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 
 <div class="sheet-back" id="mwSheet" hidden>
   <div class="sheet" role="dialog" aria-labelledby="mwResultTitle">
-    <button class="sheet-x" id="mwClose" type="button" aria-label="Close" hidden><svg viewBox="0 0 32 32"><path d="M9 9l14 14M23 9L9 23"/></svg></button>
     <h3 id="mwResultTitle">Got it!</h3>
     <div class="mw-secret" id="mwSecret">WORD</div>
     <p id="mwResultText">14 guesses · 2:05</p>
@@ -407,6 +404,9 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <div class="row" id="mwRow">
       <button class="btn" id="mwHome" type="button">All games</button>
       <button class="btn primary" id="mwNext" type="button">New word</button>
+    </div>
+    <div class="row one" id="mwCloseRow" hidden>
+      <button class="btn primary" id="mwClose" type="button">Close</button>
     </div>
   </div>
 </div>
@@ -436,7 +436,6 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 
 <div class="sheet-back" id="qtSheet" hidden>
   <div class="sheet" role="dialog" aria-labelledby="qtResultTitle">
-    <button class="sheet-x" id="qtClose" type="button" aria-label="Close" hidden><svg viewBox="0 0 32 32"><path d="M9 9l14 14M23 9L9 23"/></svg></button>
     <h3 id="qtResultTitle">Solved!</h3>
     <p id="qtResultText">No mistakes · 1:42</p>
     <div class="qt-grid-summary" id="qtSummary" aria-hidden="true"></div>
@@ -446,15 +445,20 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
       <button class="btn" id="qtHome" type="button">All games</button>
       <button class="btn primary" id="qtNext" type="button">Next puzzle</button>
     </div>
+    <div class="row one" id="qtCloseRow" hidden>
+      <button class="btn primary" id="qtClose" type="button">Close</button>
+    </div>
   </div>
 </div>
 
 <div class="sheet-back" id="lwStatsSheet" hidden>
   <div class="sheet" role="dialog" aria-labelledby="lwStatsTitle">
-    <button class="sheet-x" id="lwStatsClose" type="button" aria-label="Close"><svg viewBox="0 0 32 32"><path d="M9 9l14 14M23 9L9 23"/></svg></button>
     <h3 id="lwStatsTitle">Letter Web stats</h3>
     <div class="mw-stats" id="lwTotals"></div>
     <div class="lw-table" id="lwTable"></div>
+    <div class="row one">
+      <button class="btn primary" id="lwStatsClose" type="button">Close</button>
+    </div>
   </div>
 </div>
 
@@ -1275,7 +1279,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     const h = game.hints || 0, hintText = h ? ` · ${h} hint${h > 1 ? "s" : ""}` : "";
     $("mwResultText").textContent = (won ? `${n} guess${n > 1 ? "es" : ""} · ${fmt(game.elapsed)}` : `You made ${n} guess${n === 1 ? "" : "es"}`) + hintText;
     $("mwResultText").hidden = false;
-    $("mwRow").hidden = false; $("mwClose").hidden = true;
+    $("mwRow").hidden = false; $("mwCloseRow").hidden = true;
     renderChart(won ? bucketOf(n) : -1);
     $("mwEntry").blur();
     $("mwSheet").hidden = false;
@@ -1283,7 +1287,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   function showStats() {
     $("mwResultTitle").textContent = "Midword stats";
     $("mwSecret").hidden = true; $("mwResultText").hidden = true;
-    $("mwRow").hidden = true; $("mwClose").hidden = false;
+    $("mwRow").hidden = true; $("mwCloseRow").hidden = false;
     renderChart(-1);
     $("mwSheet").hidden = false;
   }
@@ -1576,7 +1580,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
     const m = game.mistakes;
     $("qtResultText").textContent = (won ? (m === 0 ? "No mistakes" : `${m} mistake${m > 1 ? "s" : ""}`) : "Out of mistakes") + ` · ${fmt(game.elapsed)}`;
     $("qtResultText").hidden = false; $("qtSummary").hidden = false;
-    $("qtRow").hidden = false; $("qtClose").hidden = true;
+    $("qtRow").hidden = false; $("qtCloseRow").hidden = true;
     // the colors in the order you found them
     const sum = $("qtSummary"); sum.innerHTML = "";
     (mine ? mine.order : []).forEach((lv) => { for (let i = 0; i < 4; i++) { const d = document.createElement("i"); d.className = `qt-l${lv}`; sum.appendChild(d); } });
@@ -1585,7 +1589,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   function showStats() {
     $("qtResultTitle").textContent = "Quads stats";
     $("qtResultText").hidden = true; $("qtSummary").hidden = true;
-    $("qtRow").hidden = true; $("qtClose").hidden = false;
+    $("qtRow").hidden = true; $("qtCloseRow").hidden = false;
     renderChart(-1);
   }
   function renderChart(nowRow) {

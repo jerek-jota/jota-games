@@ -42,7 +42,8 @@ function levelTrie(words, level) {
   return trieCache.get(key);
 }
 
-function generatePuzzle(N, seed, words, level) {
+// `avoid`: words from the player's recent boards; none of them may appear on this one.
+function generatePuzzle(N, seed, words, level, avoid) {
   level = LEVELS[level] ? level : "medium";
   const L = LEVELS[level], cfg = L[N];
   const trie = levelTrie(words, level);
@@ -67,6 +68,10 @@ function generatePuzzle(N, seed, words, level) {
   let formsPlaced = 0;
   const pick = () => {
     const src = formsPlaced < FORM_LIMIT[N] && rand() < 0.2 ? forms : plain;
+    for (let t = 0; t < 20; t++) {
+      const w = src[Math.floor(rand() * src.length)];
+      if (!avoid || !avoid.has(w)) return w;
+    }
     return src[Math.floor(rand() * src.length)];
   };
 
@@ -158,6 +163,7 @@ function generatePuzzle(N, seed, words, level) {
     }
     if (targets.length < cfg.min || targets.length > cfg.max) continue;
     if (targets.filter((t) => isForm(t.word)).length > Math.max(2, Math.floor(targets.length * FORM_SHARE))) continue;
+    if (avoid && targets.some((t) => avoid.has(t.word))) continue;
     return { size: N, seed, level, letters, words: targets };
   }
   return null;

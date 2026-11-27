@@ -317,7 +317,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     </header>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
-  <p class="version">Version Nov 20, 11:08 AM</p>
+  <p class="version">Version Nov 26, 9:19 PM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -534,7 +534,8 @@ function levelTrie(words, level) {
   return trieCache.get(key);
 }
 
-function generatePuzzle(N, seed, words, level) {
+// `avoid`: words from the player's recent boards; none of them may appear on this one.
+function generatePuzzle(N, seed, words, level, avoid) {
   level = LEVELS[level] ? level : "medium";
   const L = LEVELS[level], cfg = L[N];
   const trie = levelTrie(words, level);
@@ -559,6 +560,10 @@ function generatePuzzle(N, seed, words, level) {
   let formsPlaced = 0;
   const pick = () => {
     const src = formsPlaced < FORM_LIMIT[N] && rand() < 0.2 ? forms : plain;
+    for (let t = 0; t < 20; t++) {
+      const w = src[Math.floor(rand() * src.length)];
+      if (!avoid || !avoid.has(w)) return w;
+    }
     return src[Math.floor(rand() * src.length)];
   };
 
@@ -650,6 +655,7 @@ function generatePuzzle(N, seed, words, level) {
     }
     if (targets.length < cfg.min || targets.length > cfg.max) continue;
     if (targets.filter((t) => isForm(t.word)).length > Math.max(2, Math.floor(targets.length * FORM_SHARE))) continue;
+    if (avoid && targets.some((t) => avoid.has(t.word))) continue;
     return { size: N, seed, level, letters, words: targets };
   }
   return null;
@@ -684,9 +690,15 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   let els = null;    // svg element refs
   let busy = false;
 
+  // Words from the last few boards of this size and level are kept off the next board.
+  const RECENT_BOARDS = 3;
   function newGame(N) {
-    let p = null, seed;
+    const rk = key("recent", N), recent = Array.isArray(store[rk]) ? store[rk] : [];
+    const avoid = new Set(recent.flat());
+    let p = null, seed, tries = 0;
+    while (!p && tries++ < 40) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, level, avoid); }
     while (!p) { seed = Math.floor(Math.random() * 2 ** 31); p = generatePuzzle(N, seed, words, level); }
+    store[rk] = recent.concat([p.words.map((w) => w.word)]).slice(-RECENT_BOARDS);
     return { puzzle: p, found: [], bonus: [], order: [], hintsLeft: HINTS, hinted: null, elapsed: 0 };
   }
   function ensureGame(N) {

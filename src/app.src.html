@@ -34,6 +34,7 @@
   color-scheme: light;
 }
 html, body { height: 100%; }
+[hidden] { display: none !important; }
 body {
   background: var(--bg); color: var(--ink); font-family: var(--font);
   -webkit-tap-highlight-color: transparent; touch-action: manipulation;
@@ -66,7 +67,10 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .lw-table > div { background: var(--tile); border-radius: 12px; padding: 8px 6px; display: flex; flex-direction: column; }
 .lw-table > div b { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .lw-table > div small { font-size: 0.75rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
-.sheet .row.one { grid-template-columns: 1fr; }
+.sheet { position: relative; }
+.sheet-x { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; color: var(--muted); }
+.sheet-x svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; }
+.sheet-x:active { background: var(--tile); }
 .game-card header { display: flex; align-items: center; gap: 14px; }
 .game-card h2 { margin: 0; font-size: 1.5rem; font-weight: 700; line-height: 1.1; }
 .game-card .how { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; max-width: 60ch; }
@@ -375,12 +379,13 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 
 <div class="sheet-back" id="mwSheet" hidden>
   <div class="sheet" role="dialog" aria-labelledby="mwResultTitle">
+    <button class="sheet-x" id="mwClose" type="button" aria-label="Close" hidden><svg viewBox="0 0 32 32"><path d="M9 9l14 14M23 9L9 23"/></svg></button>
     <h3 id="mwResultTitle">Got it!</h3>
     <div class="mw-secret" id="mwSecret">WORD</div>
     <p id="mwResultText">14 guesses · 2:05</p>
     <div class="hist" id="mwHist"></div>
     <div class="mw-stats" id="mwStats"></div>
-    <div class="row">
+    <div class="row" id="mwRow">
       <button class="btn" id="mwHome" type="button">All games</button>
       <button class="btn primary" id="mwNext" type="button">New word</button>
     </div>
@@ -412,12 +417,13 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 
 <div class="sheet-back" id="qtSheet" hidden>
   <div class="sheet" role="dialog" aria-labelledby="qtResultTitle">
+    <button class="sheet-x" id="qtClose" type="button" aria-label="Close" hidden><svg viewBox="0 0 32 32"><path d="M9 9l14 14M23 9L9 23"/></svg></button>
     <h3 id="qtResultTitle">Solved!</h3>
     <p id="qtResultText">No mistakes · 1:42</p>
     <div class="qt-grid-summary" id="qtSummary" aria-hidden="true"></div>
     <div class="hist" id="qtHist"></div>
     <div class="mw-stats" id="qtStats"></div>
-    <div class="row">
+    <div class="row" id="qtRow">
       <button class="btn" id="qtHome" type="button">All games</button>
       <button class="btn primary" id="qtNext" type="button">Next puzzle</button>
     </div>
@@ -426,12 +432,10 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 
 <div class="sheet-back" id="lwStatsSheet" hidden>
   <div class="sheet" role="dialog" aria-labelledby="lwStatsTitle">
+    <button class="sheet-x" id="lwStatsClose" type="button" aria-label="Close"><svg viewBox="0 0 32 32"><path d="M9 9l14 14M23 9L9 23"/></svg></button>
     <h3 id="lwStatsTitle">Letter Web stats</h3>
     <div class="mw-stats" id="lwTotals"></div>
     <div class="lw-table" id="lwTable"></div>
-    <div class="row one">
-      <button class="btn primary" id="lwStatsClose" type="button">Close</button>
-    </div>
   </div>
 </div>
 
@@ -1073,25 +1077,22 @@ __GEN__
     showResult(won, record);
   }
 
-  let statsOnly = false;   // sheet opened from the home screen's stats button
   function showResult(won, record) {
     const n = game.guesses.length;
-    statsOnly = false;
     $("mwResultTitle").textContent = won ? (record ? "New best!" : "Got it!") : "The word was";
     $("mwSecret").textContent = game.secret; $("mwSecret").hidden = false;
     const h = game.hints || 0, hintText = h ? ` · ${h} hint${h > 1 ? "s" : ""}` : "";
     $("mwResultText").textContent = (won ? `${n} guess${n > 1 ? "es" : ""} · ${fmt(game.elapsed)}` : `You made ${n} guess${n === 1 ? "" : "es"}`) + hintText;
     $("mwResultText").hidden = false;
-    $("mwHome").textContent = "All games"; $("mwNext").textContent = "New word";
+    $("mwRow").hidden = false; $("mwClose").hidden = true;
     renderChart(won ? bucketOf(n) : -1);
     $("mwEntry").blur();
     $("mwSheet").hidden = false;
   }
   function showStats() {
-    statsOnly = true;
     $("mwResultTitle").textContent = "Midword stats";
     $("mwSecret").hidden = true; $("mwResultText").hidden = true;
-    $("mwHome").textContent = "Close"; $("mwNext").textContent = "Play";
+    $("mwRow").hidden = true; $("mwClose").hidden = false;
     renderChart(-1);
     $("mwSheet").hidden = false;
   }
@@ -1189,8 +1190,9 @@ __GEN__
   updateCard();
   $("mwPlay").addEventListener("click", open);
   $("mwMenu").addEventListener("click", goHome);
-  $("mwHome").addEventListener("click", () => (statsOnly ? ($("mwSheet").hidden = true) : goHome()));
-  $("mwNext").addEventListener("click", () => { if (!statsOnly) newGame(); open(); });
+  $("mwHome").addEventListener("click", goHome);
+  $("mwNext").addEventListener("click", () => { newGame(); open(); });
+  $("mwClose").addEventListener("click", () => ($("mwSheet").hidden = true));
   $("mwStatsBtn").addEventListener("click", showStats);
 })();
 </script>
@@ -1377,25 +1379,22 @@ __GEN__
     save(); render();
   }
 
-  let statsOnly = false;   // sheet opened from the home screen's stats button
   function showResult(won) {
     const h = store.history, mine = h.filter((x) => x.id === puzzle.id).pop();
-    statsOnly = false;
     $("qtResultTitle").textContent = won ? (game.mistakes === 0 ? "Perfect!" : "Solved!") : "So close";
     const m = game.mistakes;
     $("qtResultText").textContent = (won ? (m === 0 ? "No mistakes" : `${m} mistake${m > 1 ? "s" : ""}`) : "Out of mistakes") + ` · ${fmt(game.elapsed)}`;
     $("qtResultText").hidden = false; $("qtSummary").hidden = false;
-    $("qtHome").textContent = "All games"; $("qtNext").textContent = "Next puzzle";
+    $("qtRow").hidden = false; $("qtClose").hidden = true;
     // the colors in the order you found them
     const sum = $("qtSummary"); sum.innerHTML = "";
     (mine ? mine.order : []).forEach((lv) => { for (let i = 0; i < 4; i++) { const d = document.createElement("i"); d.className = `qt-l${lv}`; sum.appendChild(d); } });
     renderChart(won ? Math.min(m, 3) : 4);
   }
   function showStats() {
-    statsOnly = true;
     $("qtResultTitle").textContent = "Quads stats";
     $("qtResultText").hidden = true; $("qtSummary").hidden = true;
-    $("qtHome").textContent = "Close"; $("qtNext").textContent = "Play";
+    $("qtRow").hidden = true; $("qtClose").hidden = false;
     renderChart(-1);
   }
   function renderChart(nowRow) {
@@ -1444,7 +1443,8 @@ __GEN__
   updateCard();
   $("qtPlay").addEventListener("click", open);
   $("qtMenu").addEventListener("click", goHome);
-  $("qtHome").addEventListener("click", () => (statsOnly ? ($("qtSheet").hidden = true) : goHome()));
+  $("qtHome").addEventListener("click", goHome);
+  $("qtClose").addEventListener("click", () => ($("qtSheet").hidden = true));
   $("qtNext").addEventListener("click", open);
   $("qtStatsBtn").addEventListener("click", showStats);
   $("qtResults").addEventListener("click", () => showResult(game.won));

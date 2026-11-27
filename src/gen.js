@@ -1,4 +1,4 @@
-// Letter Web puzzle generator. Shared between the page and the Node test.
+// Letterweb puzzle generator. Shared between the page and the Node test.
 function makeRng(seed) {
   let s = seed >>> 0;
   return function () {

@@ -331,7 +331,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <button class="card-stats" id="qtStatsBtn" type="button" aria-label="Quads stats"><svg viewBox="0 0 32 32"><path d="M8 25V16M16 25V8M24 25V13"/></svg></button>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
-  <p class="version">Version Nov 27, 6:11 AM</p>
+  <p class="version">Version Nov 27, 6:13 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -1099,7 +1099,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
   const STORE_KEY = "jota.midword.v1";
   const MAX_LEN = 12;
   // Histogram rows for the number of guesses a win took: <3, then 3 through 10 each on their own, then >10.
-  const BUCKETS = [[1, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, 20], [21, Infinity]];
+  const BUCKETS = [[1, 2], [3, 3], [4, 4], [5, 5], [6, 6], [7, 7], [8, 8], [9, 9], [10, 10], [11, 15], [16, 20], [21, Infinity]];
   const bucketLabel = ([a, b]) => (b === Infinity ? `>${a - 1}` : a === 1 ? `<${b + 1}` : a === b ? `${a}` : `${a}–${b}`);
   const bucketOf = (n) => BUCKETS.findIndex(([a, b]) => n >= a && n <= b);
   const $ = (id) => document.getElementById(id);

@@ -335,7 +335,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
     <button class="card-stats" id="qtStatsBtn" type="button" aria-label="Quads stats"><svg viewBox="0 0 32 32"><path d="M8 25V16M16 25V8M24 25V13"/></svg></button>
     <button class="size-btn" id="qtPlay" type="button"><b>Play</b><small id="qtProg"></small></button>
   </article>
-  <p class="version">Version Nov 28, 6:40 AM</p>
+  <p class="version">Version Nov 28, 6:42 AM</p>
 </section>
 
 <section class="screen" id="game" hidden>
@@ -1079,7 +1079,7 @@ if (typeof module !== "undefined") module.exports = { generatePuzzle, buildTrie,
       b.textContent = v; sp.textContent = k; d.append(b, sp); totals.appendChild(d);
     });
     table.innerHTML = "";
-    ["Times", "4 × 4", "5 × 5"].forEach((t, i) => { const h = document.createElement("span"); h.textContent = t; if (!i) h.style.textAlign = "left"; table.appendChild(h); });
+    ["", "4 × 4", "5 × 5"].forEach((t, i) => { const h = document.createElement("span"); h.textContent = t; if (!i) h.style.textAlign = "left"; table.appendChild(h); });
     lvs.forEach((lv) => {
       const name = document.createElement("em"); name.textContent = LEVEL_NAMES[lv]; table.appendChild(name);
       [4, 5].forEach((N) => {

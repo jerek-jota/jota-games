@@ -888,7 +888,7 @@ __GEN__
       b.textContent = v; sp.textContent = k; d.append(b, sp); totals.appendChild(d);
     });
     table.innerHTML = "";
-    ["Times", "4 × 4", "5 × 5"].forEach((t, i) => { const h = document.createElement("span"); h.textContent = t; if (!i) h.style.textAlign = "left"; table.appendChild(h); });
+    ["", "4 × 4", "5 × 5"].forEach((t, i) => { const h = document.createElement("span"); h.textContent = t; if (!i) h.style.textAlign = "left"; table.appendChild(h); });
     lvs.forEach((lv) => {
       const name = document.createElement("em"); name.textContent = LEVEL_NAMES[lv]; table.appendChild(name);
       [4, 5].forEach((N) => {

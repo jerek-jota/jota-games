@@ -67,7 +67,7 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .lw-table > div { background: var(--tile); border-radius: 12px; padding: 8px 6px; display: flex; flex-direction: column; }
 .lw-table > div { gap: 2px; }
 .lw-table > div p { margin: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
-.lw-table > div b { font-size: 1.15rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.lw-table > div b { font-size: 1rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .lw-table > div small { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
 .sheet { position: relative; }
 .sheet .row.one { grid-template-columns: 1fr; }
@@ -896,9 +896,9 @@ __GEN__
         const times = (store.history || []).filter((h) => h.size === N && h.level === lv).map((h) => h.ms);
         const avg = times.length ? times.reduce((a, b) => a + b, 0) / times.length : 0;
         const d = document.createElement("div");
-        [["Best", best], ["Avg", avg]].forEach(([k, v]) => {
+        [["Best", best ? fmt(best) : "–"], ["Avg", avg ? fmt(avg) : "–"], ["Solved", solved(N, lv)]].forEach(([k, v]) => {
           const row = document.createElement("p"), l = document.createElement("small"), b = document.createElement("b");
-          l.textContent = k; b.textContent = v ? fmt(v) : "–"; row.append(l, b); d.appendChild(row);
+          l.textContent = k; b.textContent = v; row.append(l, b); d.appendChild(row);
         });
         table.appendChild(d);
       });

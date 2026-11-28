@@ -65,8 +65,10 @@ button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; bo
 .lw-table > span { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); align-self: end; }
 .lw-table > em { font-style: normal; font-weight: 700; text-align: left; align-self: center; padding-right: 6px; }
 .lw-table > div { background: var(--tile); border-radius: 12px; padding: 8px 6px; display: flex; flex-direction: column; }
-.lw-table > div b { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
-.lw-table > div small { font-size: 0.75rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lw-table > div { gap: 2px; }
+.lw-table > div p { margin: 0; display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+.lw-table > div b { font-size: 1.15rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.lw-table > div small { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
 .sheet { position: relative; }
 .sheet .row.one { grid-template-columns: 1fr; }
 .game-card header { display: flex; align-items: center; gap: 14px; }
@@ -802,6 +804,8 @@ __GEN__
     const t = game.elapsed, prev = store[key("best")];
     const record = !prev || t < prev;
     if (record) store[key("best")] = t;
+    store.history = Array.isArray(store.history) ? store.history : [];
+    store.history.push({ at: Date.now(), size, level, ms: t, words: game.puzzle.words.length, bonus: game.bonus.length, hints: HINTS - game.hintsLeft });
     save();
     $("winTime").textContent = fmt(t);
     const bestEl = $("winBest");
@@ -884,14 +888,19 @@ __GEN__
       b.textContent = v; sp.textContent = k; d.append(b, sp); totals.appendChild(d);
     });
     table.innerHTML = "";
-    ["Best time", "4 × 4", "5 × 5"].forEach((t, i) => { const h = document.createElement("span"); h.textContent = t; if (!i) h.style.textAlign = "left"; table.appendChild(h); });
+    ["Times", "4 × 4", "5 × 5"].forEach((t, i) => { const h = document.createElement("span"); h.textContent = t; if (!i) h.style.textAlign = "left"; table.appendChild(h); });
     lvs.forEach((lv) => {
       const name = document.createElement("em"); name.textContent = LEVEL_NAMES[lv]; table.appendChild(name);
       [4, 5].forEach((N) => {
-        const best = store[key("best", N, lv)], n = solved(N, lv);
-        const d = document.createElement("div"), b = document.createElement("b"), sm = document.createElement("small");
-        b.textContent = best ? fmt(best) : "–"; sm.textContent = `${n} solved`;
-        d.append(b, sm); table.appendChild(d);
+        const best = store[key("best", N, lv)];
+        const times = (store.history || []).filter((h) => h.size === N && h.level === lv).map((h) => h.ms);
+        const avg = times.length ? times.reduce((a, b) => a + b, 0) / times.length : 0;
+        const d = document.createElement("div");
+        [["Best", best], ["Avg", avg]].forEach(([k, v]) => {
+          const row = document.createElement("p"), l = document.createElement("small"), b = document.createElement("b");
+          l.textContent = k; b.textContent = v ? fmt(v) : "–"; row.append(l, b); d.appendChild(row);
+        });
+        table.appendChild(d);
       });
     });
     $("lwStatsSheet").hidden = false;
